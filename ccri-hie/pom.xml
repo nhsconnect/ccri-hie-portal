@@ -147,7 +147,7 @@
     </dependencies>
 
     <build>
-        <finalName>ccri-mananagement</finalName>
+        <finalName>ccri-hie</finalName>
         <plugins>
 
             <plugin>
