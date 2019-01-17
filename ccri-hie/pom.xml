@@ -4,18 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.nhs.careconnect.ri</groupId>
-    <artifactId>ccri-management</artifactId>
+    <artifactId>ccri-hie</artifactId>
     <version>3.7.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ccri-management</name>
+    <name>ccri-hie</name>
     <description>Management Tool for CCI</description>
 
-  <parent>
-      <groupId>uk.nhs.careconnect.ri</groupId>
-      <artifactId>ccri-parent</artifactId>
-      <version>3.7.0-SNAPSHOT</version>
-  </parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.15.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -174,7 +175,7 @@
                             <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.parent.basedir}/ccri-management-app/src/main/web/dist/ccri-app/</directory>
+                                    <directory>../hie-portal/dist/ccri-hie/</directory>
                                 </resource>
                             </resources>
                         </configuration>
