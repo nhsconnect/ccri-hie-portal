@@ -87,7 +87,7 @@ import {MedicationDispenseDetailComponent} from './dialog/medication-dispense-de
 import {LinksService} from './service/links.service';
 import {EprService} from './service/epr.service';
 import {ResponseInterceptor} from './service/response-interceptor';
-import {AppConfig} from './app-config';
+import {AppConfigService} from './app-config';
 import { ObservationChartDialogComponent } from './dialog/observation-chart-dialog/observation-chart-dialog.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ExplorerMainComponent } from './modules/explorer/explorer-main/explorer-main.component';
@@ -150,7 +150,7 @@ import { QuestionnaireResponseItemComponent } from './component/questionnaire-re
 import { HtmlViewerComponent } from './component/binary/html-viewer/html-viewer.component';
 
 
-export function initializeApp(appConfig: AppConfig) {
+export function initializeApp(appConfig: AppConfigService) {
     return () => appConfig.load();
 }
 
@@ -336,10 +336,10 @@ export function initializeApp(appConfig: AppConfig) {
     OAuthModule.forRoot()
   ],
   providers: [
-      AppConfig,
+      AppConfigService,
       { provide: APP_INITIALIZER,
           useFactory: initializeApp,
-          deps: [AppConfig], multi: true },
+          deps: [AppConfigService], multi: true },
     MatIconRegistry,
       MessageService,
     LinksService,

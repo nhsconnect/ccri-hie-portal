@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../service/auth.service";
-import {Oauth2Service} from "../../service/oauth2.service";
-import {Router} from "@angular/router";
+import {AuthService} from '../../service/auth.service';
+import {Oauth2Service} from '../../service/oauth2.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -15,8 +15,8 @@ export class LogoutComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private oauth2 : Oauth2Service,
-    private router : Router
+    private oauth2: Oauth2Service,
+    private router: Router
   ) { }
 
   ngOnInit(

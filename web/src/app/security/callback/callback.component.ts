@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
 import {FhirService} from '../../service/fhir.service';
-import {AuthService} from "../../service/auth.service";
-import {Oauth2Service} from "../../service/oauth2.service";
+import {AuthService} from '../../service/auth.service';
+import {AppConfigService} from '../../service/app-config.service';
+
+
 
 @Component({
   selector: 'app-callback',
@@ -11,33 +13,37 @@ import {Oauth2Service} from "../../service/oauth2.service";
 })
 export class CallbackComponent implements OnInit {
 
-  private authCode :string ;
+  constructor(private activatedRoute: ActivatedRoute,
+              private fhirService: FhirService,
+              private auth: AuthService,
+              private router: Router,
+              private appConfig: AppConfigService) { }
 
-  subOAuth2 : any;
+  private authCode: string ;
 
-  subPermission : any;
-
-  constructor(private activatedRoute: ActivatedRoute
-    ,private  auth : AuthService
-    ,private router: Router) { }
+  subOAuth2: any;
 
   ngOnInit() {
     this.authCode = this.activatedRoute.snapshot.queryParams['code'];
-    this.auth.setBaseUrlOAuth2();
 
-    if (this.authCode !==undefined) {
+    if (this.authCode !== undefined) {
 
       this.subOAuth2 = this.auth.getOAuthChangeEmitter()
         .subscribe(item => {
           console.log('Callback Access Token callback ran');
-          this.router.navigateByUrl('').then( ()=> {
-            //console.log('Navigate by Url');
+          this.router.navigateByUrl('edms').then( () => {
+            // console.log('Navigate by Url');
           });
           // Potentially a loop but need to record the access token
 
         });
+      this.appConfig.getInitEventEmitter().subscribe( () => {
+          this.auth.performGetAccessToken(this.authCode);
+        }
+      );
+      this.appConfig.loadConfig();
+      // this.fhirService.performGetAccessToken(this.authCode);
 
-      this.auth.performGetAccessToken(this.authCode);
     }
   }
 
