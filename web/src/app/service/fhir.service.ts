@@ -262,7 +262,7 @@ return this.http.put<fhir.Endpoint>(url, body, { 'headers': headers});
 
 public get(search: string): Observable<fhir.Bundle> {
 
-const url: string = this.getFHIRServerBase() + search;
+const url: string = this.getBaseUrl() + search;
 let headers = new HttpHeaders(
 );
 
@@ -320,8 +320,10 @@ let headers = new HttpHeaders(
 );
 headers = headers.append( 'Content-Type',  'application/fhir+json' );
 headers = headers.append('Accept', 'application/fhir+json');
-const body = '{ "resourceType": "Parameters", "parameter": [ { "name": "patientNHSNumber", "valueIdentifier": { "system": "https://fhir.nhs.uk/Id/nhs-number", "value": "'
-  + nhsNumber + '" } }, { "name": "includeAllergies","part": [{"name": "includeResolvedAllergies","valueBoolean": true}]},{"name": "includeMedication","part": [{"name": "includePrescriptionIssues","valueBoolean": true}]}]}';
+const body = '{ "resourceType": "Parameters", "parameter": [ { "name": "patientNHSNumber", '
+  + '"valueIdentifier": { "system": "https://fhir.nhs.uk/Id/nhs-number", "value": "'
+  + nhsNumber + '" } }, { "name": "includeAllergies","part": [{"name": "includeResolvedAllergies","valueBoolean": true}]}, '
+  + '{"name": "includeMedication","part": [{"name": "includePrescriptionIssues","valueBoolean": true}]}]}';
 
 return this.http.post<any>(url, body, {'headers': headers});
 }

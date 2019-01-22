@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {environment} from "../../environments/environment";
-import {HttpHeaders} from "@angular/common/http";
+import {environment} from '../../environments/environment';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class Oauth2Service {
@@ -15,7 +15,9 @@ export class Oauth2Service {
 
   public getToken(): string {
     const access_token = localStorage.getItem('access_token_' + environment.oauth2.client_id);
-    if (access_token === "" || access_token === null) return undefined;
+    if (access_token === '' || access_token === null) {
+      return undefined;
+    }
     return access_token;
   }
 
@@ -38,14 +40,18 @@ export class Oauth2Service {
     // ccri-token indicates logging on not the jwt.
      const token = localStorage.getItem('ccri-token');
 
-     if (token === undefined || token === null) return false;
+     if (token === undefined || token === null) {
+       return false;
+     }
      return true;
   }
 
   public isAuthenticated(): boolean {
     // get the token
     const token = this.getToken();
-    if (token === undefined) return false;
+    if (token === undefined) {
+      return false;
+    }
     const helper = new JwtHelperService();
     // return a boolean reflecting
     // whether or not the token is expired
@@ -56,9 +62,8 @@ export class Oauth2Service {
   public getUser(): string {
     const token = this.getToken();
     const helper = new JwtHelperService();
-    console.log('Token '+token);
-    let retStr = helper.decodeToken(token)
-    return retStr;
+    console.log('Token ' + token);
+    return helper.decodeToken(token);
   }
 
 
