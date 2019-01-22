@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from "../../../../environments/environment";
-import {FhirService} from "../../../service/fhir.service";
-import {EprService} from "../../../service/epr.service";
+
+import {FhirService} from '../../../service/fhir.service';
+import {EprService} from '../../../service/epr.service';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
-import {AuthService} from "../../../service/auth.service";
-import {RegisterSmartComponent} from "../../../dialog/register-smart/register-smart.component";
-import {TdMediaService} from "@covalent/core";
+import {AuthService} from '../../../service/auth.service';
+import {RegisterSmartComponent} from '../../../dialog/register-smart/register-smart.component';
+import {TdMediaService} from '@covalent/core';
 
 @Component({
   selector: 'app-smart-apps',
@@ -23,11 +23,11 @@ export class SmartAppsComponent implements OnInit {
 
   cards = undefined;
 
-  title: string ='SMART on FHIR';
+  title = 'SMART on FHIR';
 
   ngOnInit() {
     this.eprService.setTitle(this.title);
-    this.cards = environment.apps;
+    // this.cards = environment.apps;
     this.getClients();
 
 
@@ -35,20 +35,19 @@ export class SmartAppsComponent implements OnInit {
   getClients() {
     this.cards = [];
     this.authService.getClients().subscribe( response => {
-        //console.log(clients);
         const clients: any[] = response as any[];
-        for (let client of clients) {
+        for (const client of clients) {
 
-            if (client.scope.includes("launch")) {
+            if (client.scope.includes('launch')) {
                 let found = false;
-                for (let search of this.cards) {
+                for (const search of this.cards) {
                     if (search.clientId === client.clientId) {
-                        found=true;
+                        found = true;
                     }
                 }
                 if (!found) {
                     console.log(client);
-                    let newclient = {
+                    const newclient = {
                         id: client.id,
                         name: client.clientName,
                         image: client.logoUri,
@@ -56,30 +55,29 @@ export class SmartAppsComponent implements OnInit {
                         notes: client.clientDescription,
                         source: '',
                         clientId: client.clientId
-                    }
+                    };
                     this.addClient(newclient);
                 }
             }
 
         }
-    })
+    });
 
   }
 
   addClient(client) {
-    this.fhirService.get('/Endpoint?identifier='+client.clientId).subscribe( result => {
-      let bundle: fhir.Bundle = result;
-      let endpoint: fhir.Endpoint = undefined;
+    this.fhirService.get('/Endpoint?identifier=' + client.clientId).subscribe( result => {
+      const bundle: fhir.Bundle = result;
       if (bundle.entry !== undefined) {
         for (const entry of bundle.entry) {
-          let resource: fhir.Resource = entry.resource;
+          const resource: fhir.Resource = entry.resource;
           if (resource.resourceType === 'Endpoint') {
               client.endpoint = resource;
           }
         }
       }
       },
-      ()=>{
+      () => {
 
       },
       () => {
@@ -92,17 +90,17 @@ export class SmartAppsComponent implements OnInit {
 
         // Get data from endpoint and start up the dialog
 
-        this.fhirService.get('/Endpoint?identifier='+card.clientId).subscribe( result => {
+        this.fhirService.get('/Endpoint?identifier=' + card.clientId).subscribe( result => {
 
-            let bundle: fhir.Bundle = result;
-            let endpoint: fhir.Endpoint = undefined;
+            const bundle: fhir.Bundle = result;
+            let endpoint: fhir.Endpoint;
             if (bundle.entry !== undefined) {
                 for (const entry of bundle.entry) {
-                  let resource: fhir.Resource = entry.resource;
+                  const resource: fhir.Resource = entry.resource;
                   if (resource.resourceType === 'Endpoint') {
                     console.log('Found endpoint');
                     console.log(resource);
-                    endpoint= <fhir.Endpoint> resource;
+                    endpoint = <fhir.Endpoint> resource;
 
                     }
                 }
@@ -117,17 +115,17 @@ export class SmartAppsComponent implements OnInit {
                   value: card.clientId
                 }],
                 status: 'active',
-                "connectionType": {
-                  "system": "http://hl7.org/fhir/endpoint-connection-type",
-                  "code": "direct-project"
+                'connectionType': {
+                  'system': 'http://hl7.org/fhir/endpoint-connection-type',
+                  'code': 'direct-project'
                 },
                 name: card.name,
                 payloadType: [
                   {
-                    "coding": [
+                    'coding': [
                       {
-                        "system": "http://hl7.org/fhir/resource-types",
-                        "code": "Endpoint"
+                        'system': 'http://hl7.org/fhir/resource-types',
+                        'code': 'Endpoint'
                       }
                     ]
                   }
@@ -147,12 +145,12 @@ export class SmartAppsComponent implements OnInit {
           };
           const resourceDialog: MatDialogRef<RegisterSmartComponent> = this.dialog.open( RegisterSmartComponent, dialogConfig);
 
-          resourceDialog.afterClosed().subscribe( result => {
+          resourceDialog.afterClosed().subscribe(res => {
               this.getClients();
             }
           );
 
-        })
+        });
 
     }
 
@@ -171,8 +169,8 @@ export class SmartAppsComponent implements OnInit {
 
     configuration() {
         this.authService.setCookie();
-        let url:string = localStorage.getItem("registerUri");
-        url = url.replace('register','');
+        let url: string = localStorage.getItem('registerUri');
+        url = url.replace('register', '');
         window.open(url, '_blank');
     }
 
