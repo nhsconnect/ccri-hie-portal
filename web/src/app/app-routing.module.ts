@@ -4,23 +4,16 @@ import {LoginComponent} from './security/login/login.component';
 import {CallbackComponent} from './security/callback/callback.component';
 import {LogoutComponent} from './security/logout/logout.component';
 import {PingComponent} from './security/ping/ping.component';
+import {LoadingComponent} from './security/loading/loading.component';
 
 const routes: Routes = [
-  {  path: '', redirectTo: 'exp', pathMatch: 'full' },
+  { path: '', component: LoadingComponent },
 
-    {  path: 'error', redirectTo: 'exp'
-    },
-    {  path: 'login', component : LoginComponent
-    }
-  ,
-  {  path: 'ping', component : PingComponent
-  }
-  ,
-  {  path: 'logout', component : LogoutComponent
-  }
-  ,
-  {  path: 'callback', component : CallbackComponent
-  }
+   {  path: 'error', redirectTo: 'exp'},
+   {  path: 'login', component : LoginComponent},
+  {  path: 'ping', component : PingComponent},
+  {  path: 'logout', component : LogoutComponent}  ,
+  {  path: 'callback', component : CallbackComponent}
 ];
 
 @NgModule({

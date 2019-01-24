@@ -7,7 +7,7 @@ import {
   CovalentChipsModule,
   CovalentDialogsModule, CovalentExpansionPanelModule,
   CovalentJsonFormatterModule,
-  CovalentLayoutModule,
+  CovalentLayoutModule, CovalentLoadingModule,
   CovalentMediaModule, CovalentMenuModule,
   CovalentMessageModule, CovalentNotificationsModule,
   CovalentStepsModule
@@ -87,7 +87,6 @@ import {MedicationDispenseDetailComponent} from './dialog/medication-dispense-de
 import {LinksService} from './service/links.service';
 import {EprService} from './service/epr.service';
 import {ResponseInterceptor} from './service/response-interceptor';
-import {AppConfigService} from './app-config';
 import { ObservationChartDialogComponent } from './dialog/observation-chart-dialog/observation-chart-dialog.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { ExplorerMainComponent } from './modules/explorer/explorer-main/explorer-main.component';
@@ -148,11 +147,16 @@ import { AmbulanceATMISTComponent } from './modules/patient/ambulance-atmist/amb
 import { CareTeamComponent } from './component/care-team/care-team.component';
 import { QuestionnaireResponseItemComponent } from './component/questionnaire-response-item/questionnaire-response-item.component';
 import { HtmlViewerComponent } from './component/binary/html-viewer/html-viewer.component';
+import {AppConfigService} from './service/app-config.service';
+import {LoadingComponent} from './security/loading/loading.component';
 
 
-export function initializeApp(appConfig: AppConfigService) {
-    return () => appConfig.load();
-}
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => {
+    return appConfig.loadConfig();
+  };
+};
+
 
 @NgModule({
   declarations: [
@@ -163,6 +167,7 @@ export function initializeApp(appConfig: AppConfigService) {
       LoginComponent,
     CallbackComponent,
     PingComponent,
+    LoadingComponent,
     LogoutComponent,
     SmartAppsComponent,
 
@@ -314,13 +319,14 @@ export function initializeApp(appConfig: AppConfigService) {
     CovalentJsonFormatterModule,
     CovalentDialogsModule,
     CovalentExpansionPanelModule,
-      CovalentChipsModule,
+    CovalentChipsModule,
     CovalentNotificationsModule,
     CovalentMenuModule,
-      CovalentBaseEchartsModule,
-      CovalentBarEchartsModule,
-      CovalentLineEchartsModule,
-      CovalentTooltipEchartsModule,
+    CovalentBaseEchartsModule,
+    CovalentBarEchartsModule,
+    CovalentLineEchartsModule,
+    CovalentTooltipEchartsModule,
+    CovalentLoadingModule,
 
     NgxChartsModule,
 
@@ -336,10 +342,13 @@ export function initializeApp(appConfig: AppConfigService) {
     OAuthModule.forRoot()
   ],
   providers: [
-      AppConfigService,
-      { provide: APP_INITIALIZER,
-          useFactory: initializeApp,
-          deps: [AppConfigService], multi: true },
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    },
     MatIconRegistry,
       MessageService,
     LinksService,

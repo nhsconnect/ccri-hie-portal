@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {Oauth2Service} from './oauth2.service';
+import {AppConfigService} from "./app-config.service";
 
 
 export enum Formats {
@@ -19,7 +20,7 @@ export class FhirService {
 
 
   // private baseUrl: string = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
-  private baseUrl = 'http://127.0.0.1:8183/ccri-fhir/STU3';
+  private baseUrl = 'http://127.0.0.1:8186/ccri-fhir/STU3';
  //   private baseUrl: string = undefined;
 
  // private GPCbaseUrl = 'https://data.developer-test.nhs.uk/ccri/camel/fhir/gpc';
@@ -44,7 +45,9 @@ export class FhirService {
    private rootUrl: string = undefined;
 
 
-    constructor( private http: HttpClient, private oauth2: Oauth2Service) {
+    constructor( private http: HttpClient,
+                 private oauth2: Oauth2Service,
+                 private appConfig: AppConfigService) {
 
 
     /*
@@ -109,23 +112,28 @@ export class FhirService {
         // this should be resolved by app-config.ts but to stop start up errors
 
         if (retStr === undefined) {
+          console.log(this.appConfig);
+          if (this.appConfig.getConfig() !== undefined) {
+            retStr = this.appConfig.getConfig().fhirServer;
+          } else {
             if (document.baseURI.includes('localhost')) {
-                retStr = 'http://127.0.0.1:8183/ccri-fhir/STU3';
-                this.baseUrl = retStr;
+              retStr = 'http://127.0.0.1:8186/ccri-fhir/STU3';
+              this.baseUrl = retStr;
             }
             if (document.baseURI.includes('data.developer-test.nhs.uk')) {
-                retStr = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
-                this.baseUrl = retStr;
+              retStr = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
+              this.baseUrl = retStr;
             }
             if (document.baseURI.includes('data.developer.nhs.uk')) {
-                retStr = 'https://data.developer.nhs.uk/ccri-fhir/STU3';
-                this.baseUrl = retStr;
+              retStr = 'https://data.developer.nhs.uk/ccri-fhir/STU3';
+              this.baseUrl = retStr;
             }
+          }
         }
         if (retStr !== undefined) {
          if (this.oauth2.isAuthenticated() || this.oauth2.isAuthenticating()) {
 
-          if (retStr.includes('8183/ccri-fhir')) {
+          if (retStr.includes('8186/ccri-fhir')) {
             retStr = 'https://data.developer-test.nhs.uk/ccri-smartonfhir/STU3';
             console.log('swapping to smartonfhir instance: ' + retStr);
             this.baseUrl = retStr;

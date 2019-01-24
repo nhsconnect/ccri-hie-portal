@@ -1,11 +1,10 @@
 
 
-docker build . -t ccri-management
+docker build . -t ccri-hie
 
-docker tag ccri-management thorlogic/ccri-management
+docker tag ccri-hie thorlogic/ccri-hie
 
-
-docker push thorlogic/ccri-management
+docker push thorlogic/ccri-hie
 
 
 
