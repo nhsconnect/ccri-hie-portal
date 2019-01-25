@@ -27,14 +27,19 @@ export class LoadingComponent implements OnInit {
 
       this._loadingService.register('overlayStarSyntax');
 
-      this.appConfig.getInitEventEmitter().subscribe( result => {
-         // console.log(this.appConfig.getConfig());
-        if (this.appConfig.getConfig() !== undefined) {
+      if (this.appConfig.getConfig() !== undefined) {
+        this.appConfig.getInitEventEmitter().subscribe(result => {
+          // console.log(this.appConfig.getConfig());
+          if (this.appConfig.getConfig() !== undefined) {
             this.fhirService.setRootUrl(this.appConfig.getConfig().fhirServer);
             this.getConformanace();
-        }
-      });
-      this.appConfig.loadConfig();
+          }
+        });
+      } else {
+        console.log('app config present');
+        this.redirectToEDMS();
+      }
+      //this.appConfig.loadConfig();
 
   }
 
@@ -52,7 +57,10 @@ export class LoadingComponent implements OnInit {
 }
 
   redirectToEDMS() {
-    this.router.navigate(['exp']);
+    console.log('Navigate to EDMS');
+    this.router.navigate(['exp']).then( () => {
+      // console.log('Navigate by Url');
+    });
   }
 
     toggleOverlayStarSyntax(): void {

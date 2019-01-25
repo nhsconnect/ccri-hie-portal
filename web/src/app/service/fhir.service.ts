@@ -20,10 +20,8 @@ export class FhirService {
 
 
   // private baseUrl: string = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
-  private baseUrl = 'http://127.0.0.1:8186/ccri-fhir/STU3';
- //   private baseUrl: string = undefined;
+  private baseUrl;
 
- // private GPCbaseUrl = 'https://data.developer-test.nhs.uk/ccri/camel/fhir/gpc';
     private GPCbaseUrl = 'http://127.0.0.1:8187/ccri/camel/fhir/gpc';
 
     private NRLSbaseUrl = 'https://data.developer.nhs.uk/nrls-ri';
@@ -49,25 +47,14 @@ export class FhirService {
                  private oauth2: Oauth2Service,
                  private appConfig: AppConfigService) {
 
-
-    /*
-    const clientSettings = {
-      client_id: 'diabetes',
-      // Adding the scopes launch or launch/patient depending upon the SMART on FHIR Launch sequence
-      scope: 'user/*.read launch openid profile',
-      redirect_uri: 'http://localhost:4200/redirect',
-      state: '12312'
-    };
-
-    console.log('Fhir Service Construct');
-    const oauth2Configuration = {
-      client: clientSettings,
-      server: "http://127.0.0.1:8183/ccri-fhir/STU3"
-    };
-    */
-    // The authorize method of the SMART on FHIR JS client, will take care of completing the OAuth2.0 Workflow
-
-
+      localStorage.removeItem('baseUrl');
+      this.appConfig.getInitEventEmitter().subscribe( result => {
+        console.log('FHIR Service config change detected');
+        if (this.getBaseUrl() !== this.baseUrl) {
+          this.conformance == undefined;
+          this.getConformance();
+        }
+      })
 
   }
 
@@ -95,6 +82,12 @@ export class FhirService {
 
     storeBaseUrl(baseUrl: string) {
         localStorage.setItem('baseUrl', baseUrl);
+
+        if (this.baseUrl !== baseUrl) {
+          this.baseUrl = baseUrl;
+          this.conformance = undefined;
+          this.getConformance();
+        }
     }
 
     getStoredBaseUrl(): string {
@@ -115,21 +108,10 @@ export class FhirService {
           console.log(this.appConfig);
           if (this.appConfig.getConfig() !== undefined) {
             retStr = this.appConfig.getConfig().fhirServer;
-          } else {
-            if (document.baseURI.includes('localhost')) {
-              retStr = 'http://127.0.0.1:8186/ccri-fhir/STU3';
-              this.baseUrl = retStr;
-            }
-            if (document.baseURI.includes('data.developer-test.nhs.uk')) {
-              retStr = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
-              this.baseUrl = retStr;
-            }
-            if (document.baseURI.includes('data.developer.nhs.uk')) {
-              retStr = 'https://data.developer.nhs.uk/ccri-fhir/STU3';
-              this.baseUrl = retStr;
-            }
+            this.storeBaseUrl(retStr);
           }
         }
+        /*
         if (retStr !== undefined) {
          if (this.oauth2.isAuthenticated() || this.oauth2.isAuthenticating()) {
 
@@ -153,34 +135,34 @@ export class FhirService {
 
              }
          }
-        }
-        this.storeBaseUrl(retStr);
+        } */
+        //console.log('Get Base Url result = '+retStr);
       return retStr;
 }
 
 public setRootUrl(rootUrl: string) {
     this.storeBaseUrl(rootUrl);
-this.rootUrl = rootUrl;
-this.baseUrl = rootUrl;
-this.rootUrlChange.emit(rootUrl);
+    this.rootUrl = rootUrl;
+    this.baseUrl = rootUrl;
+    this.rootUrlChange.emit(rootUrl);
 }
 
 setGPCNRLSUrl(baseUrl: string) {
-if (baseUrl.includes('4203')) {
-this.GPCbaseUrl = 'http://127.0.0.1:8187/ccri/camel/fhir/gpc';
-} else {
+  if (baseUrl.includes('4203')) {
+  this.GPCbaseUrl = 'http://127.0.0.1:8187/ccri/camel/fhir/gpc';
+  } else {
 
-this.GPCbaseUrl = baseUrl + 'camel/fhir/gpc';
-}
-// GP Connect only at present
+  this.GPCbaseUrl = baseUrl + 'camel/fhir/gpc';
+  }
+  // GP Connect only at present
 }
 
 public getRootUrlChange() {
-return this.rootUrlChange;
+  return this.rootUrlChange;
 }
 
 public getConformanceChange() {
-return this.conformanceChange;
+  return this.conformanceChange;
 }
 
 public getFormatChange() {
@@ -230,21 +212,25 @@ return headers;
 }
 
 public setOutputFormat(outputFormat: Formats) {
-this.format = outputFormat;
-this.formatChange.emit(outputFormat);
+  this.format = outputFormat;
+  this.formatChange.emit(outputFormat);
 }
 
 public getConformance() {
-//  console.log('called CapabilityStatement');
-this.http.get<any>(this.getBaseUrl() + '/metadata', { 'headers' : this.getHeaders(true)}).subscribe(capabilityStatement => {
-this.conformance = capabilityStatement;
+      if (this.conformance !== undefined) return this.conformance;
 
-this.conformanceChange.emit(capabilityStatement);
-}, () => {
-  this.conformance = undefined;
-  this.conformanceChange.emit(undefined);
-});
+      if (this.baseUrl !== undefined) {
+        this.http.get<any>(this.getBaseUrl() + '/metadata', {'headers': this.getHeaders(true)}).subscribe(capabilityStatement => {
+          this.conformance = capabilityStatement;
+
+          this.conformanceChange.emit(capabilityStatement);
+        }, () => {
+          this.conformance = undefined;
+          this.conformanceChange.emit(undefined);
+        });
+      }
 }
+
 
 public postAny(url: string, body: string, httpHeaders: HttpHeaders) {
 return this.http.post<any>(url, body, { headers : httpHeaders});
@@ -354,7 +340,7 @@ return this.http.get<any>(url, {'headers': this.getHeaders(true)});
 
 
 public getResults(url: string): Observable<fhir.Bundle> {
-console.log('getResults');
+// console.log('getResults');
 let headers = new HttpHeaders();
 
 if (this.format === 'xml') {

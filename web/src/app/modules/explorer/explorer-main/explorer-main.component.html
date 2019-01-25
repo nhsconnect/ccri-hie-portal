@@ -40,7 +40,7 @@
     <td-navigation-drawer flex sidenavTitle="Applications"  name="" email="" >
         <mat-nav-list>
             <a *ngFor="let item of routes" mat-list-item (click)="onClick(item.route)"><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>
-          <span *ngIf="fhirSrv.getBaseUrl().includes('smartonfhir')">
+          <span *ngIf="oauth2routes !== undefined">
               <a *ngFor="let item of oauth2routes" mat-list-item (click)="onClick(item.route)"><mat-icon>{{item.icon}}</mat-icon>{{item.title}}</a>
             </span>
           <h3 matSubheader>Other Resources</h3>
@@ -83,7 +83,7 @@
         </div>
 
         <mat-nav-list td-sidenav-content >
-            <a mat-list-item routerLink="/"><mat-icon matListAvatar>home</mat-icon> <h3 matLine>Home </h3></a>
+            <a mat-list-item routerLink="/exp"><mat-icon matListAvatar>home</mat-icon> <h3 matLine>Home </h3></a>
             <mat-divider></mat-divider>
             <mat-list-item><h2 matLine>  Resources</h2></mat-list-item>
             <mat-divider></mat-divider>

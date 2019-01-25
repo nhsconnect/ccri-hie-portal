@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
     oauth2 : {
-        eprUrl : 'http://127.0.0.1:8186/ccri-fhir/STU3',
+        eprUrl : 'https://data.developer-test.nhs.uk/ccri-fhir/STU3',
         client_id : 'nhs-smart-ehr',
         client_secret : 'APa5oCe6SHhty_or2q34WpNcq0-X957n6p48TkAJw14YCtmZeQil60XvCfuByIPd8DlXyusxAGxp5_Z5UKlgZJU',
         cookie_domain : 'localhost'

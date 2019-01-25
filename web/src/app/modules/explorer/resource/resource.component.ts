@@ -322,7 +322,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
        default:
          console.log('MISSING - ' + param.type);
      }
-     console.log('call refresh');
+     // console.log('call refresh');
      this.form.refresh();
      this.buildQuery();
    }
@@ -359,7 +359,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
   }
 
     ngAfterViewInit() {
-      console.log('after init');
+     // console.log('after init');
 
         if (this.form !== undefined) {
             this.form.form.valueChanges.subscribe((val) => {
@@ -383,7 +383,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
           if (!first) {
               query = query + '&' + param;
           } else { query = query + param; }
-          //  console.log(content[0]);
+          // console.log('KGM ' + query);
           switch (content[0]) {
               case 'date':
                   query = query + '=';
@@ -402,8 +402,13 @@ export class ResourceComponent implements OnInit, AfterViewInit {
                   i++;
                   break;
               case 'string':
-                  if (this.form.value[this.elements[i].name] !== undefined) {
-                      query = query + ':' + this.form.value[this.elements[i].name]; }
+                 // console.log(this.elements[i]);
+                  if (this.form.value[this.elements[i].name] !== undefined
+                    && (typeof this.form.value[this.elements[i].name] === 'string' || this.form.value[this.elements[i].name] instanceof String)) {
+                      console.log(this.form.value[this.elements[i].name]);
+                      //
+                      query = query + ':' + this.form.value[this.elements[i].name];
+                  }
                   query = query + '=';
                   if (this.form.value[this.elements[i + 1].name] !== undefined) {
                       query = query + this.form.value[this.elements[i + 1].name]; }
@@ -418,7 +423,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
           }
 
 
-          console.log(this.form.value[this.elements[i].name]);
+         // console.log(this.form.value[this.elements[i].name]);
           first = false;
       }
       //  console.log(query);
@@ -427,7 +432,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
   onSearch() {
 
     this.clearDown();
-      console.log(this.form.valid);
+      // console.log(this.form.valid);
       if (this.form.valid && this.elements.length > 0) {
           this.resource = undefined;
           this.progressBar = true;
@@ -444,10 +449,10 @@ export class ResourceComponent implements OnInit, AfterViewInit {
             
             let id_query = this.fhirSrv.getFHIRServerBase() + '/' + this.currentResource + '/' + + this.form1.value[this.elements_id[0].name];
             this.id_query = id_query;
-            console.log(id_query);
+            // console.log(id_query);
             this.query = id_query;
             this.getResults();
-            console.log(id_query);
+            // console.log(id_query);
         }
     }
   onClear() {
@@ -459,7 +464,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
 
   getResults() {
       if (this.query !== undefined && (this.query !== '')) {
-          console.log(this.format + ' Query = ' + this.query);
+      //    console.log(this.format + ' Query = ' + this.query);
             this.fhirSrv.getResults(this.query).subscribe(bundle => {
                   switch (this.format) {
                       case 'jsonf':
@@ -521,7 +526,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
               }
           }
       } else {
-          console.log('In Resource - Forcing naviagation to root');
+          // console.log('In Resource - Forcing naviagation to root');
           // this.router.navigateByUrl('/');
       }
 
@@ -650,7 +655,7 @@ export class ResourceComponent implements OnInit, AfterViewInit {
               this.forms.push(form);
               break;
               case 'ReferralRequest':
-                  console.log('Referral Request');
+              //    console.log('Referral Request');
                   const referral: fhir.ReferralRequest = <fhir.ReferralRequest> resource;
                   this.referrals.push(referral);
                   break;

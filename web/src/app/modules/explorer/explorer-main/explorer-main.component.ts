@@ -122,11 +122,12 @@ export class ExplorerMainComponent implements OnInit {
             route: url,
             title: 'Care Connect RI'
         };
-        this.fhirSrv.getConformance();
+       // this.fhirSrv.getConformance();
     });
 
     this.fhirSrv.getConformanceChange().subscribe(capabilityStatement => {
         this.navmenu = [];
+        console.log('Explorer Main conformance changed');
         if (capabilityStatement !== undefined) {
             for (const node of capabilityStatement.rest) {
                 // console.log('mode ' + node.mode);

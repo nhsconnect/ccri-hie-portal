@@ -21,31 +21,26 @@ export class AppConfigService {
             console.log('calling config endpoint: ' + document.baseURI + 'camel/config/http');
             this.http.get<any>(document.baseURI + 'camel/config/http').subscribe(result => {
                   console.log('app config fhirServer retrieved.');
-                  console.log(result);
+                //  console.log(result);
 
-                  const rootUrl: string = result.fhirServer;
-                 // this.fhirService.setRootUrl(rootUrl);
-                 // this.fhirService.setGPCNRLSUrl(document.baseURI);
                   this.appConfig = result;
                   this.initEvent.emit(result);
               },
                 error => {
-                    console.log(error);
-                    console.log('No server detected');
                     console.log('No configuration endpoint detected');
-                    const result = {
+                    const env = {
                       fhirServer: environment.oauth2.eprUrl,
                       oauth2client_id: environment.oauth2.client_id,
                       oauth2client_secret: environment.oauth2.client_secret,
                       oauth2cookie_domain: environment.oauth2.cookie_domain
                     };
-                    this.appConfig = result;
-                    this.initEvent.emit(result);
-                  // this.fhirServer.setRootUrl('http://127.0.0.1:8183/ccri-fhir/STU3');
+                    this.appConfig = env;
+                    this.initEvent.emit(env);
                 });
     }
 
   getConfig() {
+   // console.log(this.appConfig);
     return this.appConfig;
   }
 
