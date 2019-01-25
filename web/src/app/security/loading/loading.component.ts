@@ -39,7 +39,7 @@ export class LoadingComponent implements OnInit {
         console.log('app config present');
         this.redirectToEDMS();
       }
-      //this.appConfig.loadConfig();
+      // this.appConfig.loadConfig();
 
   }
 
