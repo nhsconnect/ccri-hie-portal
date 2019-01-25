@@ -11,6 +11,7 @@ import {Observable} from 'rxjs';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {EventEmitter, Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {AppConfigService} from './app-config.service';
 
 
 @Injectable()
@@ -38,9 +39,8 @@ export class AuthService {
              private oauth2service: OAuthService,
              private _cookieService: CookieService,
              private fhirService: FhirService,
-             private http: HttpClient
-
-
+             private http: HttpClient,
+             private appConfig: AppConfigService
               ) {
 
     this.updateUser();
@@ -73,17 +73,12 @@ export class AuthService {
     return this.oauth2.getToken();
   }
 
-
-
     getLogonServer() {
-        if (document.baseURI.includes('data.developer-test.nhs.uk')) {
-          return 'https://data.developer-test.nhs.uk/ccri-logon';
-        }
-        if (document.baseURI.includes('data.developer.nhs.uk')) {
-          return 'https://data.developer.nhs.uk/ccri-logon';
-        }
-
-        return 'http://localhost:4200/ccri-logon';
+       if (this.appConfig.getConfig() !== undefined) {
+         return this.appConfig.getConfig().logonUrl;
+       } else {
+         return environment.oauth2.logonUrl;
+       }
     }
 
     getCookie() {

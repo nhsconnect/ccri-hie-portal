@@ -51,10 +51,10 @@ export class FhirService {
       this.appConfig.getInitEventEmitter().subscribe( result => {
         console.log('FHIR Service config change detected');
         if (this.getBaseUrl() !== this.baseUrl) {
-          this.conformance == undefined;
+          this.conformance = undefined;
           this.getConformance();
         }
-      })
+      });
 
   }
 
@@ -111,32 +111,7 @@ export class FhirService {
             this.storeBaseUrl(retStr);
           }
         }
-        /*
-        if (retStr !== undefined) {
-         if (this.oauth2.isAuthenticated() || this.oauth2.isAuthenticating()) {
 
-          if (retStr.includes('8186/ccri-fhir')) {
-            retStr = 'https://data.developer-test.nhs.uk/ccri-smartonfhir/STU3';
-            console.log('swapping to smartonfhir instance: ' + retStr);
-            this.baseUrl = retStr;
-          } else {
-            if (retStr.includes('ccri-fhir')) {
-              retStr = retStr.replace('ccri-fhir', 'ccri-smartonfhir');
-              console.log('swapping to smartonfhir instance: ' + retStr);
-              this.baseUrl = retStr;
-            }
-          }
-        } else {
-
-             if (retStr.includes('ccri-smartonfhir')) {
-                 retStr = retStr.replace('ccri-smartonfhir', 'ccri-fhir');
-                 console.log('swapping to unsec fhir instance: ' + retStr);
-                 this.baseUrl = retStr;
-
-             }
-         }
-        } */
-        //console.log('Get Base Url result = '+retStr);
       return retStr;
 }
 
@@ -217,7 +192,9 @@ public setOutputFormat(outputFormat: Formats) {
 }
 
 public getConformance() {
-      if (this.conformance !== undefined) return this.conformance;
+      if (this.conformance !== undefined) {
+        return this.conformance;
+      }
 
       if (this.baseUrl !== undefined) {
         this.http.get<any>(this.getBaseUrl() + '/metadata', {'headers': this.getHeaders(true)}).subscribe(capabilityStatement => {

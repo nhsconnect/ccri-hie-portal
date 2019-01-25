@@ -48,6 +48,18 @@ public class CamelMonitorRoute extends RouteBuilder {
 	@Value("${gpc.fhirbase}")
 	private String gpcServer;
 
+	@Value("${oauth2.client_id}")
+	private String oauth2client_id;
+
+	@Value("${oauth2.client_secret}")
+	private String oauth2client_secret;
+
+	@Value("${oauth2.cookie_domain}")
+	private String oauth2cookie_domain;
+
+	@Value("${conf.logon}")
+	private String logonUrl;
+
     @Override
     public void configure() 
     {
@@ -71,7 +83,12 @@ public class CamelMonitorRoute extends RouteBuilder {
 
 		from("direct:hello")
 				.routeId("helloTest")
-				.transform().constant("{ \"fhirServer\" : \""+serverBase+"\" }");
+				.transform().constant("{ \"fhirServer\": \""+serverBase+"\", "
+				+"\"logonUrl\": \""+logonUrl+"\", "
+				+"\"oauth2client_id\": \""+oauth2client_id+"\", "
+				+"\"oauth2client_secret\": \""+oauth2client_secret+"\", "
+				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\""
+				+ " }");
 
 		rest("/fhir")
 				.get("/ods/{path}").to("direct:ods")
