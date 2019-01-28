@@ -185,7 +185,7 @@
                             <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../web/dist/ccri-hie/</directory>
+                                    <directory>../web/dist/</directory>
                                 </resource>
                             </resources>
                         </configuration>
