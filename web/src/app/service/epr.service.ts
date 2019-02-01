@@ -9,31 +9,41 @@ export class EprService {
   public routes: Object[] = [
     {
       icon: 'home',
-      route: '/',
-      title: 'FHIR Explorer',
+      route: '/hie',
+      title: 'HIE Portal',
     }
     , {
       icon: 'search',
-      route: '/ed',
+      route: '/hie',
       title: 'Patient Find' +
         '',
     }
     , {
       icon: 'hotel',
-      route: '/ed/caseload',
+      route: '/hie/caseload',
       title: 'Caseload',
     }
     , {
       icon: 'dashboard',
-      route: '/ed/capacity',
+      route: '/hie/capacity',
       title: 'Emergency Planning',
+    }
+    , {
+      icon: 'directions',
+      route: '/dos',
+      title: 'Directory Services',
+    }
+    , {
+      icon: 'euro_symbol',
+      route: '/term',
+      title: 'Terminology Services',
     }
   ];
 
   public oauth2routes: Object[] = [
      {
       icon: 'apps',
-      route: '/ed/smart',
+      route: '/hie/smart',
       title: 'SMART on FHIR Apps',
     }
   ];

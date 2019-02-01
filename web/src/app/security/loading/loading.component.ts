@@ -37,7 +37,7 @@ export class LoadingComponent implements OnInit {
         });
       } else {
         console.log('app config present');
-        this.redirectToEDMS();
+        this.redirectToHIE();
       }
       // this.appConfig.loadConfig();
 
@@ -49,16 +49,16 @@ export class LoadingComponent implements OnInit {
     this.fhirService.getConformanceChange().subscribe( result => {
         console.log(this.fhirService.conformance);
       if (this.fhirService.conformance !== undefined) {
-          this.redirectToEDMS();
+          this.redirectToHIE();
       }
     });
     this.fhirService.getConformance();
 
 }
 
-  redirectToEDMS() {
-    console.log('Navigate to EDMS');
-    this.router.navigate(['exp']).then( () => {
+  redirectToHIE() {
+    console.log('Navigate to HIEr');
+    this.router.navigate(['hie']).then( () => {
       // console.log('Navigate by Url');
     });
   }

@@ -4,7 +4,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  CovalentChipsModule,
+  CovalentChipsModule, CovalentDataTableModule,
   CovalentDialogsModule, CovalentExpansionPanelModule,
   CovalentJsonFormatterModule,
   CovalentLayoutModule, CovalentLoadingModule,
@@ -42,9 +42,6 @@ import {
 
 } from '@angular/material';
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {MainComponent} from './modules/explorer/main/main.component';
-import { ConformanceComponent } from './modules/explorer/conformance/conformance.component';
-import { ResourceComponent } from './modules/explorer/resource/resource.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -89,8 +86,6 @@ import {EprService} from './service/epr.service';
 import {ResponseInterceptor} from './service/response-interceptor';
 import { ObservationChartDialogComponent } from './dialog/observation-chart-dialog/observation-chart-dialog.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import { ExplorerMainComponent } from './modules/explorer/explorer-main/explorer-main.component';
-import {EprRoutingModule} from './modules/epr-routing.module';
 import {BinaryComponent} from './component/binary/binary/binary.component';
 import {PdfViewerComponent} from './component/binary/pdf-viewer/pdf-viewer.component';
 import {ImgViewerComponent} from './component/binary/img-viewer/img-viewer.component';
@@ -100,7 +95,7 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
 import { MapComponent } from './component/map/map.component';
 import { EdEncounterListComponent } from './modules/hie/ed-encounter-list/ed-encounter-list.component';
-import {EdRoutingModule} from './modules/ed-routing.module';
+import {HieRoutingModule} from './modules/hie-routing.module';
 import { EdEncounterCardComponent } from './modules/hie/ed-encounter-card/ed-encounter-card.component';
 import {NguiMapModule} from '@ngui/map';
 import { PatientMainComponent } from './modules/patient/patient-main/patient-main.component';
@@ -149,6 +144,14 @@ import { QuestionnaireResponseItemComponent } from './component/questionnaire-re
 import { HtmlViewerComponent } from './component/binary/html-viewer/html-viewer.component';
 import {AppConfigService} from './service/app-config.service';
 import {LoadingComponent} from './security/loading/loading.component';
+import { DirectoryMainComponent } from './modules/hpd/directory-main/directory-main.component';
+import { TerminologyMainComponent } from './modules/terminology/terminology-main/terminology-main.component';
+import {TerminologyRoutingModule} from './modules/terminology-routing.module';
+import {DirectoryRoutingModule} from './modules/directory-routing.module';
+import { ValueSetsComponent } from './modules/terminology/value-sets/value-sets.component';
+import { ConceptMapsComponent } from './modules/terminology/concept-maps/concept-maps.component';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 const appInitializerFn = (appConfig: AppConfigService) => {
@@ -161,9 +164,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    ConformanceComponent,
-    ResourceComponent,
       LoginComponent,
     CallbackComponent,
     PingComponent,
@@ -218,7 +218,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     EncounterDialogComponent,
     ObservationChartDialogComponent,
     HieMainComponent,
-    ExplorerMainComponent,
     MapComponent,
     EdEncounterListComponent,
     EdEncounterCardComponent,
@@ -248,7 +247,11 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       AmbulanceATMISTComponent,
       CareTeamComponent,
       QuestionnaireResponseItemComponent,
-      HtmlViewerComponent
+      HtmlViewerComponent,
+      DirectoryMainComponent,
+      TerminologyMainComponent,
+      ValueSetsComponent,
+      ConceptMapsComponent
 
   ],
   entryComponents: [
@@ -307,6 +310,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     MatGridListModule,
     MatGridListModule,
 
+    DragDropModule,
+
     CovalentLayoutModule,
     CovalentStepsModule,
     // (optional) Additional Covalent Modules imports
@@ -327,6 +332,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentLineEchartsModule,
     CovalentTooltipEchartsModule,
     CovalentLoadingModule,
+    CovalentDataTableModule,
 
     NgxChartsModule,
 
@@ -334,9 +340,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       ImageViewerModule,
      NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDC8GmtqZiQXc16qf1v870NKy-phjv-1N0'}),
     //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key='}),
-
-    EprRoutingModule,
-    EdRoutingModule,
+    HieRoutingModule,
+    DirectoryRoutingModule,
+    TerminologyRoutingModule,
       AppRoutingModule,
 
     OAuthModule.forRoot()
@@ -381,3 +387,5 @@ export class AppModule {
     matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
   }
 }
+
+platformBrowserDynamic().bootstrapModule(AppModule);

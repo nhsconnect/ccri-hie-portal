@@ -9,7 +9,7 @@ import {LoadingComponent} from './security/loading/loading.component';
 const routes: Routes = [
   { path: '', component: LoadingComponent },
 
-   {  path: 'error', redirectTo: 'exp'},
+   {  path: 'error', redirectTo: ''},
    {  path: 'login', component : LoginComponent},
   {  path: 'ping', component : PingComponent},
   {  path: 'logout', component : LogoutComponent}  ,
