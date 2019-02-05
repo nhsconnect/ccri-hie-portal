@@ -1,7 +1,24 @@
 <mat-card>
-
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+<div>
+  <div>
+    <h2>Care Connect Marital Status</h2>
+  <div cdkDropList
+       #todoList="cdkDropList"
+       [cdkDropListData]="valueSet1"
+       [cdkDropListConnectedTo]="[doneList]"
+       class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let value of valueSet1" cdkDrag>{{value}}</div>
   </div>
-
+  </div>
+<div>
+  <h2>NHS Marital Status</h2>
+  <div cdkDropList
+       #doneList="cdkDropList"
+       [cdkDropListData]="valueSet2"
+       [cdkDropListConnectedTo]="[todoList]"
+       class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let value of valueSet2" cdkDrag>{{value}}</div>
+  </div>
+</div>
+</div>
 </mat-card>

@@ -1,0 +1,5 @@
+<span *ngIf="questionnaire !== undefined">
+  <span *ngFor="let item of questionnaire.item">
+    <app-questionnaire-item [item]="item"></app-questionnaire-item>
+  </span>
+</span>

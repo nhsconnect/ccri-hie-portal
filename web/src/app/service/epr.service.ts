@@ -34,7 +34,7 @@ export class EprService {
       title: 'Directory Services',
     }
     , {
-      icon: 'euro_symbol',
+      icon: 'translate',
       route: '/term',
       title: 'Terminology Services',
     }

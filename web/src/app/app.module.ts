@@ -152,6 +152,8 @@ import { ValueSetsComponent } from './modules/terminology/value-sets/value-sets.
 import { ConceptMapsComponent } from './modules/terminology/concept-maps/concept-maps.component';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { QuestionnaireComponent } from './modules/terminology/questionnaire/questionnaire.component';
+import { QuestionnaireItemComponent } from './modules/terminology/questionnaire-item/questionnaire-item.component';
 
 
 const appInitializerFn = (appConfig: AppConfigService) => {
@@ -251,7 +253,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       DirectoryMainComponent,
       TerminologyMainComponent,
       ValueSetsComponent,
-      ConceptMapsComponent
+      ConceptMapsComponent,
+      QuestionnaireComponent,
+      QuestionnaireItemComponent
 
   ],
   entryComponents: [

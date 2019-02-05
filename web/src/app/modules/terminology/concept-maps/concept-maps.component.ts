@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-conccept-maps',
@@ -10,16 +10,26 @@ export class ConceptMapsComponent implements OnInit {
 
   // https://material.angular.io/cdk/drag-drop/examples
 
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
+  valueSet1 = [
+    'U - Unmarried',
+    'D - Divorced',
+    'L - Legally Separated',
+    'M - Married',
+    'S - Never Married',
+    'W - Widowed',
+    'UNK - Unknown'
   ];
+
+
+    valueSet2 = [
+
+      'P - Separated',
+      'N - Not disclosed',
+      'S - Never Married',
+      'W - Widowed',
+      'UNK - Unknown'
+    ];
+
 
 
   constructor() { }
@@ -28,7 +38,16 @@ export class ConceptMapsComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
+
+
 
 }
