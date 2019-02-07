@@ -31,6 +31,7 @@ export class QuestionnaireItemComponent implements OnInit {
         return 'question_answer';
       case 'string':
         return 'input';
+      case 'dateTime': return 'event';
     }
     return 'group';
   }
