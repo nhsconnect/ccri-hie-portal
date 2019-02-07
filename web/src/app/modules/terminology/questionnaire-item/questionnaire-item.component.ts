@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-questionnaire-item',
@@ -10,9 +11,31 @@ export class QuestionnaireItemComponent implements OnInit {
   @Input()
   item: any;
 
-  constructor() { }
+  @Input()
+  depth;
+
+  disabled: boolean = false;
+
+  constructor(private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+  }
+
+  getIcon(item) {
+    switch(item.type) {
+      case 'group':
+        return 'group';
+      case 'reference':
+        return 'book';
+      case 'choice':
+        return 'question_answer';
+      case 'string':
+        return 'input';
+    }
+    return 'group';
+  }
+  getStyle(item) {
+    return this._sanitizer.bypassSecurityTrustStyle('{background-color: accent;}');
   }
 
   remove(str: String) {

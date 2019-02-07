@@ -1,42 +1,31 @@
+<td-expansion-panel [style]="getStyle(depth)" label="{{item.text}}" sublabel="linkId={{item.linkId}}" [disabled]="disabled">
+
 <mat-card>
-  <mat-card-title>{{item.text}}</mat-card-title>
-  <mat-card-content>
-    <table>
-      <tr>
-        <td>linkId</td>
-        <td><b>{{item.linkId}}</b></td>
-      </tr>
-      <tr>
-        <td>type</td>
-        <td><b>{{item.type}}</b></td>
-      </tr>
-      <tr *ngIf="item.options !== undefined">
-        <td>valueSet options</td>
-        <td>{{item.options.reference}}</td>
-      </tr>
-      <tr>
-        <td>repeats</td>
-        <td><b>{{item.repeats}}</b></td>
-      </tr>
-      <tr>
-        <td>required</td>
-        <td><b>{{item.required}}</b></td>
-      </tr>
-    </table>
-    <table>
-      <tr *ngFor="let ext of item.extension">
-        <td>{{remove(ext.url)}}</td>
-        <td>
-          <b>
-          <span *ngIf="ext.valueCode !== undefined">{{ext.valueCode}}</span>
-          <span *ngIf="ext.valueReference !== undefined">{{ext.valueReference.reference}}</span>
-          </b>
-        </td>
-      </tr>
-    </table>
+  <mat-chip-list>
+    <mat-chip *ngIf="item.repeats">repeats
+    </mat-chip>
+    <mat-chip color="accent" *ngIf="item.required">required
+    </mat-chip>
+    <span *ngFor="let ext of item.extension">
+          <mat-chip color="primary" *ngIf="ext.valueCode !== undefined">Resource: {{ext.valueCode}}</mat-chip>
+          <mat-chip *ngIf="ext.valueReference !== undefined">Profile: {{ext.valueReference.reference}}</mat-chip>
+    </span>
+    <mat-chip *ngIf="item.options !== undefined">
+      Options ValueSet {{item.options.reference}}
+    </mat-chip>
+  </mat-chip-list>
+
+  <mat-list>
+    <mat-list-item>
+      <mat-icon matListAvatar>{{getIcon(item)}}</mat-icon>
+      <h3 matLine>{{item.type}}</h3>
+    </mat-list-item>
+  </mat-list>
     <br>
   <span *ngFor="let subitem of item.item">
-    <app-questionnaire-item [item]="subitem"></app-questionnaire-item>
+    <td-expansion-panel-group [multi]="multi" #panelGroup>
+    <app-questionnaire-item [item]="subitem" [depth]="depth+1"></app-questionnaire-item>
+    </td-expansion-panel-group>
   </span>
-  </mat-card-content>
 </mat-card>
+</td-expansion-panel>
