@@ -14,7 +14,7 @@ export class QuestionnaireItemComponent implements OnInit {
   @Input()
   depth;
 
-  disabled: boolean = false;
+  disabled = false;
 
   constructor(private _sanitizer: DomSanitizer) { }
 
@@ -22,7 +22,7 @@ export class QuestionnaireItemComponent implements OnInit {
   }
 
   getIcon(item) {
-    switch(item.type) {
+    switch (item.type) {
       case 'group':
         return 'group';
       case 'reference':
@@ -37,9 +37,19 @@ export class QuestionnaireItemComponent implements OnInit {
   getStyle(item) {
     return this._sanitizer.bypassSecurityTrustStyle('{background-color: accent;}');
   }
+  getProfile(extension: fhir.Extension[]): string {
+     for ( const ext of extension) {
+       if (ext.url === 'http://hl7.org/fhir/StructureDefinition/questionnaire-allowedProfile') {
+         return ext.valueReference.reference;
+       }
+     }
+     return '';
+  }
 
   remove(str: String) {
-    if (str === undefined) return "";
+    if (str === undefined) {
+      return '';
+    }
 
     return str.replace('http://hl7.org/fhir/StructureDefinition/questionnaire-', '');
   }

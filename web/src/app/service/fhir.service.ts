@@ -20,7 +20,7 @@ export class FhirService {
 
 
   // private baseUrl: string = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
-  private baseUrl;
+  private baseUrl = 'http://localhost:8186/ccri-fhir/STU3';
 
     private GPCbaseUrl = 'http://127.0.0.1:8187/ccri/camel/fhir/gpc';
 

@@ -24,11 +24,11 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   getQuestionnaire() {
-    this.fhirService.getResource('/Questionnaire/4').subscribe(
+    this.fhirService.getResource('/Questionnaire/10').subscribe(
       form => {
         console.log('Got Questionnaire');
         this.questionnaire = <fhir.Questionnaire> form;
       }
-    )
+    );
   }
 }
