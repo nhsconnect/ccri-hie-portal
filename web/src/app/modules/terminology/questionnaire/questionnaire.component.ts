@@ -24,10 +24,17 @@ export class QuestionnaireComponent implements OnInit {
   }
 
   getQuestionnaire() {
-    this.fhirService.getResource('/Questionnaire/10').subscribe(
-      form => {
-        console.log('Got Questionnaire');
-        this.questionnaire = <fhir.Questionnaire> form;
+    this.fhirService.get('/Questionnaire?identifier=https://fhir.nhs.uk/STU3/Questionnaire%7CCareConnect-EOLC-1').subscribe(
+      result => {
+        const bundle: fhir.Bundle = result;
+        if (bundle.total > 0) {
+          for (const entry of bundle.entry) {
+            if (entry.resource.resourceType === 'Questionnaire') {
+              console.log('Got Questionnaire');
+              this.questionnaire = <fhir.Questionnaire> entry.resource;
+            }
+          }
+        }
       }
     );
   }
