@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-questionnaire-item',
@@ -16,7 +18,9 @@ export class QuestionnaireItemComponent implements OnInit {
 
   disabled = false;
 
-  constructor(private _sanitizer: DomSanitizer) { }
+  constructor(
+    public dialog: MatDialog,
+    private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
@@ -54,6 +58,18 @@ export class QuestionnaireItemComponent implements OnInit {
 
     return str.replace('http://hl7.org/fhir/StructureDefinition/questionnaire-', '');
   }
+  select(resource) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    const resourceDialog: MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
+  }
+
 
 
 }
