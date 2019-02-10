@@ -4,6 +4,7 @@ import {TerminologyMainComponent} from './terminology/terminology-main/terminolo
 import {ValueSetsComponent} from './terminology/value-sets/value-sets.component';
 import {ConceptMapsComponent} from './terminology/concept-maps/concept-maps.component';
 import {QuestionnaireComponent} from './terminology/questionnaire/questionnaire.component';
+import {EOLCIntroComponent} from './terminology/eolcintro/eolcintro.component';
 
 const dosRoutes: Routes = [
   {
@@ -12,7 +13,8 @@ const dosRoutes: Routes = [
       { path: '', component: ValueSetsComponent},
       { path: 'valuesets', component: ValueSetsComponent},
       { path: 'conceptmaps', component: ConceptMapsComponent},
-      { path: 'questionnaire', component: QuestionnaireComponent}
+      { path: 'questionnaire', component: QuestionnaireComponent},
+      { path: 'intro', component: EOLCIntroComponent}
     ]
   }
 ];

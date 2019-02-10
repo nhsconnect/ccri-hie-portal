@@ -154,6 +154,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { QuestionnaireComponent } from './modules/terminology/questionnaire/questionnaire.component';
 import { QuestionnaireItemComponent } from './modules/terminology/questionnaire-item/questionnaire-item.component';
+import { EOLCIntroComponent } from './modules/terminology/eolcintro/eolcintro.component';
 
 
 const appInitializerFn = (appConfig: AppConfigService) => {
@@ -255,7 +256,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       ValueSetsComponent,
       ConceptMapsComponent,
       QuestionnaireComponent,
-      QuestionnaireItemComponent
+      QuestionnaireItemComponent,
+      EOLCIntroComponent
 
   ],
   entryComponents: [
@@ -322,6 +324,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentHttpModule.forRoot(),
     CovalentHighlightModule,
     CovalentMarkdownModule,
+
     CovalentDynamicFormsModule,
     CovalentMediaModule,
     CovalentMessageModule,
