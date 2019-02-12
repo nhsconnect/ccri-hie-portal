@@ -40,35 +40,63 @@ public class AngularController {
                 ("forward:/" );
     }
 
-    @RequestMapping(value = "/ed", method = RequestMethod.GET)
+    @RequestMapping(value = "/hie", method = RequestMethod.GET)
     public Object handleAmb() {
 
         return new ModelAndView
                 ("forward:/" );
     }
 
-    @RequestMapping(value = "/ed/{path}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hie/{path}", method = RequestMethod.GET)
     public Object handleSubPath() {
        // System.out.println("handleSubPath");
         return new ModelAndView
                 ("forward:/" );
     }
 
-    @RequestMapping(value = "/ed/{path}/{patient}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hpd", method = RequestMethod.GET)
+    public Object handlehpd() {
+
+        return new ModelAndView
+                ("forward:/" );
+    }
+
+    @RequestMapping(value = "/hpd/{path}", method = RequestMethod.GET)
+    public Object handlehpdSubPath() {
+        // System.out.println("handleSubPath");
+        return new ModelAndView
+                ("forward:/" );
+    }
+
+    @RequestMapping(value = "/term", method = RequestMethod.GET)
+    public Object handleterm() {
+
+        return new ModelAndView
+                ("forward:/" );
+    }
+
+    @RequestMapping(value = "/term/{path}", method = RequestMethod.GET)
+    public Object handletermSubPath() {
+        // System.out.println("handleSubPath");
+        return new ModelAndView
+                ("forward:/" );
+    }
+
+    @RequestMapping(value = "/term/{path}/{patient}", method = RequestMethod.GET)
     public Object handlePatient() {
 
         return new ModelAndView
                 ("forward:/" );
     }
 
-    @RequestMapping(value = "/ed/{path}/{patient}/{subSection}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hie/{path}/{patient}/{subSection}", method = RequestMethod.GET)
     public Object handlePatientSection() {
 
         return new ModelAndView
                 ("forward:/" );
     }
 
-    @RequestMapping(value = "/ed/{path}/{patient}/{subSection}/{item}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hie/{path}/{patient}/{subSection}/{item}", method = RequestMethod.GET)
     public Object handlePatientSectionItem() {
 
         return new ModelAndView

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FhirService} from "../../../service/fhir.service";
-import {Router} from "@angular/router";
+import {FhirService} from '../../../service/fhir.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -28,29 +28,30 @@ export class EdEncounterCardComponent implements OnInit {
   flags: fhir.Flag[] = [];
 
 
-  plannedLocStatus: boolean = true;
+  plannedLocStatus = true;
 
     ambulanceLoc: fhir.Location = undefined;
-    plannedLoc :fhir.Location = undefined;
+    plannedLoc: fhir.Location = undefined;
 
 
 
     constructor(private fhirService: FhirService,
-              private router : Router) { }
+              private router: Router) { }
 
   ngOnInit() {
 
 
       // Main encounter lookup
-    this.fhirService.get('/Encounter?_id='+this.encounter.id+'&_include=Encounter:patient&_revinclude=Encounter:part-of').subscribe( bundle => {
+    this.fhirService.get('/Encounter?_id=' + this.encounter.id
+      + '&_include=Encounter:patient&_revinclude=Encounter:part-of').subscribe( bundle => {
       this.encounters = [];
       this.observations = [];
-      for (let entry of bundle.entry) {
+      for (const entry of bundle.entry) {
           switch (entry.resource.resourceType) {
-              case "Encounter":
-                  let sub: fhir.Encounter = <fhir.Encounter> entry.resource;
+              case 'Encounter':
+                  const sub: fhir.Encounter = <fhir.Encounter> entry.resource;
                   if (sub.id !== this.encounter.id) {
-                      //his.coords = sub.53.80634, -1.52304
+                      // his.coords = sub.53.80634, -1.52304
                       this.encounters.push(sub);
                   }
                   break;
@@ -58,42 +59,42 @@ export class EdEncounterCardComponent implements OnInit {
                   this.patient = <fhir.Patient> entry.resource;
                   break;
               default:
-                  console.log('Udder '+entry.resource.resourceType);
+                  console.log('Other: ' + entry.resource.resourceType);
           }
 
       }
     },
-        ()=>{
+        () => {
 
         }
-        , ()=> {
+        , () => {
             this.ambulanceLoc = undefined;
             this.plannedLoc = undefined;
 
-            for(let identifier of this.patient.identifier) {
+            for (const identifier of this.patient.identifier) {
                 if (identifier.system === 'https://fhir.nhs.uk/Id/nhs-number') {
                     this.getPatientData(identifier.value);
                 }
             }
 
-            let locations: fhir.Location[] = [];
+            const locations: fhir.Location[] = [];
 
-            for (let enc of this.encounters) {
-                this.fhirService.get('/Encounter?_id='+enc.id+'&_include=Encounter:location&_revinclude=Observation:context').subscribe(
+            for (const enc of this.encounters) {
+                this.fhirService.get('/Encounter?_id=' + enc.id + '&_include=Encounter:location&_revinclude=Observation:context').subscribe(
                     bundle => {
-                        for (let entry of bundle.entry) {
+                        for (const entry of bundle.entry) {
                             switch (entry.resource.resourceType) {
 
                                 case 'Observation':
 
-                                    let obs: fhir.Observation = <fhir.Observation> entry.resource;
+                                    const obs: fhir.Observation = <fhir.Observation> entry.resource;
                                     this.observations.push(obs);
                                     break;
                                 case 'Location':
                                     locations.push(<fhir.Location> entry.resource);
                                     break;
                                 case 'Encounter':
-                                    //locations.push(<fhir.Location> entry.resource);
+                                    // locations.push(<fhir.Location> entry.resource);
                                     break;
                                 default:
                                     console.log(entry.resource.resourceType);
@@ -101,23 +102,22 @@ export class EdEncounterCardComponent implements OnInit {
 
                         }
                     },
-                    ()=>{},
-                    ()=>
-                    {
+                    () => {},
+                    () => {
                         this.getObs();
-                        if (enc.status !=='finished' ) {
-                            for (let enclocation of enc.location) {
+                        if (enc.status !== 'finished' ) {
+                            for (const enclocation of enc.location) {
 
-                                if (enclocation.status == 'planned' || enclocation.status == 'active') {
-                                    for (let location of locations) {
-                                        if (enclocation.location.reference.includes('/'+location.id)) {
+                                if (enclocation.status === 'planned' || enclocation.status === 'active') {
+                                    for (const location of locations) {
+                                        if (enclocation.location.reference.includes('/' + location.id)) {
                                             if (location.type.coding[0].code === 'AMB') {
                                                 this.ambulanceLoc = location;
 
                                             } else {
                                                 this.plannedLoc = location;
 
-                                                if (enclocation.status == 'active') {
+                                                if (enclocation.status === 'active') {
                                                     this.plannedLocStatus = true;
                                                 } else {
                                                     this.plannedLocStatus = false;
@@ -135,7 +135,7 @@ export class EdEncounterCardComponent implements OnInit {
                 // ambulance encounter is the only one we are interested in - the triage should be finished and handedover
 
             }
-        })
+        });
   }
 
 
@@ -143,19 +143,19 @@ export class EdEncounterCardComponent implements OnInit {
 
       // Mock up using CCRI for now (EOLC not supported in NRLS until next phase
 
-        this.fhirService.get('/Patient?_id='+this.patient.id+'&_revinclude=Flag:patient').subscribe( bundle => {
+        this.fhirService.get('/Patient?_id=' + this.patient.id + '&_revinclude=Flag:patient').subscribe( bundle => {
             if (bundle.entry !== undefined) {
-                for (let entry of bundle.entry) {
+                for (const entry of bundle.entry) {
                     switch (entry.resource.resourceType) {
                       case 'Flag':
-                        let flag: fhir.Flag = <fhir.Flag> entry.resource;
+                        const flag: fhir.Flag = <fhir.Flag> entry.resource;
                         this.flags.push(flag);
                     }
 
 
                 }
             }
-        })
+        });
     }
 
   getObs() {
@@ -169,7 +169,7 @@ export class EdEncounterCardComponent implements OnInit {
       this.air = undefined;
       this.alert2 = undefined;
 
-      for(let obs of this.observations) {
+      for (const obs of this.observations) {
 
           switch (obs.code.coding[0].code) {
               case '364075005':
@@ -181,23 +181,23 @@ export class EdEncounterCardComponent implements OnInit {
               case '86290005':
                   this.resp = obs;
                   break;
-              case "1104051000000101":
+              case '1104051000000101':
                   this.news2 = obs;
                   break;
-              case "1104441000000107":
+              case '1104441000000107':
                   this.alert2 = obs;
                   break;
-              case "75367002":
+              case '75367002':
                   this.bp = obs;
                   break;
-              case "431314004":
-              case "866661000000106":
-              case "866701000000100":
+              case '431314004':
+              case '866661000000106':
+              case '866701000000100':
                   this.o2 = obs;
                   break;
-              case "301282008":
-              case "371825009":
-            case "722742002":
+              case '301282008':
+              case '371825009':
+            case '722742002':
                   this.air = obs;
                   break;
               default :
@@ -209,83 +209,100 @@ export class EdEncounterCardComponent implements OnInit {
 
   }
 
-    getLastName(patient :fhir.Patient) : String {
-        if (patient == undefined) return "";
-        if (patient.name == undefined || patient.name.length == 0)
-            return "";
+    getLastName(patient: fhir.Patient): String {
+      if (patient === undefined) {
+        return '';
+      }
+      if (patient.name === undefined || patient.name.length === 0) {
+        return '';
+    }
 
-        let name = "";
-        if (patient.name[0].family !== undefined) name += patient.name[0].family.toUpperCase();
+        let name = '';
+        if (patient.name[0].family !== undefined) {
+          name += patient.name[0].family.toUpperCase();
+        }
         return name;
 
     }
 
-  getFirstName(patient :fhir.Patient) : String {
-    if (patient == undefined) return "";
-    if (patient.name == undefined || patient.name.length == 0)
-      return "";
+  getFirstName(patient: fhir.Patient): String {
+    if (patient === undefined) {
+      return '';
+    }
+    if (patient.name === undefined || patient.name.length === 0) {
+      return '';
+    }
     // Move to address
-    let name = "";
-    if (patient.name[0].given !== undefined && patient.name[0].given.length>0) name += ", "+ patient.name[0].given[0];
+    let name = '';
+    if (patient.name[0].given !== undefined && patient.name[0].given.length > 0) {
+      name += ', ' + patient.name[0].given[0];
+    }
 
-    if (patient.name[0].prefix !== undefined && patient.name[0].prefix.length>0) name += " (" + patient.name[0].prefix[0] +")" ;
+    if (patient.name[0].prefix !== undefined && patient.name[0].prefix.length > 0) {
+      name += ' (' + patient.name[0].prefix[0] + ')' ;
+    }
     return name;
 
   }
 
-  getNHSIdentifier(patient: fhir.Patient) : String {
-    if (patient == undefined) return "";
-    if (patient.identifier == undefined || patient.identifier.length == 0)
-      return "";
+  getNHSIdentifier(patient: fhir.Patient): String {
+    if (patient === undefined) {
+      return '';
+    }
+    if (patient.identifier === undefined || patient.identifier.length === 0) {
+      return '';
+    }
     // Move to address
-    var NHSNumber :String = "";
-    for (var f=0;f<patient.identifier.length;f++) {
-      if (patient.identifier[f].system.includes("nhs-number") )
-        NHSNumber = NHSNumber = patient.identifier[f].value.substring(0,3)+ ' '+patient.identifier[f].value.substring(3,6)+ ' '+patient.identifier[f].value.substring(6);
+    let NHSNumber = '';
+    for (let f = 0; f < patient.identifier.length; f++) {
+      if (patient.identifier[f].system.includes('nhs-number') ) {
+        NHSNumber = NHSNumber = patient.identifier[f].value.substring(0, 3) + ' ' + patient.identifier[f].value.substring(3, 6)
+          + ' ' + patient.identifier[f].value.substring(6);
+      }
     }
     return NHSNumber;
 
   }
 
   getValue(obs: fhir.Observation) {
-      let value = "";
+      let value = '';
 
       if (obs.valueQuantity !== undefined) {
-        value = obs.valueQuantity.value.toString()
+        value = obs.valueQuantity.value.toString();
       }
     if (obs.valueCodeableConcept !== undefined) {
       value = obs.valueCodeableConcept.coding[0].display;
     }
-    if (obs.component!=undefined && obs.component.length > 1) {
+    if (obs.component !== undefined && obs.component.length > 1) {
       let sys = 0;
       let dia = 0;
-      for (let comp of obs.component) {
-        if (comp.code.coding[0].code =='72313002') {
+      for (const comp of obs.component) {
+        if (comp.code.coding[0].code === '72313002') {
           sys = Number(comp.valueQuantity.value);
         }
-        if (comp.code.coding[0].code =='271650006') {
+        if (comp.code.coding[0].code === '271650006') {
           dia = Number(comp.valueQuantity.value);
         }
-        if (comp.code.coding[0].code =='1091811000000102') {
+        if (comp.code.coding[0].code === '1091811000000102') {
           dia = Number(comp.valueQuantity.value);
         }
       }
 
-      value = sys + '/'+dia;
+      value = sys + '/' + dia;
     }
-    if (value === "" && obs.code !== undefined && obs.code.coding !== undefined) {
+    if (value === '' && obs.code !== undefined && obs.code.coding !== undefined) {
       value = obs.code.coding[0].display;
     }
       return value;
   }
 
   getColour(obs: fhir.Observation) {
-      let colour: string = undefined;
-      let value : number = undefined;
+      let colour: string;
+      let value: number;
 
       if (obs.code.coding !== undefined) {
         switch (obs.code.coding[0].code) {
-          case "1104051000000101":
+          case '1104051000000101':
             // news2
             value = Number(this.getValue(obs));
             if (value > 6) {
@@ -300,11 +317,11 @@ export class EdEncounterCardComponent implements OnInit {
             // pulse
             value = Number(this.getValue(obs));
 
-            if (value > 130 || value <40 ) {
+            if (value > 130 || value < 40 ) {
               colour = 'warn';
             } else if (value > 110  ) {
               colour = 'accent';
-            } else if (value > 90 || value< 51  ) {
+            } else if (value > 90 || value < 51  ) {
               colour = ''; // yellow
             }
             break;
@@ -315,38 +332,38 @@ export class EdEncounterCardComponent implements OnInit {
               colour = 'warn';
             } else if (value > 39  ) {
               colour = 'accent';
-            } else if (value > 38 || value< 36.1  ) {
+            } else if (value > 38 || value < 36.1  ) {
               colour = ''; // yellow
             }
             break;
           case '86290005':
             // resp
             value = Number(this.getValue(obs));
-            if (value > 24 || value <9 ) {
+            if (value > 24 || value < 9 ) {
               colour = 'warn';
             } else if (value > 20  ) {
               colour = 'accent';
-            } else if ( value< 12  ) {
+            } else if ( value < 12  ) {
               colour = ''; // yellow
             }
             break;
 
-          case "365933000":
+          case '365933000':
             // alert
-            if (obs.valueCodeableConcept.coding[0].code == '422768004') {
+            if (obs.valueCodeableConcept.coding[0].code === '422768004') {
               colour = 'accent';
             }
-            if (obs.valueCodeableConcept.coding[0].code == '130987000') {
+            if (obs.valueCodeableConcept.coding[0].code === '130987000') {
               colour = 'accent';
             }
             break;
-          case "75367002":
+          case '75367002':
             // bp
-            value=undefined;
+            value = undefined;
 
-            for (let comp of obs.component) {
+            for (const comp of obs.component) {
             //  console.log(comp.code.coding[0].code);
-              if (comp.code.coding[0].code ==='72313002') {
+              if (comp.code.coding[0].code === '72313002') {
                 value = Number(obs.component[0].valueQuantity.value);
               }
             }
@@ -362,14 +379,14 @@ export class EdEncounterCardComponent implements OnInit {
             }
             break;
 
-          case "431314004":
-          case "866661000000106":
-          case "866701000000100":
+          case '431314004':
+          case '866661000000106':
+          case '866701000000100':
   // o2
             value = Number(this.getValue(obs));
-            let onair :boolean = false;
+            let onair = false;
             if (this.air !== undefined) {
-              onair = this.air.code.coding[0].code == '371825009';
+              onair = this.air.code.coding[0].code === '371825009';
             }
             if (onair) {
               if (value < 84 || value > 96) {
@@ -389,11 +406,11 @@ export class EdEncounterCardComponent implements OnInit {
               }
             }
             break;
-          case "371825009":
+          case '371825009':
             colour = 'accent';
             break;
-          case "301282008":
-            if (obs.valueCodeableConcept.coding[0].code == '371825009') {
+          case '301282008':
+            if (obs.valueCodeableConcept.coding[0].code === '371825009') {
               colour = 'accent';
             }
             break;
@@ -402,18 +419,20 @@ export class EdEncounterCardComponent implements OnInit {
 
       return colour;
   }
-  getSelected(obs: fhir.Observation) :boolean {
-      let value = this.getColour(obs);
+  getSelected(obs: fhir.Observation): boolean {
+      const value = this.getColour(obs);
 
       if (value !== undefined ) {
 
         return true;
-      } else return false;
+      } else {
+        return false;
+      }
   }
 
 
 
     viewDetails(patient: fhir.Patient) {
-        this.router.navigateByUrl('/ed/patient/'+patient.id);
+        this.router.navigateByUrl('/hie/patient/' + patient.id);
     }
 }

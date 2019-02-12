@@ -54,7 +54,7 @@
               <h4>{{form.questionnaire.display}}</h4>
                {{ form.authored | date: 'dd-MMM-yyyy'}}
             </span>
-            <app-questionnaire-response-item [form]="form"></app-questionnaire-response-item>
+            <app-questionnaire-response-item [item]="form.item"></app-questionnaire-response-item>
         </mat-card-content>
         <mat-card-actions>
            <button mat-icon-button color="accent" placement="top"  matTooltip="View FHIR resource" (click)="select(form)"><mat-icon>code</mat-icon>
@@ -115,7 +115,7 @@
               <h4>{{form.questionnaire.display}}</h4>
                    {{ form.authored | date: 'dd-MMM-yyyy'}}
             </span>
-            <app-questionnaire-response-item [form]="form"></app-questionnaire-response-item>
+            <app-questionnaire-response-item [item]="form.item"></app-questionnaire-response-item>
         </mat-card-content>
         <mat-card-actions>
            <button mat-icon-button color="accent" placement="top"  matTooltip="View FHIR resource" (click)="select(form)"><mat-icon>code</mat-icon>
@@ -149,7 +149,7 @@
               <h4>{{form.questionnaire.display}}</h4>
                {{ form.authored | date: 'dd-MMM-yyyy'}}
             </span>
-            <app-questionnaire-response-item [form]="form"></app-questionnaire-response-item>
+            <app-questionnaire-response-item [item]="form.item"></app-questionnaire-response-item>
         </mat-card-content>
         <mat-card-actions>
            <button mat-icon-button color="accent" placement="top"  matTooltip="View FHIR resource" (click)="select(form)"><mat-icon>code</mat-icon>

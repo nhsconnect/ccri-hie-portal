@@ -155,6 +155,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { QuestionnaireComponent } from './modules/terminology/questionnaire/questionnaire.component';
 import { QuestionnaireItemComponent } from './modules/terminology/questionnaire-item/questionnaire-item.component';
 import { EOLCIntroComponent } from './modules/terminology/eolcintro/eolcintro.component';
+import { PatientEOLCComponent } from './modules/patient/patient-eolc/patient-eolc.component';
+import { PatientEOLCItemComponent } from './modules/patient/patient-eolcitem/patient-eolcitem.component';
 
 
 const appInitializerFn = (appConfig: AppConfigService) => {
@@ -257,7 +259,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       ConceptMapsComponent,
       QuestionnaireComponent,
       QuestionnaireItemComponent,
-      EOLCIntroComponent
+      EOLCIntroComponent,
+      PatientEOLCComponent,
+      PatientEOLCItemComponent
 
   ],
   entryComponents: [

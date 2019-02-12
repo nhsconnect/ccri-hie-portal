@@ -58,7 +58,7 @@ export class PatientFindComponent implements OnInit {
         //  console.log('Patient change - '+patient.id);
         if (patient !== undefined) {
             //this.patientChange.set(patient);
-            this.router.navigateByUrl('ed/patient/'+patient.id  );
+            this.router.navigateByUrl('hie/patient/'+patient.id  );
 
         }
     }

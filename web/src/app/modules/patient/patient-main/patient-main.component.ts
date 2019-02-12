@@ -1,10 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {FhirService} from "../../../service/fhir.service";
-import {EprService} from "../../../service/epr.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {FhirService} from '../../../service/fhir.service';
+import {EprService} from '../../../service/epr.service';
 import {MatChip} from '@angular/material';
-import {AuthService} from "../../../service/auth.service";
-import {Oauth2Service} from "../../../service/oauth2.service";
+import {AuthService} from '../../../service/auth.service';
+import {Oauth2Service} from '../../../service/oauth2.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -22,9 +22,9 @@ export class PatientMainComponent implements OnInit {
     gpcolor = 'info';
     nrlscolor = 'info';
 
-    bscolour= 'accent';
+    bscolour = 'accent';
     bocolour = 'info';
-    becolour= 'info';
+    becolour = 'info';
     bdcolour = 'info';
     bpcolour = 'info';
     btcolour = 'info';
@@ -33,31 +33,31 @@ export class PatientMainComponent implements OnInit {
     brcolour = 'info';
     aacolour = 'info';
 
-    cards : any[] = [];
+    cards: any[] = [];
 
-     @ViewChild('gpchip') gpchip : MatChip;
-
-
+     @ViewChild('gpchip') gpchip: MatChip;
 
 
-  constructor(private router : Router,
+
+
+  constructor(private router: Router,
               private fhirSrv: FhirService,
               private route: ActivatedRoute,
-              private eprService : EprService,
-              private authService : AuthService,
-              private oauth2 : Oauth2Service) { }
+              private eprService: EprService,
+              private authService: AuthService,
+              private oauth2: Oauth2Service) { }
 
   ngOnInit() {
 
-      let patientid = this.route.snapshot.paramMap.get('patientid');
+      const patientid = this.route.snapshot.paramMap.get('patientid');
          this.eprService.setTitle('Health Information Exchange Portal');
       this.acutecolor = 'info';
       this.yascolor = 'info';
 
-      this.fhirSrv.get('/Patient?_id='+patientid+'&_revinclude=Flag:patient').subscribe(bundle => {
+      this.fhirSrv.get('/Patient?_id=' + patientid + '&_revinclude=Flag:patient').subscribe(bundle => {
 
           if (bundle.entry !== undefined) {
-              for (let entry of bundle.entry) {
+              for (const entry of bundle.entry) {
                  switch (entry.resource.resourceType) {
                    case 'Patient' :
                      this.patient = <fhir.Patient> entry.resource;
@@ -71,7 +71,7 @@ export class PatientMainComponent implements OnInit {
               this.acutecolor = 'primary';
               this.yascolor = 'primary';
           }
-          ,()=> {
+          , () => {
             this.acutecolor = 'warn';
             this.yascolor = 'warn';
         }
@@ -86,20 +86,20 @@ export class PatientMainComponent implements OnInit {
 
       if (this.oauth2.isAuthenticated()) {
         this.authService.getClients().subscribe( response => {
-          //console.log(clients);
+          // console.log(clients);
           const clients: any[] = response as any[];
-          for (let client of clients) {
+          for (const client of clients) {
 
-            if (client.scope.includes("launch")) {
+            if (client.scope.includes('launch')) {
               let found = false;
-              for (let search of this.cards) {
+              for (const search of this.cards) {
                 if (search.clientId === client.clientId) {
                   found = true;
                 }
               }
               if (!found) {
                 console.log(client);
-                let newclient = {
+                const newclient = {
                   id: client.id,
                   name: client.clientName,
                   image: client.logoUri,
@@ -107,7 +107,7 @@ export class PatientMainComponent implements OnInit {
                   notes: client.clientDescription,
                   source: '',
                   clientId: client.clientId
-                }
+                };
                 this.addClient(newclient);
               }
             }
@@ -118,12 +118,12 @@ export class PatientMainComponent implements OnInit {
   }
 
   addClient(client) {
-    this.fhirSrv.get('/Endpoint?identifier='+client.clientId).subscribe( result => {
-        let bundle: fhir.Bundle = result;
-        let endpoint: fhir.Endpoint = undefined;
+    this.fhirSrv.get('/Endpoint?identifier=' + client.clientId).subscribe( result => {
+        const bundle: fhir.Bundle = result;
+        const endpoint: fhir.Endpoint = undefined;
         if (bundle.entry !== undefined) {
           for (const entry of bundle.entry) {
-            let resource: fhir.Resource = entry.resource;
+            const resource: fhir.Resource = entry.resource;
             if (resource.resourceType === 'Endpoint') {
               client.endpoint = resource;
               if (client.endpoint.address !== undefined) {
@@ -133,7 +133,7 @@ export class PatientMainComponent implements OnInit {
           }
         }
       },
-      ()=>{
+      () => {
 
       },
       () => {
@@ -145,9 +145,9 @@ export class PatientMainComponent implements OnInit {
 
   onClick(event, btn) {
     //  console.log(event);
-        this.bscolour= 'info';
+        this.bscolour = 'info';
         this.bocolour = 'info';
-        this.becolour= 'info';
+        this.becolour = 'info';
         this.bdcolour = 'info';
         this.bpcolour = 'info';
         this.btcolour = 'info';
@@ -199,55 +199,72 @@ export class PatientMainComponent implements OnInit {
       }
     }
 
-    getFirstName(patient :fhir.Patient) : String {
-        if (patient == undefined) return "";
-        if (patient.name == undefined || patient.name.length == 0)
-            return "";
+    getFirstName(patient: fhir.Patient): String {
+        if (patient === undefined) {
+          return '';
+        }
+        if (patient.name === undefined || patient.name.length === 0) {
+            return '';
+        }
         // Move to address
-        let name = "";
-        if (patient.name[0].given !== undefined && patient.name[0].given.length>0) name += ", "+ patient.name[0].given[0];
+        let name = '';
+        if (patient.name[0].given !== undefined && patient.name[0].given.length > 0) {
+          name += ', ' + patient.name[0].given[0];
+        }
 
-        if (patient.name[0].prefix !== undefined && patient.name[0].prefix.length>0) name += " (" + patient.name[0].prefix[0] +")" ;
+        if (patient.name[0].prefix !== undefined && patient.name[0].prefix.length > 0) {
+          name += ' (' + patient.name[0].prefix[0] + ')' ;
+        }
         return name;
 
     }
 
-    getNHSIdentifier(patient: fhir.Patient) : String {
-        if (patient == undefined) return "";
-        if (patient.identifier == undefined || patient.identifier.length == 0)
-            return "";
+    getNHSIdentifier(patient: fhir.Patient): String {
+        if (patient === undefined) {
+          return '';
+        }
+        if (patient.identifier === undefined || patient.identifier.length === 0) {
+          return '';
+        }
         // Move to address
-        var NHSNumber :String = "";
-        for (var f=0;f<patient.identifier.length;f++) {
-            if (patient.identifier[f].system.includes("nhs-number") )
-                NHSNumber = patient.identifier[f].value.substring(0,3)+ ' '+patient.identifier[f].value.substring(3,6)+ ' '+patient.identifier[f].value.substring(6);
+        let NHSNumber = '';
+        for (let f = 0 ; f < patient.identifier.length; f++) {
+            if (patient.identifier[f].system.includes('nhs-number') ) {
+              NHSNumber = patient.identifier[f].value.substring(0, 3) + ' ' + patient.identifier[f].value.substring(3, 6)
+                + ' ' + patient.identifier[f].value.substring(6);
+            }
         }
         return NHSNumber;
 
     }
 
-    getLastName(patient :fhir.Patient) : String {
-        if (patient == undefined) return "";
-        if (patient.name == undefined || patient.name.length == 0)
-            return "";
+    getLastName(patient: fhir.Patient): String {
+        if (patient === undefined) {
+          return '';
+        }
+        if (patient.name === undefined || patient.name.length === 0) {
+          return '';
+        }
 
-        let name = "";
-        if (patient.name[0].family !== undefined) name += patient.name[0].family.toUpperCase();
+        let name = '';
+        if (patient.name[0].family !== undefined) {
+          name += patient.name[0].family.toUpperCase();
+        }
         return name;
 
     }
 
   smartApp(card) {
 
-    let launch: string = undefined;
+    let launch: string;
 
-    console.log('App Lauch '+card.url);
+    console.log('App Lauch ' + card.url);
 
     if (card.url !== '') {
 
       this.authService.launchSMART(card.clientId, '4ae23017813e417d937e3ba21974581', this.eprService.patient.id).subscribe(response => {
           launch = response.launch_id;
-          console.log("Returned Launch = " + launch);
+          console.log('Returned Launch = ' + launch);
         },
         (err) => {
           console.log(err);
@@ -257,17 +274,18 @@ export class PatientMainComponent implements OnInit {
         }
       );
     } else {
-      this.fhirSrv.get('/Endpoint?identifier='+card.clientId).subscribe( result => {
+      this.fhirSrv.get('/Endpoint?identifier=' + card.clientId).subscribe( result => {
         console.log(result);
-        let bundle: fhir.Bundle = result;
+        const bundle: fhir.Bundle = result;
         if (bundle.entry !== undefined) {
           for (const entry of bundle.entry) {
-            let resource: fhir.Resource = entry.resource;
+            const resource: fhir.Resource = entry.resource;
             if (resource.resourceType === 'Endpoint') {
-              let endpoint: fhir.Endpoint = <fhir.Endpoint> resource;
-              this.authService.launchSMART(card.clientId, '4ae23017813e417d937e3ba21974581', this.eprService.patient.id).subscribe(response => {
+              const endpoint: fhir.Endpoint = <fhir.Endpoint> resource;
+              this.authService.launchSMART(card.clientId, '4ae23017813e417d937e3ba21974581', this.eprService.patient.id)
+                .subscribe(response => {
                   launch = response.launch_id;
-                  console.log("Returned Launch = " + launch);
+                  console.log('Returned Launch = ' + launch);
                 },
                 (err) => {
                   console.log(err);
@@ -279,12 +297,12 @@ export class PatientMainComponent implements OnInit {
             }
           }
         }
-      })
+      });
     }
 
   }
 
-  onToggle(event : any) {
+  onToggle(event: any) {
       console.log(this.sidenavopen);
 
       this.sidenavopen = !this.sidenavopen;

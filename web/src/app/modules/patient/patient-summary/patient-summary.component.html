@@ -22,23 +22,28 @@
      </mat-card-content>
      </mat-card>
 
-<!-- Care Plans -->
+<!-- EOLC -->
+<span *ngFor="let flag of flags">
+  <span *ngIf="flag.code !== undefined && flag.code.coding[0].code ==='526631000000108'">
 <mat-card>
   <mat-card-content>
     <div fxLayout="row"
          fxFlexFill >
-      <h3>Care Plan</h3>
+      <h3>On End of Life Care Register</h3>
       <span flex></span>
-      <mat-chip-list><mat-chip [color]="acutecolor" selected=true>Acute</mat-chip></mat-chip-list>
+      <mat-chip-list><mat-chip [color]="acutecolor" selected=true>GP</mat-chip></mat-chip-list>
     </div>
-    <span *ngIf="careplans.length>0">
-        <app-care-plan [carePlans]="careplans" (carePlan)="selectCarePlan($event)"> </app-care-plan>
-    </span>
-    <span *ngIf="careplans.length==0">
+      <a mat-raised-button color="accent" routerLink="../eolc">View EOLC</a>
+
+        <!-- <app-care-plan [carePlans]="careplans" (carePlan)="selectCarePlan($event)"> </app-care-plan> -->
+
+    <span *ngIf="flags.length==0">
              No results found.
          </span>
   </mat-card-content>
 </mat-card>
+    </span>
+</span>
 
 <!-- National Documents -->
 
