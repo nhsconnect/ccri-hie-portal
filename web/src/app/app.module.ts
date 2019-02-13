@@ -157,6 +157,8 @@ import { QuestionnaireItemComponent } from './modules/terminology/questionnaire-
 import { EOLCIntroComponent } from './modules/terminology/eolcintro/eolcintro.component';
 import { PatientEOLCComponent } from './modules/patient/patient-eolc/patient-eolc.component';
 import { PatientEOLCItemComponent } from './modules/patient/patient-eolcitem/patient-eolcitem.component';
+import {QuestionnaireResponseItemAnswerComponent} from './component/questionnaire-response-item-answer/questionnaire-response-item-answer.component';
+
 
 
 const appInitializerFn = (appConfig: AppConfigService) => {
@@ -261,7 +263,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       QuestionnaireItemComponent,
       EOLCIntroComponent,
       PatientEOLCComponent,
-      PatientEOLCItemComponent
+      PatientEOLCItemComponent,
+      QuestionnaireResponseItemAnswerComponent
 
   ],
   entryComponents: [

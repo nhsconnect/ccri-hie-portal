@@ -23,7 +23,7 @@ export class FlagComponent implements OnInit {
 
   dataSource: FlagDataSource;
 
-  displayedColumns = ['alert', 'status', 'resource'];
+  displayedColumns = ['alert', 'status', 'start', 'end', 'resource'];
 
   constructor(private linksService: LinksService,
               public bundleService: BundleService,

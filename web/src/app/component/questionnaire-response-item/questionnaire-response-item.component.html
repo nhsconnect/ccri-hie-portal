@@ -1,24 +1,40 @@
 <div>
 
-  <div class="container"
+  <div
        fxLayout
        fxLayout.xs="column"
        fxLayoutAlign="center"
        fxLayoutGap="10px"
        fxLayoutGap.xs="0">
-    <div class="item item-1" [fxFlex]="getLeft()">
-      <i>{{item.text}}</i>
+    <div fxFlex="30%">
+      <div
+        fxLayout
+        fxLayout.xs="column"
+        fxLayoutAlign="center"
+        fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+        <div [fxFlex]="getLeft()">
+        </div>
+        <div class="mat-body-1" [fxFlex]="getRight()">
+          {{item.text}} ({{item.linkId}})
+        </div>
+
+      </div>
+      <br>
     </div>
-    <div class="item item-2" [fxFlex]="getRight">
+    <div class="mat-body-2" fxFlex="70%">
               <span *ngFor="let answer of item.answer">
-                 <b>
+
                     {{answer.valueString}}
                    {{answer.valueInteger}}
                    {{answer.valueDate}}
                    {{answer.valueDateTime}}
                    <span *ngIf="answer.valueCoding !== undefined">{{answer.valueCoding.display}} ( {{answer.valueCoding.code}} )</span>
-                   <span *ngIf="answer.valueReference !== undefined">{{answer.valueReference.display}} ( {{answer.valueReference.reference}} )</span>
-                </b>
+                   <span *ngIf="answer.valueReference !== undefined">
+                      <app-questionnaire-response-item-answer [answer]="answer">
+                      </app-questionnaire-response-item-answer>
+                   </span>
+
               </span>
     </div>
 
@@ -27,23 +43,10 @@
 
 
     <span *ngIf="item.item !== undefined">
-        <div class="container"
-             fxLayout
-             fxLayout.xs="column"
-             fxLayoutAlign="center"
-             fxLayoutGap="10px"
-             fxLayoutGap.xs="0">
-          <div class="item item-1" fxFlex="5%">
-            <!--<mat-icon>subdirectory_arrow_right</mat-icon>-->
-            </div>
-          <div class="item item-2" fxFlex="95%">
               <span *ngFor="let subitem of item.item">
                 <app-questionnaire-response-item [item]="subitem" [depth]="depth+1"></app-questionnaire-response-item>
               </span>
-          </div>
-
-        </div>
-          </span>
+    </span>
 </div>
 <!--
 <table mat-table [dataSource]="items">

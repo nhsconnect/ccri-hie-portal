@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {FhirService} from '../../../service/fhir.service';
 import {ActivatedRoute} from '@angular/router';
+import {BundleService} from '../../../service/bundle.service';
 
 @Component({
   selector: 'app-patient-eolc',
@@ -57,7 +58,8 @@ export class PatientEOLCComponent implements OnInit {
 
 
   constructor(private fhirService: FhirService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private bundleService: BundleService) { }
 
   ngOnInit() {
 
@@ -67,6 +69,7 @@ export class PatientEOLCComponent implements OnInit {
      '&questionnaire:identifier=https://fhir.nhs.uk/STU3/Questionnaire%7CCareConnect-EOLC-1&_include=*&_count=100').subscribe(bundle => {
 
       if (bundle.entry !== undefined) {
+        this.bundleService.setBundle(bundle);
         for (const entry of bundle.entry) {
           switch (entry.resource.resourceType) {
             case 'QuestionnaireResponse' :

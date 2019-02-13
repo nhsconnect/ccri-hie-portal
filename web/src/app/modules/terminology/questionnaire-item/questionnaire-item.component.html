@@ -1,7 +1,7 @@
 
       <td-expansion-panel [style]="getStyle(depth)" label="{{item.text}}" sublabel="linkId={{item.linkId}}" [disabled]="disabled">
 
-      <mat-card>
+      <div>
         <mat-chip-list>
           <mat-chip *ngIf="item.repeats">repeats
           </mat-chip>
@@ -86,6 +86,6 @@
 
         </div>
           </span>
-      </mat-card>
+      </div>
       </td-expansion-panel>
 

@@ -1,9 +1,9 @@
-<td-expansion-panel [label]="unit.name" style.backgroud="blue">
-  <mat-card>
+<td-expansion-panel [label]="unit.name" class="bgc-red">
+  <div>
     <span *ngFor="let item of form.item">
       <span *ngIf="unit.code === item.linkId">
         <app-questionnaire-response-item [item]="item" [depth]="0"></app-questionnaire-response-item>
       </span>
     </span>
-  </mat-card>
+  </div>
 </td-expansion-panel>

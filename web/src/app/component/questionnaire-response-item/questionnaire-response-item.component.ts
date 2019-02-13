@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {Component, Directive, Input, OnInit} from '@angular/core';
+import {BundleService} from '../../service/bundle.service';
+
 
 @Component({
   selector: 'app-questionnaire-response-item',
@@ -14,21 +15,27 @@ export class QuestionnaireResponseItemComponent implements OnInit {
   @Input()
   depth;
 
+
  // items: MatTableDataSource<any> = undefined;
  // displayedColumns: string[] = ['question', 'answer'];
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
    //   this.items = new MatTableDataSource<any> ([ this.item ] );
   }
 
   getLeft() {
-    const left = 40 - (5 * this.depth);
+    const left = (10 * this.depth);
     return left + '%';
   }
 
   getRight() {
-    const right = 60 + (5 * this.depth);
+    const right = 100 - (10 * this.depth);
     return right + '%';
   }
+
+
+
 }
