@@ -40,8 +40,9 @@ export class PatientEncounterDetailComponent implements OnInit {
     referrals: fhir.ReferralRequest[] = [];
 
 
-  constructor(private route: ActivatedRoute,private fhirService: FhirService
-      ,private linksService: LinksService) { }
+  constructor(private route: ActivatedRoute,
+              private fhirService: FhirService,
+              private linksService: LinksService) { }
 
   ngOnInit() {
 

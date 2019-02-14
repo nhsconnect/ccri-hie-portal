@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {FhirService} from "../../../service/fhir.service";
-import {EprService} from "../../../service/epr.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {FhirService} from '../../../service/fhir.service';
+import {EprService} from '../../../service/epr.service';
 
 @Component({
   selector: 'app-patient-encounters',
@@ -16,12 +16,14 @@ export class PatientEncountersComponent implements OnInit {
 
     resource: fhir.Bundle;
 
-    constructor(private router : Router, private fhirSrv: FhirService,  private route: ActivatedRoute, private eprService : EprService) { }
+    constructor(private router: Router,
+                private fhirSrv: FhirService,
+                private route: ActivatedRoute) { }
 
     ngOnInit() {
-        let patientid = this.route.snapshot.paramMap.get('patientid');
+        const patientid = this.route.snapshot.paramMap.get('patientid');
 
-        this.fhirSrv.get('/Encounter?patient='+patientid).subscribe(
+        this.fhirSrv.get('/Encounter?patient=' + patientid).subscribe(
             bundle => {
                this.resource = bundle;
                 this.getResources();
