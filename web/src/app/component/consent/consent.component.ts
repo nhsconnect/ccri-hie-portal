@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ConsentDataSource} from "../../data-source/consent-data-source";
-import {LinksService} from  '../../service/links.service';
+import {ConsentDataSource} from '../../data-source/consent-data-source';
+import {LinksService} from '../../service/links.service';
 import {BundleService} from '../../service/bundle.service';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {FhirService} from '../../service/fhir.service';
-import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
+import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-consent',
@@ -19,11 +19,11 @@ export class ConsentComponent implements OnInit {
 
     @Input() patientId: string;
 
-    @Input() useBundle :boolean = false;
+    @Input() useBundle = false;
 
-    dataSource : ConsentDataSource;
+    dataSource: ConsentDataSource;
 
-    displayedColumns = ['id', 'resource'];
+    displayedColumns = ['date', 'purpose', 'actor', 'status', 'resource'];
 
     constructor(private linksService: LinksService,
                 public bundleService: BundleService,

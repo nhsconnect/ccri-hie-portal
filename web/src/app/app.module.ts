@@ -158,6 +158,9 @@ import { EOLCIntroComponent } from './modules/terminology/eolcintro/eolcintro.co
 import { PatientEOLCComponent } from './modules/patient/patient-eolc/patient-eolc.component';
 import { PatientEOLCItemComponent } from './modules/patient/patient-eolcitem/patient-eolcitem.component';
 import {QuestionnaireResponseItemAnswerComponent} from './component/questionnaire-response-item-answer/questionnaire-response-item-answer.component';
+import { CarePlanActivityComponent } from './component/care-plan-activity/care-plan-activity.component';
+import { ListComponent } from './component/list/list.component';
+import { RelatedPersonComponent } from './component/related-person/related-person.component';
 
 
 
@@ -264,7 +267,10 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       EOLCIntroComponent,
       PatientEOLCComponent,
       PatientEOLCItemComponent,
-      QuestionnaireResponseItemAnswerComponent
+      QuestionnaireResponseItemAnswerComponent,
+      CarePlanActivityComponent,
+      ListComponent,
+      RelatedPersonComponent
 
   ],
   entryComponents: [
