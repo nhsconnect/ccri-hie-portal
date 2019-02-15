@@ -141,6 +141,53 @@
              </div>
           </span>
         </span>
+        <span *ngIf="valueSet.expansion !== undefined">
+               <div class="mat-card-content"
+                    fxLayout
+                    fxLayout.xs="column"
+                    fxLayoutAlign="center"
+                    fxLayoutGap="10px"
+                    fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="50%">
+              <b>Expansion</b>
+            </div>
+            <div class="mat-body-1" fxFlex="50%">
+
+            </div>
+           </div>
+
+           <div class="mat-card-content"
+                fxLayout
+                fxLayout.xs="column"
+                fxLayoutAlign="center"
+                fxLayoutGap="10px"
+                fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="25%">
+              <b>Concepts</b>
+            </div>
+            <div class="mat-body-1" fxFlex="70%">
+              <table>
+                <thead>
+                <th><b>Code</b></th>
+                <th><b>Display</b></th>
+                <th><b>System</b></th>
+                </thead>
+                <tr *ngFor="let concept of valueSet.expansion.contains">
+                  <td>
+                    {{concept.code}}
+                  </td>
+                  <td>
+                   {{concept.display}}
+                  </td>
+                  <td>
+                   {{concept.system}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+           </div>
+          </span>
       </mat-card-content>
     </mat-card>
   </span>

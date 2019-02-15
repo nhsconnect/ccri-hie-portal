@@ -21,7 +21,7 @@ export class ValueSetDetailComponent implements OnInit {
 
     this.valuesetid = this.route.snapshot.paramMap.get('valuesetid');
     if (this.valuesetid !== undefined) {
-    this.fhirService.getResource('/ValueSet/' + this.valuesetid).subscribe( result => {
+    this.fhirService.getResource('/ValueSet/' + this.valuesetid + '/$expand').subscribe( result => {
        this.valueSet = result;
     });
     }
