@@ -14,8 +14,7 @@ export class ValueSetDetailComponent implements OnInit {
   valueSet: fhir.ValueSet;
 
   constructor(private route: ActivatedRoute,
-              private fhirService: FhirService,
-              private linksService: LinksService) { }
+              private fhirService: FhirService) { }
 
   ngOnInit() {
 

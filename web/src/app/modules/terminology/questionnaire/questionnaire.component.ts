@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
 import {AppConfigService} from '../../../service/app-config.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire',
@@ -12,19 +13,26 @@ import {AppConfigService} from '../../../service/app-config.service';
 export class QuestionnaireComponent implements OnInit {
 
   questionnaire: fhir.Questionnaire;
-  constructor(private appConfig: AppConfigService, private fhirService: FhirService) { }
+
+  questionnaireid: string;
+
+  constructor(
+    private appConfig: AppConfigService,
+    private route: ActivatedRoute,
+    private fhirService: FhirService
+  ) { }
 
   ngOnInit() {
 
 
-
+    this.questionnaireid = this.route.snapshot.paramMap.get('questionnaireid');
 
     this.getQuestionnaire();
 
   }
 
   getQuestionnaire() {
-    this.fhirService.get('/Questionnaire?identifier=https://fhir.nhs.uk/STU3/Questionnaire%7CCareConnect-EOLC-1').subscribe(
+    this.fhirService.get('/Questionnaire?_id=' + this.questionnaireid).subscribe(
       result => {
         const bundle: fhir.Bundle = result;
         if (bundle.total > 0) {

@@ -162,6 +162,7 @@ import { CarePlanActivityComponent } from './component/care-plan-activity/care-p
 import { ListComponent } from './component/list/list.component';
 import { RelatedPersonComponent } from './component/related-person/related-person.component';
 import { ValueSetDetailComponent } from './modules/terminology/value-set-detail/value-set-detail.component';
+import { QuestionnaireSummaryComponent } from './modules/terminology/questionnaire-summary/questionnaire-summary.component';
 
 
 
@@ -272,7 +273,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       CarePlanActivityComponent,
       ListComponent,
       RelatedPersonComponent,
-      ValueSetDetailComponent
+      ValueSetDetailComponent,
+      QuestionnaireSummaryComponent
 
   ],
   entryComponents: [
