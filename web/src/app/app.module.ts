@@ -9,7 +9,7 @@ import {
   CovalentJsonFormatterModule,
   CovalentLayoutModule, CovalentLoadingModule,
   CovalentMediaModule, CovalentMenuModule,
-  CovalentMessageModule, CovalentNotificationsModule,
+  CovalentMessageModule, CovalentNotificationsModule, CovalentSearchModule,
   CovalentStepsModule
 } from '@covalent/core';
 import {CovalentHttpModule} from '@covalent/http';
@@ -357,6 +357,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentTooltipEchartsModule,
     CovalentLoadingModule,
     CovalentDataTableModule,
+    CovalentSearchModule,
 
     NgxChartsModule,
 

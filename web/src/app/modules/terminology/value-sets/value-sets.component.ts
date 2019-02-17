@@ -20,6 +20,10 @@ export class ValueSetsComponent implements OnInit {
 
   dataSource: ValueSetDataSource;
 
+  searchInputName;
+
+  searchInputPublisher;
+
   displayedColumns = ['select', 'name', 'description', 'status', 'resource'];
 
   constructor(private fhirService: FhirService,
@@ -28,12 +32,42 @@ export class ValueSetsComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.fhirService.get('/ValueSet?_count=20').subscribe(
+
+  }
+
+  search(name, publisher) {
+    //console.log(event);
+    if (name !== undefined) {
+      this.searchInputName = name;
+    }
+    if (publisher !== undefined) {
+      this.searchInputPublisher = publisher;
+    }
+
+    let url = '/ValueSet';
+
+    if (this.searchInputName !== undefined) {
+      url = url + '?name='+ this.searchInputName;
+    }
+    if (this.searchInputPublisher !== undefined) {
+      if (this.searchInputName === undefined) {
+        url = url + '?publisher='+ this.searchInputPublisher;
+      } else {
+        url = url + '&publisher='+ this.searchInputPublisher;
+      }
+    }
+    url = url + '&_count=20';
+
+    this.valueSets = [];
+
+    this.fhirService.get(url).subscribe(
       result => {
         const bundle = <fhir.Bundle> result;
-        for (const entry of bundle.entry) {
-          if (entry.resource.resourceType === 'ValueSet') {
-            this.valueSets.push(<fhir.ValueSet> entry.resource);
+        if (bundle.entry !== undefined) {
+          for (const entry of bundle.entry) {
+            if (entry.resource.resourceType === 'ValueSet') {
+              this.valueSets.push(<fhir.ValueSet>entry.resource);
+            }
           }
         }
         this.dataSource = new ValueSetDataSource(this.fhirService,  this.valueSets);

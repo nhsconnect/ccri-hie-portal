@@ -43,7 +43,7 @@ export class TerminologyMainComponent implements OnInit {
   ];
   navmenu: Object[] = [];
 
-  title = 'Terminology Services';
+  title = 'Reference Services';
 
   constructor(public media: TdMediaService,
               public fhirSrv: FhirService,

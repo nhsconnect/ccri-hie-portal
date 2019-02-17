@@ -1,4 +1,29 @@
-<div class="container">
+
+<mat-card>
+  <div class="mat-card-content"
+       fxLayout
+       fxLayout.xs="column"
+       fxLayoutAlign="center"
+       fxLayoutGap="10px"
+       fxLayoutGap.xs="0">
+    <div class="mat-body-1" fxFlex="2%">
+
+    </div>
+    <div class="mat-body-1" fxFlex="48%">
+      <td-search-input  placeholder="Value Set Name" [(ngModel)]="searchInputName" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputName = $event" (search)="search($event,undefined)" (clear)="searchInputName = ''">
+      </td-search-input>
+    </div>
+    <div class="mat-body-1" fxFlex="2%">
+
+    </div>
+    <div class="mat-body-1" fxFlex="48%">
+      <td-search-input  placeholder="Value Set Publisher" [(ngModel)]="searchInputPublisher" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputPublisher = $event" (search)="search(undefined, $event)" (clear)="searchInputPublisher = ''">
+      </td-search-input>
+    </div>
+  </div>
+
+
+
   <table fxFill="100" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
@@ -46,4 +71,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+</mat-card>
