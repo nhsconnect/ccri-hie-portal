@@ -1,7 +1,6 @@
-
 <mat-card>
   <mat-card-header>
-    <h3>Value Set</h3>
+    <h3>Code System</h3>
   </mat-card-header>
   <div class="mat-card-content"
        fxLayout
@@ -13,61 +12,59 @@
 
     </div>
     <div class="mat-body-1" fxFlex="48%">
-      <td-search-input  placeholder="Value Set Name" [(ngModel)]="searchInputName" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputName = $event" (search)="search($event,undefined)" (clear)="searchInputName = ''">
+      <td-search-input  placeholder="Name" [(ngModel)]="searchInputName" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputName = $event" (search)="search($event,undefined)" (clear)="searchInputName = ''">
       </td-search-input>
     </div>
     <div class="mat-body-1" fxFlex="2%">
 
     </div>
     <div class="mat-body-1" fxFlex="48%">
-      <td-search-input  placeholder="Value Set Publisher" [(ngModel)]="searchInputPublisher" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputPublisher = $event" (search)="search(undefined, $event)" (clear)="searchInputPublisher = ''">
+      <td-search-input  placeholder="Url" [(ngModel)]="searchInputUrl" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputUrl= $event" (search)="search(undefined, $event)" (clear)="searchInputUrl = ''">
       </td-search-input>
     </div>
   </div>
-
-
 
   <table fxFill="100" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let valueSet"> {{valueSet.id}} </td>
+      <td mat-cell *matCellDef="let codeSystem"> {{codeSystem.id}} </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let valueSet"> <b>{{valueSet.name}}</b>
+      <td mat-cell *matCellDef="let codeSystem"> <b>{{codeSystem.name}}</b>
         <br>
-        {{valueSet.url}}
+        {{codeSystem.url}}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="url">
       <th mat-header-cell *matHeaderCellDef  width="10%"> Url </th>
-      <td mat-cell *matCellDef="let valueSet"> {{valueSet.url}} </td>
+      <td mat-cell *matCellDef="let codeSystem"> {{codeSystem.url}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description"  width="60%">
       <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let valueSet"> {{valueSet.description}} </td>
+      <td mat-cell *matCellDef="let codeSystem"> {{codeSystem.description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef  width="5%"> Status </th>
-      <td mat-cell *matCellDef="let valueSet"> {{valueSet.status}} </td>
+      <td mat-cell *matCellDef="let codeSystem"> {{codeSystem.status}} </td>
     </ng-container>
 
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef width="8%"> View </th>
-      <td mat-cell *matCellDef="let valueSet">
-        <button mat-icon-button color="accent"  matTooltip="View ValueSet" (click)="selectValueSet(valueSet)"><mat-icon>assignment</mat-icon></button>
+      <td mat-cell *matCellDef="let codeSystem">
+        <button mat-icon-button color="accent"  matTooltip="View CodeSystem" (click)="selectValueSet(codeSystem)"><mat-icon>description</mat-icon></button>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="resource">
       <th mat-header-cell *matHeaderCellDef width="5%">FHIR</th>
-      <td mat-cell *matCellDef="let valueSet">  <button mat-icon-button color="accent"  matTooltip="View FHIR resource" (click)="select(valueSet)"><mat-icon>code</mat-icon></button>  </td>
+      <td mat-cell *matCellDef="let codeSystem">  <button mat-icon-button color="accent"  matTooltip="View FHIR resource" (click)="select(codeSystem)"><mat-icon>code</mat-icon></button>  </td>
     </ng-container>
 
 

@@ -7,12 +7,14 @@ import {QuestionnaireComponent} from './terminology/questionnaire/questionnaire.
 import {EOLCIntroComponent} from './terminology/eolcintro/eolcintro.component';
 import {ValueSetDetailComponent} from './terminology/value-set-detail/value-set-detail.component';
 import {QuestionnaireSummaryComponent} from './terminology/questionnaire-summary/questionnaire-summary.component';
+import {CodeSystemComponent} from './terminology/code-system/code-system.component';
 
 const dosRoutes: Routes = [
   {
     path: 'term',  component: TerminologyMainComponent,
     children : [
       { path: '', component: ValueSetsComponent},
+      { path: 'codesystem', component: CodeSystemComponent},
       { path: 'valuesets', component: ValueSetsComponent},
       { path: 'valuesets/:valuesetid', component: ValueSetDetailComponent},
       { path: 'conceptmaps', component: ConceptMapsComponent},

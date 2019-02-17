@@ -1,4 +1,8 @@
-<div class="container">
+<mat-card>
+  <mat-card-header>
+    <h3>Questionnaire</h3>
+  </mat-card-header>
+
   <table fxFill="100" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
@@ -46,4 +50,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+</mat-card>

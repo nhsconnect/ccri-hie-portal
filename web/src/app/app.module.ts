@@ -163,6 +163,7 @@ import { ListComponent } from './component/list/list.component';
 import { RelatedPersonComponent } from './component/related-person/related-person.component';
 import { ValueSetDetailComponent } from './modules/terminology/value-set-detail/value-set-detail.component';
 import { QuestionnaireSummaryComponent } from './modules/terminology/questionnaire-summary/questionnaire-summary.component';
+import { CodeSystemComponent } from './modules/terminology/code-system/code-system.component';
 
 
 
@@ -274,7 +275,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       ListComponent,
       RelatedPersonComponent,
       ValueSetDetailComponent,
-      QuestionnaireSummaryComponent
+      QuestionnaireSummaryComponent,
+      CodeSystemComponent
 
   ],
   entryComponents: [
