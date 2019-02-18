@@ -23,15 +23,21 @@
                   fxLayoutAlign="center"
                   fxLayoutGap="10px"
                   fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="50%">
-              <b>Status</b> {{namingSystem.status}}
-            </div>
-                  <div class="mat-body-1"  fxFlex="50%">
+              <div class="mat-body-1" fxFlex="25%">
+                <b>Status</b> {{namingSystem.status}}
+              </div>
+                  <div class="mat-body-1"  fxFlex="25%">
                     <b>Date</b> {{namingSystem.date | date: 'dd-MMM-yyyy'}}
-            </div>
+              </div>
+               <div class="mat-body-1" fxFlex="25%">
+                 <b>Publisher</b> {{namingSystem.publisher}}
+               </div>
+               <div class="mat-body-1" fxFlex="25%">
+                 <b>Responsible</b> {{namingSystem.responsible}}
+               </div>
           </div>
-          <div class="mat-card-content" >{{namingSystem.description}}</div>
-          <div class="mat-card-content mat-body-1" ><b>Publisher</b> {{namingSystem.publisher}}</div>
+          <div class="mat-card-content" ><b>Description</b> {{namingSystem.description}}</div>
+
 
         </mat-card-content>
     </mat-card>
