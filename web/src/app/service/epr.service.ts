@@ -28,15 +28,15 @@ export class EprService {
       route: '/hie/capacity',
       title: 'Emergency Planning',
     }
-    , {
+ /* Not for Alder Hey hackathon  , {
       icon: 'directions',
       route: '/dos',
       title: 'Directory Services',
-    }
+    } */
     , {
       icon: 'translate',
       route: '/term',
-      title: 'Terminology Services',
+      title: 'Reference Services',
     }
   ];
 

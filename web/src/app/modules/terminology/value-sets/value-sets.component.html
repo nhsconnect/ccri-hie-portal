@@ -13,14 +13,14 @@
 
     </div>
     <div class="mat-body-1" fxFlex="48%">
-      <td-search-input  placeholder="Value Set Name" [(ngModel)]="searchInputName" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputName = $event" (search)="search($event,undefined)" (clear)="searchInputName = ''">
+      <td-search-input  placeholder="Name" [(ngModel)]="searchInputName" [showUnderline]="true" [debounce]="500" (searchDebounce)="search($event,undefined)" (search)="search($event,undefined)" (clear)="searchInputName = ''">
       </td-search-input>
     </div>
     <div class="mat-body-1" fxFlex="2%">
 
     </div>
     <div class="mat-body-1" fxFlex="48%">
-      <td-search-input  placeholder="Value Set Publisher" [(ngModel)]="searchInputPublisher" [showUnderline]="true" [debounce]="500" (searchDebounce)="searchInputPublisher = $event" (search)="search(undefined, $event)" (clear)="searchInputPublisher = ''">
+      <td-search-input  placeholder="Publisher" [(ngModel)]="searchInputPublisher" [showUnderline]="true" [debounce]="500" (searchDebounce)="search(undefined, $event)" (search)="search(undefined, $event)" (clear)="searchInputPublisher = ''">
       </td-search-input>
     </div>
   </div>
@@ -58,10 +58,10 @@
       <td mat-cell *matCellDef="let valueSet"> {{valueSet.status}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="select">
+    <ng-container matColumnDef="view">
       <th mat-header-cell *matHeaderCellDef width="8%"> View </th>
       <td mat-cell *matCellDef="let valueSet">
-        <button mat-icon-button color="accent"  matTooltip="View ValueSet" (click)="selectValueSet(valueSet)"><mat-icon>assignment</mat-icon></button>
+        <button mat-icon-button color="accent"  matTooltip="View ValueSet" (click)="view(valueSet)"><mat-icon>assignment</mat-icon></button>
       </td>
     </ng-container>
 

@@ -24,7 +24,7 @@ export class ValueSetsComponent implements OnInit {
 
   searchInputPublisher;
 
-  displayedColumns = ['select', 'name', 'description', 'status', 'resource'];
+  displayedColumns = ['view', 'name', 'description', 'status', 'resource'];
 
   constructor(private fhirService: FhirService,
               public dialog: MatDialog,
@@ -87,7 +87,7 @@ export class ValueSetsComponent implements OnInit {
     const resourceDialog: MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
   }
 
-  selectValueSet(valueSet: fhir.ValueSet) {
+  view(valueSet: fhir.ValueSet) {
     this.router.navigate([valueSet.id], {relativeTo: this.route });
   }
 }

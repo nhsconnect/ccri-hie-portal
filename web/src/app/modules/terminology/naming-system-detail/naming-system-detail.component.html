@@ -1,0 +1,76 @@
+<span *ngIf="namingSystem !== undefined">
+    <mat-card>
+        <mat-card-header><h2>NamingSystem - {{namingSystem.name}}</h2></mat-card-header>
+        <mat-card-content>
+
+
+          <div class="mat-card-content"
+               fxLayout
+               fxLayout.xs="column"
+               fxLayoutAlign="center"
+               fxLayoutGap="10px"
+               fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="50%">
+                <b>Name</b> {{namingSystem.name}}
+            </div>
+            <div class="mat-body-1" fxFlex="50%">
+              <b>Kind</b> {{namingSystem.kind}}
+            </div>
+          </div>
+             <div class="mat-card-content"
+                  fxLayout
+                  fxLayout.xs="column"
+                  fxLayoutAlign="center"
+                  fxLayoutGap="10px"
+                  fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="50%">
+              <b>Status</b> {{namingSystem.status}}
+            </div>
+                  <div class="mat-body-1"  fxFlex="50%">
+                    <b>Date</b> {{namingSystem.date | date: 'dd-MMM-yyyy'}}
+            </div>
+          </div>
+          <div class="mat-card-content" >{{namingSystem.description}}</div>
+          <div class="mat-card-content mat-body-1" ><b>Publisher</b> {{namingSystem.publisher}}</div>
+
+        </mat-card-content>
+    </mat-card>
+  <span *ngIf="namingSystem.uniqueId !== undefined">
+    <mat-card>
+      <mat-card-header><h3>Unique Id's</h3></mat-card-header>
+<div class="mat-card-content"
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="25%">
+
+            </div>
+            <div class="mat-body-1" fxFlex="70%">
+              <table>
+                <thead>
+                <th><b>Type</b></th>
+                <th><b>Value</b></th>
+                 <th><b>Preferred</b></th>
+                </thead>
+                <tr *ngFor="let concept of namingSystem.uniqueId">
+                  <td>
+                    {{concept.type}}
+                  </td>
+                  <td>
+                   {{concept.value}}
+                  </td>
+                   <td>
+                   {{concept.preferred}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+           </div>
+    </mat-card>
+  </span>
+</span>
+
+

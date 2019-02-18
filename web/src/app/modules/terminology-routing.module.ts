@@ -8,13 +8,19 @@ import {EOLCIntroComponent} from './terminology/eolcintro/eolcintro.component';
 import {ValueSetDetailComponent} from './terminology/value-set-detail/value-set-detail.component';
 import {QuestionnaireSummaryComponent} from './terminology/questionnaire-summary/questionnaire-summary.component';
 import {CodeSystemComponent} from './terminology/code-system/code-system.component';
+import { CodeSystemDetailComponent } from './terminology/code-system-detail/code-system-detail.component';
+import {NamingSystemComponent} from './terminology/naming-system/naming-system.component';
+import { NamingSystemDetailComponent } from './terminology/naming-system-detail/naming-system-detail.component';
 
 const dosRoutes: Routes = [
   {
     path: 'term',  component: TerminologyMainComponent,
     children : [
       { path: '', component: ValueSetsComponent},
+      { path: 'namingsystem', component: NamingSystemComponent},
+      { path: 'namingsystem/:namingsystemid', component: NamingSystemDetailComponent},
       { path: 'codesystem', component: CodeSystemComponent},
+      { path: 'codesystem/:codesystemid', component: CodeSystemDetailComponent},
       { path: 'valuesets', component: ValueSetsComponent},
       { path: 'valuesets/:valuesetid', component: ValueSetDetailComponent},
       { path: 'conceptmaps', component: ConceptMapsComponent},
