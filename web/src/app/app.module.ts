@@ -167,6 +167,7 @@ import { CodeSystemComponent } from './modules/terminology/code-system/code-syst
 import { CodeSystemDetailComponent } from './modules/terminology/code-system-detail/code-system-detail.component';
 import { NamingSystemComponent } from './modules/terminology/naming-system/naming-system.component';
 import { NamingSystemDetailComponent } from './modules/terminology/naming-system-detail/naming-system-detail.component';
+import { ConceptMapDetailComponent } from './modules/terminology/concept-map-detail/concept-map-detail.component';
 
 
 
@@ -282,7 +283,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       CodeSystemComponent,
       CodeSystemDetailComponent,
       NamingSystemComponent,
-      NamingSystemDetailComponent
+      NamingSystemDetailComponent,
+      ConceptMapDetailComponent
 
   ],
   entryComponents: [

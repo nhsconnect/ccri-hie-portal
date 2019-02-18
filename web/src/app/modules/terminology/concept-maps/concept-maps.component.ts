@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
+import {FhirService} from '../../../service/fhir.service';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
+import {ConceptMapDataSource} from '../../../data-source/concept-map-data-source';
+
 @Component({
   selector: 'app-conccept-maps',
   templateUrl: './concept-maps.component.html',
@@ -8,44 +14,83 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ConceptMapsComponent implements OnInit {
 
-  // https://material.angular.io/cdk/drag-drop/examples
 
-  valueSet1 = [
-    'U - Unmarried',
-    'D - Divorced',
-    'L - Legally Separated',
-    'M - Married',
-    'S - Never Married',
-    'W - Widowed',
-    'UNK - Unknown'
-  ];
+  conceptMaps: fhir.ConceptMap[];
 
+  searchInputName;
 
-    valueSet2 = [
+  // searchInputPublisher;
 
-      'P - Separated',
-      'N - Not disclosed',
-      'S - Never Married',
-      'W - Widowed',
-      'UNK - Unknown'
-    ];
+  searchInputUrl;
 
+  dataSource: ConceptMapDataSource;
 
+  displayedColumns = ['view', 'name', 'publisher', 'description', 'status', 'resource'];
 
-  constructor() { }
+  constructor(private fhirService: FhirService,
+              public dialog: MatDialog,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+
+
+  search(name, uri) {
+    //console.log(event);
+    if (name !== undefined) {
+      this.searchInputName = name;
     }
+    if (uri !== undefined) {
+      this.searchInputUrl = uri;
+    }
+
+    let url = '/ConceptMap';
+
+    if (this.searchInputName !== undefined) {
+      url = url + '?name='+ this.searchInputName;
+    }
+    if (this.searchInputUrl !== undefined) {
+      if (this.searchInputName === undefined) {
+        url = url + '?url='+ this.searchInputUrl;
+      } else {
+        url = url + '&url='+ this.searchInputUrl;
+      }
+    }
+    url = url + '&_count=20';
+
+    this.conceptMaps = [];
+
+    this.fhirService.get(url).subscribe(
+      result => {
+        const bundle = <fhir.Bundle> result;
+        if (bundle.entry !== undefined) {
+          for (const entry of bundle.entry) {
+            if (entry.resource.resourceType === 'ConceptMap') {
+              this.conceptMaps.push(<fhir.ConceptMap>entry.resource);
+            }
+          }
+        }
+        this.dataSource = new ConceptMapDataSource(this.fhirService,  this.conceptMaps);
+      }
+    );
+  }
+
+  select(resource) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    const resourceDialog: MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
+  }
+
+  view(conceptMap: fhir.ConceptMap) {
+    this.router.navigate([conceptMap.id], {relativeTo: this.route });
   }
 
 

@@ -11,6 +11,7 @@ import {CodeSystemComponent} from './terminology/code-system/code-system.compone
 import { CodeSystemDetailComponent } from './terminology/code-system-detail/code-system-detail.component';
 import {NamingSystemComponent} from './terminology/naming-system/naming-system.component';
 import { NamingSystemDetailComponent } from './terminology/naming-system-detail/naming-system-detail.component';
+import {ConceptMapDetailComponent} from './terminology/concept-map-detail/concept-map-detail.component';
 
 const dosRoutes: Routes = [
   {
@@ -24,6 +25,7 @@ const dosRoutes: Routes = [
       { path: 'valuesets', component: ValueSetsComponent},
       { path: 'valuesets/:valuesetid', component: ValueSetDetailComponent},
       { path: 'conceptmaps', component: ConceptMapsComponent},
+      { path: 'conceptmaps/:conceptmapid', component: ConceptMapDetailComponent},
       { path: 'questionnaire', component: QuestionnaireSummaryComponent},
       { path: 'questionnaire/:questionnaireid', component: QuestionnaireComponent},
       { path: 'intro', component: EOLCIntroComponent}
