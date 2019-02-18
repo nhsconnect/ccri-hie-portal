@@ -22,7 +22,7 @@ export class NamingSystemComponent implements OnInit {
 
   dataSource: NamingSystemDataSource;
 
-  displayedColumns = ['view', 'name', 'kind', 'publisher', 'description', 'status', 'resource'];
+  displayedColumns = ['view', 'name', 'kind', 'publisher', 'type', 'status', 'resource'];
 
   constructor(private fhirService: FhirService,
               public dialog: MatDialog,

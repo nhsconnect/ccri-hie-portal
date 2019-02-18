@@ -14,7 +14,10 @@
                 <b>Name</b> {{namingSystem.name}}
             </div>
             <div class="mat-body-1" fxFlex="50%">
-              <b>Kind</b> {{namingSystem.kind}}
+                <b>Type</b>
+                <span *ngIf="namingSystem.type !== undefined">
+                    {{namingSystem.type.coding[0].display}}
+                </span>
             </div>
           </div>
              <div class="mat-card-content"
@@ -33,7 +36,7 @@
                  <b>Publisher</b> {{namingSystem.publisher}}
                </div>
                <div class="mat-body-1" fxFlex="25%">
-                 <b>Responsible</b> {{namingSystem.responsible}}
+                 <b>Kind</b> {{namingSystem.kind}}
                </div>
           </div>
           <div class="mat-card-content" ><b>Description</b> {{namingSystem.description}}</div>
