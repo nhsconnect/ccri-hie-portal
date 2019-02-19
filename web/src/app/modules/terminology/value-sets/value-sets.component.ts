@@ -51,9 +51,9 @@ export class ValueSetsComponent implements OnInit {
     }
     if (this.searchInputPublisher !== undefined) {
       if (this.searchInputName === undefined) {
-        url = url + '?publisher='+ this.searchInputPublisher;
+        url = url + '?publisher=' + this.searchInputPublisher;
       } else {
-        url = url + '&publisher='+ this.searchInputPublisher;
+        url = url + '&publisher=' + this.searchInputPublisher;
       }
     }
     url = url + '&_count=20';

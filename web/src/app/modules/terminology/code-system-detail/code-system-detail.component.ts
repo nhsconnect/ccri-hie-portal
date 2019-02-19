@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-code-system-detail',
@@ -12,7 +14,8 @@ export class CodeSystemDetailComponent implements OnInit {
   codesystemid = undefined;
   codeSystem: fhir.CodeSystem;
 
-  constructor(private route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+              private route: ActivatedRoute,
               private fhirService: FhirService) { }
 
   ngOnInit() {
@@ -24,5 +27,15 @@ export class CodeSystemDetailComponent implements OnInit {
       });
     }
   }
+  view(resource) {
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
+  }
 }

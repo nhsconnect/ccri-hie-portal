@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-concept-map-detail',
@@ -35,7 +37,8 @@ export class ConceptMapDetailComponent implements OnInit {
   conceptmapid = undefined;
   conceptMap: fhir.ConceptMap;
 
-  constructor(private route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+              private route: ActivatedRoute,
               private fhirService: FhirService) { }
 
   ngOnInit() {
@@ -58,5 +61,15 @@ export class ConceptMapDetailComponent implements OnInit {
     }
   }
 
+  view(resource) {
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
+  }
 }
