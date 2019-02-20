@@ -43,6 +43,10 @@
 
 
         </mat-card-content>
+        <mat-card-actions>
+          <button mat-button placement="top" (click)="view(namingSystem)"  color="accent"><mat-icon>code</mat-icon>
+              View FHIR Resource</button>
+       </mat-card-actions>
     </mat-card>
   <span *ngIf="namingSystem.uniqueId !== undefined">
     <mat-card>

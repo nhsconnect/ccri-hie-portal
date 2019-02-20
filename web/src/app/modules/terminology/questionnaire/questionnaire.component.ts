@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
 import {AppConfigService} from '../../../service/app-config.service';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog, MatDialogConfig} from "@angular/material";
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-questionnaire',
@@ -17,6 +19,7 @@ export class QuestionnaireComponent implements OnInit {
   questionnaireid: string;
 
   constructor(
+    public dialog: MatDialog,
     private appConfig: AppConfigService,
     private route: ActivatedRoute,
     private fhirService: FhirService
@@ -45,5 +48,17 @@ export class QuestionnaireComponent implements OnInit {
         }
       }
     );
+  }
+
+  view(resource) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
   }
 }

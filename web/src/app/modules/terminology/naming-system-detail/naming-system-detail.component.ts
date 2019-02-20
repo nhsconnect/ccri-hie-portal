@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-naming-system-detail',
@@ -12,7 +14,8 @@ export class NamingSystemDetailComponent implements OnInit {
   namingSystemid = undefined;
   namingSystem: fhir.NamingSystem;
 
-  constructor(private route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+              private route: ActivatedRoute,
               private fhirService: FhirService) { }
 
   ngOnInit() {
@@ -23,5 +26,16 @@ export class NamingSystemDetailComponent implements OnInit {
         this.namingSystem = result;
       });
     }
+  }
+  view(resource) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
   }
 }

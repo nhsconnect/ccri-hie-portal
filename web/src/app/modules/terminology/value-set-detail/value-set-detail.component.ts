@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {LinksService} from '../../../service/links.service';
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
+import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
 @Component({
   selector: 'app-value-set-detail',
@@ -13,7 +15,9 @@ export class ValueSetDetailComponent implements OnInit {
   valuesetid = undefined;
   valueSet: fhir.ValueSet;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
               private fhirService: FhirService) { }
 
   ngOnInit() {
@@ -24,6 +28,18 @@ export class ValueSetDetailComponent implements OnInit {
        this.valueSet = result;
     });
     }
+  }
+
+  view(resource) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
   }
 
 }
