@@ -17,36 +17,12 @@ export class PatientEOLCComponent implements OnInit {
 
   units: any[] = [
     {
-      code: 'ATP',
-      name: 'Advanced Treatment Preferences' },
-    {
-      code: 'CON',
-      name: 'Consent'
-    },
-    {
       code: 'CPR',
       name: 'CPR Status'
     },
     {
-      code: 'DIS',
-      name: 'Disability'
-    },
-    {
-      code: 'DOC',
-      name: 'Other Documents'
-    },
-    {
-      code: 'EOL',
-      name: 'End Of Life Care'
-    },
-    {
-      code: 'FUN',
-      name: 'Functional Status'
-    },
-    {
-      code: 'LPA',
-      name: 'Lasting Power Of Attorney'
-    },
+      code: 'ATP',
+      name: 'Advanced Treatment Preferences' },
     {
       code: 'PREF',
       name: 'Preferences'
@@ -54,7 +30,33 @@ export class PatientEOLCComponent implements OnInit {
     {
       code: 'PRO',
       name: 'Prognosis'
-    }]
+    },
+    {
+      code: 'DOC',
+      name: 'Other Documents'
+    }, // Contacts
+    {
+      code: 'LPA',
+      name: 'Lasting Power Of Attorney'
+    },
+    {
+      code: 'FUN',
+      name: 'Functional Status'
+    },
+    {
+      code: 'DIS',
+      name: 'Disability'
+    },
+    {
+      code: 'CON',
+      name: 'Consent'
+    },
+    {
+      code: 'EOL',
+      name: 'End Of Life Care'
+    }
+
+    ]
 
 
   constructor(private fhirService: FhirService,
