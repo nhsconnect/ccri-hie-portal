@@ -55,7 +55,6 @@ export class PatientEOLCComponent implements OnInit {
       code: 'EOL',
       name: 'End Of Life Care'
     }
-
     ]
 
 
