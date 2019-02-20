@@ -10,7 +10,6 @@ import {PatientDocumentsComponent} from './patient/patient-documents/patient-doc
 import {PatientEncounterDetailComponent} from './patient/patient-encounter-detail/patient-encounter-detail.component';
 import {PatientProcedureComponent} from './patient/patient-procedure/patient-procedure.component';
 import {BinaryComponent} from '../component/binary/binary/binary.component';
-import {PatientTimeSeriesComponent} from './patient/patient-time-series/patient-time-series.component';
 import {PatientImmunisationComponent} from './patient/patient-immunisation/patient-immunisation.component';
 import {PatientMedicationComponent} from './patient/patient-medication/patient-medication.component';
 import {AuthGuard} from '../service/auth-guard';
@@ -27,7 +26,7 @@ const hieRoutes: Routes = [
     children : [
         {  path: '', canActivate: [AuthGuard], component: PatientFindComponent },
         {  path: 'caseload', canActivate: [AuthGuard], component: EdEncounterListComponent },
-      {  path: 'capacity', canActivate: [AuthGuard], component: CapacityComponent },
+    /*  {  path: 'capacity', canActivate: [AuthGuard], component: CapacityComponent },*/
 
         {  path: 'patient/:patientid', canActivate: [AuthGuard], component: PatientMainComponent,
            children : [
@@ -37,7 +36,7 @@ const hieRoutes: Routes = [
                { path: 'eolc', component: PatientEOLCComponent },
                { path: 'immunisation', component: PatientImmunisationComponent },
                { path: 'medication', component: PatientMedicationComponent },
-               { path: 'timeline', component: PatientTimeSeriesComponent },
+             /*  { path: 'timeline', component: PatientTimeSeriesComponent }, */
                { path: 'observation', component: PatientVitalSignsComponent },
                { path: 'encounter', component: PatientEncountersComponent },
                { path: 'encounter/:encounterid', component: PatientEncounterDetailComponent },

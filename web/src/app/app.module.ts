@@ -101,7 +101,6 @@ import {NguiMapModule} from '@ngui/map';
 import { PatientMainComponent } from './modules/patient/patient-main/patient-main.component';
 import { PatientFindComponent } from './modules/hie/patient-find/patient-find.component';
 import {PatientSearchComponent} from './component/patient-search/patient-search.component';
-import { CapacityComponent } from './modules/hie/capacity/capacity.component';
 import { PatientSummaryComponent } from './modules/patient/patient-summary/patient-summary.component';
 import { PatientVitalSignsComponent } from './modules/patient/patient-vital-signs/patient-vital-signs.component';
 import { PatientEncountersComponent } from './modules/patient/patient-encounters/patient-encounters.component';
@@ -138,7 +137,7 @@ import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
 import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
 import { CovalentLineEchartsModule } from '@covalent/echarts/line';
 import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
-import { AmbulanceATMISTComponent } from './modules/patient/ambulance-atmist/ambulance-atmist.component';
+
 import { CareTeamComponent } from './component/care-team/care-team.component';
 import { QuestionnaireResponseItemComponent } from './component/questionnaire-response-item/questionnaire-response-item.component';
 import { HtmlViewerComponent } from './component/binary/html-viewer/html-viewer.component';
@@ -235,13 +234,13 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     EncounterDialogComponent,
     ObservationChartDialogComponent,
     HieMainComponent,
-    MapComponent,
+  //  MapComponent,
     EdEncounterListComponent,
     EdEncounterCardComponent,
     PatientMainComponent,
     PatientFindComponent,
       PatientSearchComponent,
-      CapacityComponent,
+  //    CapacityComponent,
       PatientSummaryComponent,
       PatientVitalSignsComponent,
       PatientEncountersComponent,
@@ -261,7 +260,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       ReferralRequestComponent,
       PatientReferralRequestComponent,
       MedicationAdministrationComponent,
-      AmbulanceATMISTComponent,
+  //    AmbulanceATMISTComponent,
       CareTeamComponent,
       QuestionnaireResponseItemComponent,
       HtmlViewerComponent,

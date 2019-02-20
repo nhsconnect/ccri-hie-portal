@@ -23,16 +23,16 @@ export class EprService {
       route: '/hie/caseload',
       title: 'Caseload',
     }
-    , {
-      icon: 'dashboard',
-      route: '/hie/capacity',
-      title: 'Emergency Planning',
-    }
- /* Not for Alder Hey hackathon  , {
-      icon: 'directions',
-      route: '/dos',
-      title: 'Directory Services',
-    } */
+    /*   , {
+         icon: 'dashboard',
+         route: '/hie/capacity',
+         title: 'Emergency Planning',
+       }
+     Not for Alder Hey hackathon  , {
+         icon: 'directions',
+         route: '/dos',
+         title: 'Directory Services',
+       } */
     , {
       icon: 'translate',
       route: '/term',
