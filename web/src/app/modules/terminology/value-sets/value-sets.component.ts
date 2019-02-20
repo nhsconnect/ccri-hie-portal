@@ -22,7 +22,7 @@ export class ValueSetsComponent implements OnInit {
 
   searchInputName;
 
-  searchInputPublisher;
+  searchInputUrl;
 
   displayedColumns = ['view', 'name', 'description', 'status', 'resource'];
 
@@ -41,7 +41,7 @@ export class ValueSetsComponent implements OnInit {
       this.searchInputName = name;
     }
     if (publisher !== undefined) {
-      this.searchInputPublisher = publisher;
+      this.searchInputUrl = publisher;
     }
 
     let url = '/ValueSet';
@@ -49,11 +49,11 @@ export class ValueSetsComponent implements OnInit {
     if (this.searchInputName !== undefined) {
       url = url + '?name='+ this.searchInputName;
     }
-    if (this.searchInputPublisher !== undefined) {
+    if (this.searchInputUrl !== undefined) {
       if (this.searchInputName === undefined) {
-        url = url + '?publisher=' + this.searchInputPublisher;
+        url = url + '?url=' + this.searchInputUrl;
       } else {
-        url = url + '&publisher=' + this.searchInputPublisher;
+        url = url + '&url=' + this.searchInputUrl;
       }
     }
     url = url + '&_count=20';
