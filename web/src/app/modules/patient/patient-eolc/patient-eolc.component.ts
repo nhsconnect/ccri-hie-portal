@@ -34,7 +34,7 @@ export class PatientEOLCComponent implements OnInit {
     {
       code: 'DOC',
       name: 'Other Documents'
-    }, // Contacts
+    }, // Contacts- this is part of Patient
     {
       code: 'LPA',
       name: 'Lasting Power Of Attorney'
