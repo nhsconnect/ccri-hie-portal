@@ -48,9 +48,9 @@ export class NamingSystemComponent implements OnInit {
     }
     if (this.searchInputUrl !== undefined) {
       if (this.searchInputName === undefined) {
-        url = url + '?id-type='+ this.searchInputUrl;
+        url = url + '?value='+ this.searchInputUrl;
       } else {
-        url = url + '&id-type='+ this.searchInputUrl;
+        url = url + '&value='+ this.searchInputUrl;
       }
     }
     url = url + '&_count=20';
