@@ -16,6 +16,7 @@ export class PatientSummaryComponent implements OnInit {
     encounters: fhir.Encounter[] = [];
    // careplans: fhir.CarePlan[]=[];
     flags: fhir.Flag[] = [];
+    eolc: fhir.Flag;
     patient: fhir.Patient = undefined;
 
     gpallergies: fhir.AllergyIntolerance[] = [];
@@ -70,8 +71,13 @@ export class PatientSummaryComponent implements OnInit {
                               this.lhcreMedicationStatement.push(<fhir.MedicationStatement> entry.resource);
                               break;
                         case 'Flag':
-                          this.flags.push(<fhir.Flag> entry.resource);
-                          break;
+                              const flag=<fhir.Flag> entry.resource;
+                              this.flags.push(flag);
+
+                              if (flag.code !== undefined && flag.code.coding[0].code ==='526631000000108') {
+                                this.eolc =flag;
+                              }
+                              break;
                        /* case 'CarePlan':
                             this.careplans.push(<fhir.CarePlan> entry.resource);
                             break; */
@@ -217,6 +223,7 @@ export class PatientSummaryComponent implements OnInit {
         this.lhcreAllergies = [];
         this.lhcreMedicationStatement = [];
         this.lhcreConditions = [];
+        this.eolc = undefined;
     }
 
     selectEncounter(encounter: fhir.Reference) {

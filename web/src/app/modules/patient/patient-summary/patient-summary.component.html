@@ -23,8 +23,8 @@
      </mat-card>
 
 <!-- EOLC -->
-<span *ngFor="let flag of flags">
-  <span *ngIf="flag.code !== undefined && flag.code.coding[0].code ==='526631000000108'">
+<span *ngIf="eolc !== undefined">
+
 <mat-card>
   <mat-card-content>
     <div fxLayout="row"
@@ -42,7 +42,7 @@
          </span>
   </mat-card-content>
 </mat-card>
-    </span>
+
 </span>
 
 <!-- National Documents -->
