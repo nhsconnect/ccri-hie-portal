@@ -12,6 +12,8 @@ import { CodeSystemDetailComponent } from './terminology/code-system-detail/code
 import {NamingSystemComponent} from './terminology/naming-system/naming-system.component';
 import { NamingSystemDetailComponent } from './terminology/naming-system-detail/naming-system-detail.component';
 import {ConceptMapDetailComponent} from './terminology/concept-map-detail/concept-map-detail.component';
+import {MessageDefinitionComponent} from './terminology/message-definition/message-definition.component';
+import {MessageDefinitionDetailComponent} from './terminology/message-definition-detail/message-definition-detail.component';
 
 const dosRoutes: Routes = [
   {
@@ -20,6 +22,8 @@ const dosRoutes: Routes = [
       { path: '', component: ValueSetsComponent},
       { path: 'namingsystem', component: NamingSystemComponent},
       { path: 'namingsystem/:namingsystemid', component: NamingSystemDetailComponent},
+      { path: 'messaging', component: MessageDefinitionComponent},
+      { path: 'messaging/:messageid', component: MessageDefinitionDetailComponent},
       { path: 'codesystem', component: CodeSystemComponent},
       { path: 'codesystem/:codesystemid', component: CodeSystemDetailComponent},
       { path: 'valuesets', component: ValueSetsComponent},
