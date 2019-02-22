@@ -169,6 +169,9 @@ import { NamingSystemDetailComponent } from './modules/terminology/naming-system
 import { ConceptMapDetailComponent } from './modules/terminology/concept-map-detail/concept-map-detail.component';
 import { MessageDefinitionComponent } from './modules/terminology/message-definition/message-definition.component';
 import { MessageDefinitionDetailComponent } from './modules/terminology/message-definition-detail/message-definition-detail.component';
+import { GraphDefinitionComponent } from './modules/terminology/graph-definition/graph-definition.component';
+import { GraphDefinitionDetailComponent } from './modules/terminology/graph-definition-detail/graph-definition-detail.component';
+import { GraphDefinitionLinkComponent } from './modules/terminology/graph-definition-link/graph-definition-link.component';
 
 
 
@@ -287,7 +290,10 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       NamingSystemDetailComponent,
       ConceptMapDetailComponent,
       MessageDefinitionComponent,
-      MessageDefinitionDetailComponent
+      MessageDefinitionDetailComponent,
+      GraphDefinitionComponent,
+      GraphDefinitionDetailComponent,
+      GraphDefinitionLinkComponent
 
   ],
   entryComponents: [

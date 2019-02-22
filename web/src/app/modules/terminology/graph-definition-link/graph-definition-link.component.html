@@ -1,0 +1,45 @@
+<div>
+  <div class="mat-card-content"
+       fxLayout
+       fxLayout.xs="column"
+       fxLayoutAlign="center"
+       fxLayoutGap="10px"
+       fxLayoutGap.xs="0">
+    <div class="mat-body-1" fxFlex="50%">
+      <b>Path</b>  {{link.path}}
+    </div>
+    <div class="mat-body-1" fxFlex="50%">
+      <b>Description</b> {{link.description}}
+    </div>
+  </div>
+ <span *ngIf="link.target !== undefined">
+    <span *ngFor="let target of link.target">
+         <a mat-raised-button color="primary"> {{target.type}}</a>
+      <span *ngIf="target.compartment != undefined">
+            <span *ngFor="let compartment of target.compartment">
+               <a mat-raised-button color="primary"> {{compartment.code}}</a>
+               <b>Rule</b> {{compartment.rule}}
+            </span>
+      </span>
+         <span *ngIf="target.link != undefined">
+            <span *ngFor="let sublink of target.link">
+                   <div class="mat-card-content"
+                        fxLayout
+                        fxLayout.xs="column"
+                        fxLayoutAlign="center"
+                        fxLayoutGap="10px"
+                        fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="5%">
+
+            </div>
+            <div class="mat-body-1" fxFlex="95%">
+                <app-graph-definition-link [link]="sublink"></app-graph-definition-link>
+            </div>
+          </div>
+
+             </span>
+          </span>
+    </span>
+ </span>
+
+</div>

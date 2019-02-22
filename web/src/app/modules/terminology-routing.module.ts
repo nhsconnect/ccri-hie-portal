@@ -14,6 +14,8 @@ import { NamingSystemDetailComponent } from './terminology/naming-system-detail/
 import {ConceptMapDetailComponent} from './terminology/concept-map-detail/concept-map-detail.component';
 import {MessageDefinitionComponent} from './terminology/message-definition/message-definition.component';
 import {MessageDefinitionDetailComponent} from './terminology/message-definition-detail/message-definition-detail.component';
+import {GraphDefinitionComponent} from './terminology/graph-definition/graph-definition.component';
+import {GraphDefinitionDetailComponent} from './terminology/graph-definition-detail/graph-definition-detail.component';
 
 const dosRoutes: Routes = [
   {
@@ -24,6 +26,8 @@ const dosRoutes: Routes = [
       { path: 'namingsystem/:namingsystemid', component: NamingSystemDetailComponent},
       { path: 'messaging', component: MessageDefinitionComponent},
       { path: 'messaging/:messageid', component: MessageDefinitionDetailComponent},
+      { path: 'graph', component: GraphDefinitionComponent},
+      { path: 'graph/:graphid', component: GraphDefinitionDetailComponent},
       { path: 'codesystem', component: CodeSystemComponent},
       { path: 'codesystem/:codesystemid', component: CodeSystemDetailComponent},
       { path: 'valuesets', component: ValueSetsComponent},
