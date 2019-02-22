@@ -25,7 +25,7 @@
                  <a mat-raised-button color="primary"> {{target.type}}</a>
             </div>
            <div class="mat-body-1" fxFlex="30%">
-
+             <b>Profile</b> {{ target.profile }}
                 <span *ngIf="target.compartment != undefined">
                       <span *ngFor="let compartment of target.compartment">
                          <a mat-raised-button color="primary"> {{compartment.code}}</a>
