@@ -88,6 +88,7 @@
   </table>
 
       <h2>Allowed Response</h2>
+          <span *ngIf="messageDefinition.allowedResponse !== undefined">
        <table fxFill="100" mat-table [dataSource]="dataSourceResponse" class="mat-elevation-z8">
 
 
@@ -116,7 +117,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumnsResponse"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumnsResponse;"></tr>
   </table>
-
+</span>
 
       
         </mat-card-content>

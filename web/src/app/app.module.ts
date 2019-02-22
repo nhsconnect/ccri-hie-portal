@@ -172,6 +172,7 @@ import { MessageDefinitionDetailComponent } from './modules/terminology/message-
 import { GraphDefinitionComponent } from './modules/terminology/graph-definition/graph-definition.component';
 import { GraphDefinitionDetailComponent } from './modules/terminology/graph-definition-detail/graph-definition-detail.component';
 import { GraphDefinitionLinkComponent } from './modules/terminology/graph-definition-link/graph-definition-link.component';
+import {CovalentGraphEchartsModule} from '@covalent/echarts/graph';
 
 
 
@@ -373,6 +374,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentBaseEchartsModule,
     CovalentBarEchartsModule,
     CovalentLineEchartsModule,
+    CovalentGraphEchartsModule,
     CovalentTooltipEchartsModule,
     CovalentLoadingModule,
     CovalentDataTableModule,

@@ -79,7 +79,7 @@ export class GraphDefinitionComponent implements OnInit {
       id: 1,
       resource: resource
     };
-    const resourceDialog: MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
   }
 
   view(graph: fhir.GraphDefinition) {

@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 
+
 @Component({
   selector: 'app-graph-definition-detail',
   templateUrl: './graph-definition-detail.component.html',
@@ -12,9 +13,20 @@ import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-
 export class GraphDefinitionDetailComponent implements OnInit {
 
   graphid = undefined;
+
   graph: fhir.GraphDefinition;
 
-  
+  data = [ ];
+
+  edges = [];
+
+  force = {
+    // initLayout: 'circular'
+    // gravity: 0
+    repulsion: 100,
+    edgeLength: 300
+  };
+
 
   constructor(
     public dialog: MatDialog,
@@ -28,8 +40,72 @@ export class GraphDefinitionDetailComponent implements OnInit {
       this.fhirService.getResource('/GraphDefinition/' + this.graphid ).subscribe( result => {
         const graph: fhir.GraphDefinition = result;
         this.graph = graph;
+        this.processGraph();
       });
     }
+  }
+
+  processGraph() {
+    this.data = [];
+    this.edges = [];
+    let f = 1;
+
+    this.data.push({
+      id: f.toString(3),
+      name: this.graph.start,
+      symbolSize: 50,
+      itemStyle: {normal: {color: '#c71919'}}
+    });
+    let base = f;
+    f++;
+    if (this.graph.link !== undefined) {
+      this.processItem(base, f, this.graph.link);
+    }
+  }
+  processItem(base, f, links) {
+    for (let link of links) {
+      if (link.target !== undefined) {
+        for (const target of link.target) {
+
+          this.data.push({
+            id: f.toString(3),
+            name: target.type,
+            symbolSize: 50,
+            itemStyle: {normal: {color: '#4f19c7'}}
+          });
+          this.edges.push({
+            source: base.toString(3),
+            target: f.toString(3),
+            label: 'saz'
+          });
+
+          base = f;
+          f++;
+          if (target.compartment !== undefined) {
+            for (const compartment of target.compartment) {
+              this.data.push({
+                id: f.toString(3),
+                name: compartment.code,
+                symbolSize: 50,
+                itemStyle: {normal: {color: '#c76919'}}
+              });
+              this.edges.push({
+                source: base.toString(3),
+                target: f.toString(3),
+                label: 'bob'
+              });
+              f++;
+            }
+          }
+          if (target.link !== undefined) {
+            this.processItem(base, f, target.link);
+          }
+        }
+      }
+
+    }
+    console.log(this.data);
+    console.log(this.edges);
   }
 
   view(resource) {
