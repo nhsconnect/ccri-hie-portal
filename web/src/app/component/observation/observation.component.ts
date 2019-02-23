@@ -5,6 +5,8 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {ObservationDataSource} from '../../data-source/observation-data-source';
 import {FhirService} from '../../service/fhir.service';
 import {ObservationChartDialogComponent} from '../../dialog/observation-chart-dialog/observation-chart-dialog.component';
+import {PractitionerDialogComponent} from '../../dialog/practitioner-dialog/practitioner-dialog.component';
+import {BundleService} from '../../service/bundle.service';
 
 
 @Component({
@@ -22,14 +24,15 @@ export class ObservationComponent implements OnInit {
 
   @Output() observation = new EventEmitter<any>();
 
-  selectedObs: fhir.Observation;
+
+  @Input() useBundle = false;
 
   dataSource: ObservationDataSource;
 
-  displayedColumns = ['date', 'code', 'codelink', 'category', 'status', 'value', 'chart', 'resource'];
+  displayedColumns = ['date', 'code', 'codelink', 'category', 'status', 'value', 'chart', 'performer', 'resource'];
 
   constructor(private linksService: LinksService,
-             // private modalService: NgbModal,
+              public bundleService: BundleService,
               public dialog: MatDialog,
               public fhirService: FhirService) { }
 
@@ -99,6 +102,33 @@ export class ObservationComponent implements OnInit {
       return observation.component[0].valueQuantity.value + '/' + observation.component[1].valueQuantity.value + ' ' + unit0 + '/' + unit1;
     }
 
+  }
+
+  showPractitioner(observation: fhir.Observation) {
+    let practitioners = [];
+
+
+    for (let reference of observation.performer) {
+
+      this.bundleService.getResource(reference.reference).subscribe((practitioner) => {
+          if (practitioner !== undefined && practitioner.resourceType === "Practitioner") {
+            practitioners.push(<fhir.Practitioner>practitioner);
+
+            const dialogConfig = new MatDialogConfig();
+
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            // dialogConfig.width="800px";
+            dialogConfig.data = {
+              id: 1,
+              practitioners: practitioners,
+              useBundle: this.useBundle
+            };
+            this.dialog.open(PractitionerDialogComponent, dialogConfig);
+          }
+        }
+      );
+    }
   }
 
   getCodeSystem(system: string): string {

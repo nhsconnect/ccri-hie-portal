@@ -329,55 +329,57 @@ return this.http.get<any>(url, {'headers': this.getHeaders(true)});
 }
 }
 
-getBinary(id: string): Observable<fhir.Binary> {
+  getBinary(url: string): Observable<fhir.Binary> {
 
-const url = this.getBaseUrl() + '/Binary/' + id;
+    // const url = this.getBaseUrl() + `/Binary/${id}`;
 
-return this.http.get<fhir.Binary>(url, { 'headers' : this.getEPRHeaders(true)});
+    return this.http.get<fhir.Binary>(url, { 'headers' : this.getEPRHeaders(true)});
 
-}
-getBinaryRaw(id: string): Observable<any> {
+  }
+  getBinaryRaw(url: string): Observable<any> {
 
-const url = this.getBaseUrl() + '/Binary/' + id;
+    // const url = this.getBaseUrl() + `/Binary/${id}`;
 
-return this.http.get(url, { 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
+    return this.http.get(url, { 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
 
-}
+  }
 
-getCompositionDocumentHTML(id: string): Observable<any> {
+  getCompositionDocumentHTML(url: string): Observable<any> {
 
-const url = this.getBaseUrl() + '/Binary/' + id;
+    // const url = this.getBaseUrl() + `/Binary/${id}`;
 
-let headers = this.getEPRHeaders(false);
-headers = headers.append('Content-Type', 'text/html' );
+    let headers = this.getEPRHeaders(false);
+    headers = headers.append('Content-Type', 'text/html' );
 
-return this.http
-.get(url, {  headers , responseType : 'text' as 'text'});
-}
+    return this.http
+      .get(url, {  headers , responseType : 'text' as 'text'});
+  }
+
+  getCompositionDocumentPDF(url: string): Observable<any> {
+
+    // const url = this.getBaseUrl() + `/Binary/${id}`;
+
+    let headers = this.getEPRHeaders(false);
+    headers = headers.append(
+      'Content-Type', 'application/pdf' );
+
+    return this.http
+      .get(url, { headers, responseType : 'blob' as 'blob'} );
+  }
 
 searchPatients(term: string): Observable<fhir.Bundle> {
-const url =  this.getBaseUrl();
-if (!isNaN(parseInt(term))) {
-return this.http.get<fhir.Bundle>(url + `/Patient?identifier=${term}`, { 'headers' : this.getEPRHeaders() });
-} else {
+    const url =  this.getBaseUrl();
+    if (!isNaN(parseInt(term))) {
+    return this.http.get<fhir.Bundle>(url + `/Patient?identifier=${term}`, { 'headers' : this.getEPRHeaders() });
+    } else {
 
-return this.http.get<fhir.Bundle>(url + `/Patient?name=${term}`, {'headers': this.getEPRHeaders()});
+      return this.http.get<fhir.Bundle>(url + `/Patient?name=${term}`, {'headers': this.getEPRHeaders()});
 
-}
+    }
 
-}
 
-getCompositionDocumentPDF(id: string): Observable<any> {
+  }
 
-const url = this.getBaseUrl() + '/Binary/' + id;
-
-let headers = this.getEPRHeaders(false);
-headers = headers.append(
-'Content-Type', 'application/pdf' );
-
-return this.http
-.get(url, { headers, responseType : 'blob' as 'blob'} );
-}
 
 
 }

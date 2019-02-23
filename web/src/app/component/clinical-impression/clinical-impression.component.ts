@@ -5,6 +5,7 @@ import {BundleService} from '../../service/bundle.service';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {FhirService} from '../../service/fhir.service';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
+import {PractitionerDialogComponent} from '../../dialog/practitioner-dialog/practitioner-dialog.component';
 
 @Component({
   selector: 'app-clinical-impression',
@@ -24,7 +25,7 @@ export class ClinicalImpressionComponent implements OnInit {
 
     dataSource: ClinicalImpressionDataSource;
 
-    displayedColumns = ['date', 'prognosis', 'prognosislink', 'resource'];
+    displayedColumns = ['date', 'prognosis', 'prognosislink', 'assessor', 'resource'];
 
     constructor(private linksService: LinksService,
                 public bundleService: BundleService,
@@ -62,4 +63,29 @@ export class ClinicalImpressionComponent implements OnInit {
     getCodeSystem(system: string): string {
         return this.linksService.getCodeSystem(system);
     }
+
+  showPractitioner(clinicalImpression: fhir.ClinicalImpression) {
+    let practitioners = [];
+
+
+    this.bundleService.getResource(clinicalImpression.assessor.reference).subscribe((practitioner) => {
+        if (practitioner !== undefined && practitioner.resourceType === "Practitioner") {
+          practitioners.push(<fhir.Practitioner> practitioner);
+
+          const dialogConfig = new MatDialogConfig();
+
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+          // dialogConfig.width="800px";
+          dialogConfig.data = {
+            id: 1,
+            practitioners: practitioners,
+            useBundle : this.useBundle
+          };
+          this.dialog.open(PractitionerDialogComponent, dialogConfig);
+        }
+      }
+    );
+
+  }
 }

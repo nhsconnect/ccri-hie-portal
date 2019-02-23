@@ -5,6 +5,7 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {FhirService} from '../../service/fhir.service';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
 import {FlagDataSource} from '../../data-source/flag-data-source';
+import {PractitionerDialogComponent} from '../../dialog/practitioner-dialog/practitioner-dialog.component';
 
 @Component({
   selector: 'app-flag',
@@ -23,7 +24,7 @@ export class FlagComponent implements OnInit {
 
   dataSource: FlagDataSource;
 
-  displayedColumns = ['alert', 'status', 'start', 'end', 'resource'];
+  displayedColumns = ['alert', 'status', 'start', 'end', 'author', 'resource'];
 
   constructor(private linksService: LinksService,
               public bundleService: BundleService,
@@ -47,7 +48,33 @@ export class FlagComponent implements OnInit {
       id: 1,
       resource: resource
     };
-    const resourceDialog: MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
+  }
+
+
+  showPractitioner(flag: fhir.Flag) {
+    let practitioners = [];
+
+
+    this.bundleService.getResource(flag.author.reference).subscribe((practitioner) => {
+        if (practitioner !== undefined && practitioner.resourceType === "Practitioner") {
+          practitioners.push(<fhir.Practitioner> practitioner);
+
+          const dialogConfig = new MatDialogConfig();
+
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+          // dialogConfig.width="800px";
+          dialogConfig.data = {
+            id: 1,
+            practitioners: practitioners,
+            useBundle : this.useBundle
+          };
+          this.dialog.open(PractitionerDialogComponent, dialogConfig);
+        }
+      }
+    );
+
   }
 
 
