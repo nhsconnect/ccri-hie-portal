@@ -18,19 +18,7 @@
               <b>Url</b> {{graph.url}}
             </div>
           </div>
-           <div class="mat-card-content"
-                fxLayout
-                fxLayout.xs="column"
-                fxLayoutAlign="center"
-                fxLayoutGap="10px"
-                fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="50%">
-              <b>Purpose</b> {{graph.purpose}}
-            </div>
-            <div class="mat-body-1" fxFlex="50%">
-              <b>Profile</b> {{graph.profile}}
-            </div>
-          </div>
+
              <div class="mat-card-content"
                   fxLayout
                   fxLayout.xs="column"
@@ -51,11 +39,36 @@
             </div>
           </div>
           <div class="mat-card-content" ><b>Description</b> {{graph.description}}</div>
-          <div class="mat-card-content mat-body-1" ><b>Publisher</b> {{graph.publisher}}</div>
+
+       <div class="mat-card-content"
+            fxLayout
+            fxLayout.xs="column"
+            fxLayoutAlign="center"
+            fxLayoutGap="10px"
+            fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="50%">
+              <b>Purpose</b> {{graph.purpose}}
+            </div>
+            <div class="mat-body-1" fxFlex="50%">
+              <div class="mat-card-content mat-body-1" ><b>Publisher</b> {{graph.publisher}}</div>
+            </div>
+          </div>
+                 <div class="mat-card-content"
+                      fxLayout
+                      fxLayout.xs="column"
+                      fxLayoutAlign="center"
+                      fxLayoutGap="10px"
+                      fxLayoutGap.xs="0">
+            <div class="mat-body-1" fxFlex="15%">
+                <a mat-raised-button target="_blank" [href]="getProfile(graph.profile, graph.start)" [color]="getColour(graph.start)"> {{graph.start}}</a>
+
+            </div>
+            <div class="mat-body-1" fxFlex="85%">
+              <b>Profile</b> {{graph.profile}}
+            </div>
+          </div>
 
 
-           <a mat-raised-button color="primary"> {{graph.start}}</a>
-     
           <span *ngIf="graph.link != undefined">
             <span *ngFor="let link of graph.link">
 
@@ -69,7 +82,7 @@
 
             </div>
             <div class="mat-body-1" fxFlex="95%">
-                 <app-graph-definition-link [link]="link"></app-graph-definition-link>
+                 <app-graph-definition-link [link]="link" [parentlink]="undefined"></app-graph-definition-link>
             </div>
           </div>
 
@@ -77,6 +90,7 @@
 
              </span>
           </span>
+          <!--
   <td-chart [style.height.px]="500">
     <td-chart-tooltip [trigger]="'item'">
       <ng-template let-params let-i="index" let-ticket="ticket" tdTooltipFormatter>
@@ -111,7 +125,7 @@
                      [label]="{ emphasis: { position: 'right', show: true }}">
     </td-chart-series>
   </td-chart>
-      
+      -->
         </mat-card-content>
       
       

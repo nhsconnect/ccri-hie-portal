@@ -1,5 +1,6 @@
 <mat-card>
   <mat-card-content>
+    <b>Description</b> {{link.description}}
   <div class="mat-card-content"
        fxLayout
        fxLayout.xs="column"
@@ -9,22 +10,27 @@
     <div class="mat-body-1" fxFlex="50%">
       <b>Path</b>  {{link.path}}
     </div>
-    <div class="mat-body-1" fxFlex="50%">
-      <b>Description</b> {{link.description}}
+    <div class="mat-body-1" fxFlex="25%">
+      <b>Min</b> {{link.min}}
+    </div>
+    <div class="mat-body-1" fxFlex="25%">
+      <b>Max</b> {{link.max}}
     </div>
   </div>
+
  <span *ngIf="link.target !== undefined">
     <span *ngFor="let target of link.target">
+      <mat-card><mat-card-content>
        <div class="mat-card-content"
             fxLayout
             fxLayout.xs="column"
             fxLayoutAlign="center"
             fxLayoutGap="10px"
             fxLayoutGap.xs="0">
-         <div class="mat-body-1" fxFlex="30%">
-                 <a mat-raised-button color="primary"> {{target.type}}</a>
+         <div class="mat-body-1" fxFlex="20%">
+                 <a mat-raised-button target="_blank" [href]="getProfile(target.profile, target.type)" [color]="getColour(target.type)"> {{target.type}}</a>
             </div>
-           <div class="mat-body-1" fxFlex="30%">
+           <div class="mat-body-1" fxFlex="80%">
              <b>Profile</b> {{ target.profile }}
                 <span *ngIf="target.compartment != undefined">
                       <span *ngFor="let compartment of target.compartment">
@@ -42,16 +48,18 @@
                         fxLayoutAlign="center"
                         fxLayoutGap="10px"
                         fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="5%">
+            <div class="mat-body-1" fxFlex="{{getLeft(target)}}">
 
             </div>
-            <div class="mat-body-1" fxFlex="95%">
-                <app-graph-definition-link [link]="sublink"></app-graph-definition-link>
+            <div class="mat-body-1" fxFlex="{{getRight(target)}}">
+                <app-graph-definition-link [link]="sublink" [parentlink]="link"></app-graph-definition-link>
             </div>
           </div>
 
              </span>
           </span>
+      </mat-card-content>
+      </mat-card>
     </span>
  </span>
 

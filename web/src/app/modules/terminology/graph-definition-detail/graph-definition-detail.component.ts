@@ -40,9 +40,19 @@ export class GraphDefinitionDetailComponent implements OnInit {
       this.fhirService.getResource('/GraphDefinition/' + this.graphid ).subscribe( result => {
         const graph: fhir.GraphDefinition = result;
         this.graph = graph;
-        this.processGraph();
+     // TODO   this.processGraph();
       });
     }
+  }
+
+  getColour(resource) {
+    if (resource === 'Bundle') return 'accent';
+    return 'primary';
+  }
+
+  getProfile(profile: string, resource: string) {
+    if (profile !== undefined) return profile;
+    return 'https://www.hl7.org/fhir/stu3/' + resource.toLowerCase() + '.html';
   }
 
   processGraph() {
