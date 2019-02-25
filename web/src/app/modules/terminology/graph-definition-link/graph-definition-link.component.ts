@@ -11,7 +11,7 @@ export class GraphDefinitionLinkComponent implements OnInit {
   link: fhir.GraphDefinitionLink;
 
   @Input()
-  parentlink: fhir.GraphDefinitionLink;
+  level: number;
 
   constructor() { }
 
