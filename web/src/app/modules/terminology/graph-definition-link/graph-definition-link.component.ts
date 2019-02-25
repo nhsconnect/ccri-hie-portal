@@ -18,20 +18,21 @@ export class GraphDefinitionLinkComponent implements OnInit {
   ngOnInit() {
   }
 
-  getLeft(parent: fhir.GraphDefinitionLinkTarget) {
-    if (parent === undefined || parent.type === 'Bundle') {
+  getLeft() {
+    console.log('level '+ this.level);
+    if (this.level > 0) {
       return '5%';
     }
     return '0%';
 }
-  getRight(parent: fhir.GraphDefinitionLinkTarget) {
-    if (parent === undefined || parent.type === 'Bundle') {
+  getRight() {
+    if (this.level > 0) {
       return '95%';
     }
     return '100%';
   }
   getColour(level) {
-    console.log('Depth = '+level);
+
     if (level === '0') return 'accent';
     if (level === '2') return 'info';
     return 'primary';

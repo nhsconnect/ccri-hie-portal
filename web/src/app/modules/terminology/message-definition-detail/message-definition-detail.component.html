@@ -119,7 +119,15 @@
   </table>
 </span>
 
-      
+
+          <span *ngIf="messageDefinition.extension !== undefined">
+            <span *ngFor="let extension of messageDefinition.extension">
+              <span *ngIf="extension.url === 'http://hl7.org/fhir/4.0/StructureDefinition/extension-MessageDefinition.graph' && extension.valueReference !== undefined">
+
+                  <button class="mat-raised-button" (click)="graphClick(extension.valueReference.reference)"  color="accent"><mat-icon>bubble_chart</mat-icon>Graph Definition</button>
+              </span>
+            </span>
+          </span>
         </mat-card-content>
       
       

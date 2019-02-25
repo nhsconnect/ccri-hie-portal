@@ -86,4 +86,6 @@ export class MessageDefinitionComponent implements OnInit {
     this.router.navigate([messageDefinition.id], {relativeTo: this.route });
   }
 
+
+
 }

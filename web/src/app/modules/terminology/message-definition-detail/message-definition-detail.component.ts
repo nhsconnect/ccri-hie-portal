@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 import {MessageDefinitionFocusDataSource} from '../../../data-source/message-definition-focus-data-source';
@@ -28,6 +28,7 @@ export class MessageDefinitionDetailComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private router: Router,
     private fhirService: FhirService) { }
 
   ngOnInit() {
@@ -68,5 +69,15 @@ export class MessageDefinitionDetailComponent implements OnInit {
     return undefined;
   }
   viewMessage(response: fhir.MessageDefinitionAllowedResponse) {
+  }
+  graphClick(uri) {
+    this.fhirService.get('/GraphDefinition?url='+uri).
+    subscribe(result => {
+        if (result.entry !== undefined) {
+          console.log('graph id = '+result.entry[0].resource.id);
+          this.router.navigateByUrl('/term/graph/'+result.entry[0].resource.id , { relativeTo : this.route });
+        }
+      }
+    )
   }
 }

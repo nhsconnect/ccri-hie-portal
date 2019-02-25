@@ -42,8 +42,6 @@
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let graph"> <b><span *ngIf="graph.name.includes('null')">{{graph.title}}</span>
         <span *ngIf="!graph.name.includes('null')">{{graph.name}}</span></b>
-        <br>
-        {{graph.url}}
       </td>
     </ng-container>
 
