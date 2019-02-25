@@ -30,8 +30,10 @@ export class GraphDefinitionLinkComponent implements OnInit {
     }
     return '100%';
   }
-  getColour(resource) {
-    if (resource === 'Bundle') return 'accent';
+  getColour(level) {
+    console.log('Depth = '+level);
+    if (level === '0') return 'accent';
+    if (level === '2') return 'info';
     return 'primary';
   }
 
