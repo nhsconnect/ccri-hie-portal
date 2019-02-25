@@ -11,12 +11,14 @@
       <b>Path</b>&nbsp;&nbsp; <mat-chip>{{link.path}}</mat-chip>
     </div>
     <div class="mat-body-1" fxFlex="25%">
+      <span *ngIf="link.max !== undefined || link.min !== undefined">
       <mat-chip-list>
         <mat-chip>
           Min-{{link.min}}</mat-chip>
         <mat-chip>
           Max-{{link.max}}</mat-chip>
       </mat-chip-list>
+        </span>
     </div>
   </div>
   <div class="mat-card-content">
