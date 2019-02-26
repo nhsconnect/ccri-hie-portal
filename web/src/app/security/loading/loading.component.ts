@@ -23,20 +23,23 @@ export class LoadingComponent implements OnInit {
               private _loadingService: TdLoadingService) { }
 
   ngOnInit() {
-      console.log('INIT');
+      console.log('Loading Component');
 
       this._loadingService.register('overlayStarSyntax');
 
-      if (this.appConfig.getConfig() !== undefined) {
+      if (this.appConfig.getConfig() === undefined) {
         this.appConfig.getInitEventEmitter().subscribe(result => {
-          // console.log(this.appConfig.getConfig());
+          console.log(this.appConfig.getConfig());
+          console.log('Config retrieved');
           if (this.appConfig.getConfig() !== undefined) {
+            console.log('Setting fhirServer base');
             this.fhirService.setRootUrl(this.appConfig.getConfig().fhirServer);
             this.getConformanace();
           }
         });
       } else {
         console.log('app config present');
+        console.log(this.appConfig.getConfig());
         this.redirectToHIE();
       }
       // this.appConfig.loadConfig();

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {EdEncounterListComponent} from './hie/ed-encounter-list/ed-encounter-list.component';
 import {PatientMainComponent} from './patient/patient-main/patient-main.component';
-import {CapacityComponent} from './hie/capacity/capacity.component';
 import {PatientSummaryComponent} from './patient/patient-summary/patient-summary.component';
 import {PatientVitalSignsComponent} from './patient/patient-vital-signs/patient-vital-signs.component';
 import {PatientEncountersComponent} from './patient/patient-encounters/patient-encounters.component';

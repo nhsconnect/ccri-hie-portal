@@ -81,6 +81,7 @@ export class FhirService {
 
 
     storeBaseUrl(baseUrl: string) {
+      console.log('Setting storeBaseUrl ' + baseUrl);
         localStorage.setItem('baseUrl', baseUrl);
 
         if (this.baseUrl !== baseUrl) {

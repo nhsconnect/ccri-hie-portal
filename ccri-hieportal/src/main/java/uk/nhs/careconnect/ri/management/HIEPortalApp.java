@@ -24,14 +24,14 @@ public class HIEPortalApp {
         SpringApplication.run(HIEPortalApp.class, args);
     }
 
-    @Bean
+/*    @Bean
     ServletRegistrationBean servletRegistrationBean() {
         ServletRegistrationBean servlet = new ServletRegistrationBean
                 (new CamelHttpTransportServlet(), "/*");
         servlet.setName("jmxmonitor");
         servlet.setLoadOnStartup(2);
         return servlet;
-    }
+    } */
 
     @Bean
     CamelContextConfiguration contextConfiguration() {

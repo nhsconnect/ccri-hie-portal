@@ -93,11 +93,9 @@ import {ViewDocumentComponent} from './component/binary/composition-view/view-do
 import {ViewDocumentSectionComponent} from './component/binary/composition-view-section/view-document-section.component';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
-import { MapComponent } from './component/map/map.component';
 import { EdEncounterListComponent } from './modules/hie/ed-encounter-list/ed-encounter-list.component';
 import {HieRoutingModule} from './modules/hie-routing.module';
 import { EdEncounterCardComponent } from './modules/hie/ed-encounter-card/ed-encounter-card.component';
-import {NguiMapModule} from '@ngui/map';
 import { PatientMainComponent } from './modules/patient/patient-main/patient-main.component';
 import { PatientFindComponent } from './modules/hie/patient-find/patient-find.component';
 import {PatientSearchComponent} from './component/patient-search/patient-search.component';
@@ -384,7 +382,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 
       PdfViewerModule,
       ImageViewerModule,
-     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDC8GmtqZiQXc16qf1v870NKy-phjv-1N0'}),
+   //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDC8GmtqZiQXc16qf1v870NKy-phjv-1N0'}),
     //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key='}),
     HieRoutingModule,
     DirectoryRoutingModule,
@@ -434,4 +432,3 @@ export class AppModule {
   }
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
