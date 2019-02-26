@@ -6,6 +6,7 @@ import {FhirService} from '../../service/fhir.service';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
 import {FlagDataSource} from '../../data-source/flag-data-source';
 import {PractitionerDialogComponent} from '../../dialog/practitioner-dialog/practitioner-dialog.component';
+import {OrganisationDialogComponent} from '../../dialog/organisation-dialog/organisation-dialog.component';
 
 @Component({
   selector: 'app-flag',
@@ -52,29 +53,35 @@ export class FlagComponent implements OnInit {
   }
 
 
-  showPractitioner(flag: fhir.Flag) {
-    let practitioners = [];
-
-
-    this.bundleService.getResource(flag.author.reference).subscribe((practitioner) => {
-        if (practitioner !== undefined && practitioner.resourceType === "Practitioner") {
-          practitioners.push(<fhir.Practitioner> practitioner);
-
-          const dialogConfig = new MatDialogConfig();
-
-          dialogConfig.disableClose = true;
-          dialogConfig.autoFocus = true;
-          // dialogConfig.width="800px";
-          dialogConfig.data = {
-            id: 1,
-            practitioners: practitioners,
-            useBundle : this.useBundle
-          };
-          this.dialog.open(PractitionerDialogComponent, dialogConfig);
-        }
-      }
-    );
-
+  showAuthors(flag: fhir.Flag) {
+    const refs = [];
+    if (flag.author !== undefined) {
+        this.bundleService.getResource(flag.author.reference).subscribe((resource) => {
+            if (resource !== undefined) {
+              const dialogConfig = new MatDialogConfig();
+              dialogConfig.disableClose = true;
+              dialogConfig.autoFocus = true;
+              refs.push(resource);
+              if (resource.resourceType === 'Practitioner') {
+                dialogConfig.data = {
+                  id: 1,
+                  practitioners: refs,
+                  useBundle: this.useBundle
+                };
+                this.dialog.open(PractitionerDialogComponent, dialogConfig);
+              }
+              if (resource.resourceType === 'Organization') {
+                dialogConfig.data = {
+                  id: 1,
+                  organisations: refs,
+                  useBundle: this.useBundle
+                };
+                this.dialog.open(OrganisationDialogComponent, dialogConfig);
+              }
+            }
+          }
+        );
+    }
   }
 
 
