@@ -26,7 +26,7 @@
       <th mat-header-cell *matHeaderCellDef width="5%"></th>
       <td mat-cell *matCellDef="let flag">
         <span *ngIf="flag.author !=undefined">
-          <button mat-icon-button color="accent"  matTooltip="View Author" (click)="showPractitioner(flag)"><mat-icon>person</mat-icon></button>
+          <button mat-icon-button color="accent"  matTooltip="View Author" (click)="showAuthors(flag)"><mat-icon>person</mat-icon></button>
         </span>
       </td>
     </ng-container>

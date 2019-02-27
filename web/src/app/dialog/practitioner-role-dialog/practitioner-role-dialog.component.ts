@@ -12,7 +12,7 @@ declare var $: any;
 export class PractitionerRoleDialogComponent implements OnInit {
 
 
-  //https://stackoverflow.com/questions/44987260/how-to-add-jstree-to-angular-2-application-using-typescript-with-types-jstree
+  // https://stackoverflow.com/questions/44987260/how-to-add-jstree-to-angular-2-application-using-typescript-with-types-jstree
 
 
   constructor(
@@ -31,11 +31,6 @@ export class PractitionerRoleDialogComponent implements OnInit {
 
 
   ngOnInit() {
-
-    //console.log('practitioner role dialog '+this.useBundle);
-
-
-
   }
  }
 

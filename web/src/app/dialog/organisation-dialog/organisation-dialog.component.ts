@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 
 declare var $: any;
@@ -14,7 +14,7 @@ declare var $: any;
 export class OrganisationDialogComponent implements OnInit {
 
 
-  //https://stackoverflow.com/questions/44987260/how-to-add-jstree-to-angular-2-application-using-typescript-with-types-jstree
+  // https://stackoverflow.com/questions/44987260/how-to-add-jstree-to-angular-2-application-using-typescript-with-types-jstree
 
 
   constructor(
@@ -23,7 +23,7 @@ export class OrganisationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data) {
     this.organisations = data.organisations;
     this.organisationsObservable = data.organisationsObservable;
-    this.useObservable =data.useObservable;
+    this.useObservable = data.useObservable;
   }
 
   @Input()
@@ -33,9 +33,9 @@ export class OrganisationDialogComponent implements OnInit {
   organisationId: string;
 
   @Input()
-  useObservable: boolean = false;
+  useObservable = false;
 
-  organisationsObservable : Observable<fhir.Organization>;
+  organisationsObservable: Observable<fhir.Organization>;
 
   ngOnInit() {
 
