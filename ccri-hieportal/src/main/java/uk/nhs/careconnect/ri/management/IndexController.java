@@ -1,18 +1,14 @@
 package uk.nhs.careconnect.ri.management;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.WebRequest;
-
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @RestController
 public class IndexController implements ErrorController {

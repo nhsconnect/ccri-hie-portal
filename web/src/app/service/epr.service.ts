@@ -8,15 +8,9 @@ export class EprService {
 
   public routes: Object[] = [
     {
-      icon: 'home',
-      route: '/hie',
-      title: 'HIE Portal',
-    }
-    , {
       icon: 'search',
       route: '/hie',
-      title: 'Patient Find' +
-        '',
+      title: 'Patient Find'
     }
     , {
       icon: 'hotel',
@@ -32,12 +26,12 @@ export class EprService {
          icon: 'directions',
          route: '/dos',
          title: 'Directory Services',
-       } */
+       }
     , {
       icon: 'translate',
       route: '/term',
       title: 'Reference Services',
-    }
+    }*/
   ];
 
   public oauth2routes: Object[] = [

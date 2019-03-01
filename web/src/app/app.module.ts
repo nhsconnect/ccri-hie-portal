@@ -386,7 +386,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key='}),
     HieRoutingModule,
     DirectoryRoutingModule,
-    TerminologyRoutingModule,
+   // TerminologyRoutingModule,
       AppRoutingModule,
 
     OAuthModule.forRoot()
