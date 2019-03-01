@@ -1,0 +1,49 @@
+<span *ngIf="resource !== undefined">
+  <span [ngSwitch]="resource.resourceType">
+
+    <span *ngSwitchCase="'Flag'">
+      Flag
+      <app-flag [flags]="[ resource ]"></app-flag>
+    </span>
+     <span *ngSwitchCase="'ClinicalImpression'">
+      ClinicalImpression
+      <app-clinical-impression [clinicalImpressions]="[ resource ]"></app-clinical-impression>
+    </span>
+     <span *ngSwitchCase="'CarePlan'">
+      CarePlan
+        <app-care-plan [carePlans]="[ resource ]"></app-care-plan>
+       CarePlan Activity
+        <app-care-plan-activity [careActivity]="resource.activity"></app-care-plan-activity>
+    </span>
+    <span *ngSwitchCase="'Condition'">
+      Condition
+      <app-condition [conditions]="[ resource ]"></app-condition>
+    </span>
+     <span *ngSwitchCase="'Consent'">
+      Consent
+      <app-consent [consents]="[ resource ]"></app-consent>
+    </span>
+
+    <span *ngSwitchCase="'List'">
+      List
+      <app-list [list]="resource"></app-list>
+    </span>
+
+     <span *ngSwitchCase="'Observation'">
+      Observation
+      <app-observation [observations]="[ resource ]"></app-observation>
+    </span>
+    <span *ngSwitchCase="'Practitioner'">
+      Practitioner
+      <app-practitioner [practitioners]="[ resource ]"></app-practitioner>
+    </span>
+     <span *ngSwitchCase="'RelatedPerson'">
+      RelatedPerson
+       <app-related-person [persons]="[ resource ]"></app-related-person>
+    </span>
+     <span *ngSwitchDefault>
+      {{resource.resourceType}} - NOT YET IMPLEMENTED
+    </span>
+
+  </span>
+</span>
