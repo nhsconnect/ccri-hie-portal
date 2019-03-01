@@ -1,0 +1,9 @@
+<td-expansion-panel [label]="unit.name" class="bgc-red">
+  <div>
+    <span *ngFor="let item of form.item">
+      <span *ngIf="unit.code === item.linkId">
+        <app-questionnaire-response-item [item]="item" [depth]="0"></app-questionnaire-response-item>
+      </span>
+    </span>
+  </div>
+</td-expansion-panel>

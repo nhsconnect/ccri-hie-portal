@@ -1,0 +1,10 @@
+<span *ngIf="form !== undefined">
+<mat-card>
+  <mat-card-content>
+       <h3>End Of Life Care</h3>
+  </mat-card-content>
+</mat-card>
+  <span *ngFor="let unit of units">
+      <app-patient-eolcitem [form]="form" [unit]="unit"></app-patient-eolcitem>
+  </span>
+</span>
