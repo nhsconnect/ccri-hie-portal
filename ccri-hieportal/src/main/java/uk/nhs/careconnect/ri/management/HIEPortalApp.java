@@ -40,7 +40,7 @@ public class HIEPortalApp {
             @Override
             public void beforeApplicationStart(CamelContext camelContext) {
 
-                camelContext.setNameStrategy(new DefaultCamelContextNameStrategy("CcHiePortal"));
+                camelContext.setNameStrategy(new DefaultCamelContextNameStrategy("HIEPortal"));
 
             }
 
