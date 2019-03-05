@@ -67,7 +67,7 @@ export class PatientEOLCComponent implements OnInit {
     this.patientid = this.route.snapshot.paramMap.get('patientid');
 
     this.fhirService.get('/QuestionnaireResponse?patient=' + this.patientid +
-     '&questionnaire:identifier=https://fhir.nhs.uk/STU3/Questionnaire%7CCareConnect-EOLC-1&_include=*&_count=100').subscribe(bundle => {
+     '&questionnaire=https://fhir.nhs.uk/STU3/Questionnaire/CareConnect-EOLC-1&_include=*&_count=100').subscribe(bundle => {
 
       if (bundle.entry !== undefined) {
         this.bundleService.setBundle(bundle);
