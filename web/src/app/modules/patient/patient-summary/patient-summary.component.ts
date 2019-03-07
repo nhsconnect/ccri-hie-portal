@@ -32,7 +32,7 @@ export class PatientSummaryComponent implements OnInit {
     lhcreMedicationStatement: fhir.MedicationStatement[] = [];
     lhcreConditions: fhir.Condition[] = [];
 
-    yascolor = 'info';
+    lhcrcolor = 'info';
     acutecolor = 'info';
     gpcolor = 'info';
     nrlscolor = 'info';

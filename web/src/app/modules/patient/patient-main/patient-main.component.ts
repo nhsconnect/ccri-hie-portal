@@ -17,7 +17,7 @@ export class PatientMainComponent implements OnInit {
 
     sidenavopen = false;
 
-    yascolor = 'info';
+    lhcrcolor = 'info';
     acutecolor = 'info';
     gpcolor = 'info';
     nrlscolor = 'info';
@@ -52,7 +52,7 @@ export class PatientMainComponent implements OnInit {
       const patientid = this.route.snapshot.paramMap.get('patientid');
          this.eprService.setTitle('Health Information Exchange Portal');
       this.acutecolor = 'info';
-      this.yascolor = 'info';
+      this.lhcrcolor = 'info';
 
       this.fhirSrv.get('/Patient?_id=' + patientid + '&_revinclude=Flag:patient').subscribe(bundle => {
 
@@ -69,11 +69,11 @@ export class PatientMainComponent implements OnInit {
           }
 
               this.acutecolor = 'primary';
-              this.yascolor = 'primary';
+              this.lhcrcolor = 'primary';
           }
           , () => {
             this.acutecolor = 'warn';
-            this.yascolor = 'warn';
+            this.lhcrcolor = 'warn';
         }
 
       );
