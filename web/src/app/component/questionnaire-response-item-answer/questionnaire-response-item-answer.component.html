@@ -37,6 +37,10 @@
       Practitioner
       <app-practitioner [practitioners]="[ resource ]"></app-practitioner>
     </span>
+     <span *ngSwitchCase="'Procedure'">
+      Procedure
+       <app-procedure [procedures]="[ resource ]"></app-procedure>
+    </span>
      <span *ngSwitchCase="'RelatedPerson'">
       RelatedPerson
        <app-related-person [persons]="[ resource ]"></app-related-person>
