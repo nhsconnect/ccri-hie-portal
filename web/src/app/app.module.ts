@@ -41,7 +41,6 @@ import {
 
 
 } from '@angular/material';
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -107,8 +106,6 @@ import { PatientEncounterDetailComponent } from './modules/patient/patient-encou
 import { PatientProcedureComponent } from './modules/patient/patient-procedure/patient-procedure.component';
 import {CompositionDetailComponent} from './component/composition-detail/composition-detail.component';
 import {CompositionComponent} from './component/composition/composition.component';
-import { PatientTimeSeriesComponent } from './modules/patient/patient-time-series/patient-time-series.component';
-import {PatientTimelineComponent} from './component/patient-timeline/patient-timeline.component';
 import { PatientImmunisationComponent } from './modules/patient/patient-immunisation/patient-immunisation.component';
 import { PatientMedicationComponent } from './modules/patient/patient-medication/patient-medication.component';
 import {AuthGuard} from './service/auth-guard';
@@ -251,8 +248,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       PatientDocumentsComponent,
       PatientEncounterDetailComponent,
       PatientProcedureComponent,
-      PatientTimelineComponent,
-      PatientTimeSeriesComponent,
+
       PatientImmunisationComponent,
       PatientMedicationComponent,
 
@@ -326,7 +322,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
           .forRoot(),
 
 
-    MatMomentDateModule,
+ //   MatMomentDateModule,
     MatDatepickerModule,
     MatSidenavModule,
     MatInputModule,
@@ -410,9 +406,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       Oauth2Service,
 
 
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    /*    { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+      {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},*/
     {
           provide: ErrorHandler,
           useClass: ErrorsHandler,

@@ -180,10 +180,6 @@ export class PatientMainComponent implements OnInit {
               this.router.navigate(['procedure'], {relativeTo: this.route });
               this.bpcolour = 'accent';
               break;
-          case 'bt':
-              this.router.navigate(['timeline'], {relativeTo: this.route });
-              this.btcolour = 'accent';
-              break;
           case 'bi':
           this.router.navigate(['immunisation'], {relativeTo: this.route });
           this.bicolour = 'accent';
