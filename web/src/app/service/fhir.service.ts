@@ -46,7 +46,7 @@ export class FhirService {
     constructor( private http: HttpClient,
                  private oauth2: Oauth2Service,
                  private appConfig: AppConfigService) {
-
+      console.log('Constructor fhirService: Removing baseUrl');
       localStorage.removeItem('baseUrl');
       this.appConfig.getInitEventEmitter().subscribe( result => {
         console.log('FHIR Service config change detected');
@@ -106,18 +106,31 @@ export class FhirService {
         // this should be resolved by app-config.ts but to stop start up errors
 
         if (retStr === undefined) {
+          console.log('baseUrl undefined');
+          console.log('getBaseUrl - appConig=');
           console.log(this.appConfig);
           if (this.appConfig.getConfig() !== undefined) {
             retStr = this.appConfig.getConfig().fhirServer;
             this.storeBaseUrl(retStr);
           }
         }
-      if (retStr === undefined) {
-        if (location.href.includes('data.developer.nhs.uk')) {
-          return 'https://data.developer.nhs.uk/ccri-fhir/STU3';
+    if (retStr === undefined) {
+      console.log('baseUrl undefined');
+        if (localStorage.localStorage.getItem('access_token_nhs-smart-ehr') !== undefined) {
+          if (location.href.includes('data.developer.nhs.uk')) {
+            return 'https://data.developer.nhs.uk/ccri-smartonfhir/STU3';
+          }
+          if (location.href.includes('data.developer-test.nhs.uk')) {
+            return 'https://data.developer-test.nhs.uk/ccri-smartonfhir/STU3';
+          }
         }
-        if (location.href.includes('data.developer-test.nhs.uk')) {
-          return 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
+        else {
+          if (location.href.includes('data.developer.nhs.uk')) {
+            return 'https://data.developer.nhs.uk/ccri-fhir/STU3';
+          }
+          if (location.href.includes('data.developer-test.nhs.uk')) {
+            return 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
+          }
         }
 
       }
