@@ -31,7 +31,7 @@ export class CallbackComponent implements OnInit {
       this.subOAuth2 = this.auth.getOAuthChangeEmitter()
         .subscribe(item => {
           console.log('Callback Access Token callback ran');
-          this.router.navigateByUrl('hie').then( () => {
+          this.router.navigateByUrl('').then( () => {
             // console.log('Navigate by Url');
           });
           // Potentially a loop but need to record the access token
