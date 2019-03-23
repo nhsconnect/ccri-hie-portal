@@ -116,7 +116,7 @@ export class FhirService {
         }
     if (retStr === undefined) {
       console.log('baseUrl undefined');
-        if (localStorage.localStorage.getItem('access_token_nhs-smart-ehr') !== undefined) {
+        if (localStorage.getItem('access_token_nhs-smart-ehr') !== undefined) {
           if (location.href.includes('data.developer.nhs.uk')) {
             return 'https://data.developer.nhs.uk/ccri-smartonfhir/STU3';
           }

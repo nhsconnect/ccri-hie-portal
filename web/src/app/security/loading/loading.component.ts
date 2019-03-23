@@ -39,6 +39,20 @@ export class LoadingComponent implements OnInit {
         });
       } else {
         console.log('app config present');
+        console.log('loading: '+this.fhirService.getBaseUrl());
+        if (this.fhirService.getBaseUrl() !== this.appConfig.getConfig().fhiServer) {
+          console.log('Mismatch in config and server');
+          if (this.fhirService.getBaseUrl().includes('8186') && !location.href.includes('localhost')) {
+            console.log('Default server detected and not running on localhost');
+            let url = this.appConfig.getConfig().fhirServer;
+            if (localStorage.getItem('access_token_nhs-smart-ehr') !== undefined) {
+              console.log('Access Token present, swapping to smart on fhir');
+              url = url.replace('ccri-fhir','ccri-smartonfhir');
+            }
+            console.log('Swapping server to retrieved url');
+            this.fhirService.setRootUrl(url);
+          }
+        }
         console.log(this.appConfig.getConfig());
         this.redirectToHIE();
       }
