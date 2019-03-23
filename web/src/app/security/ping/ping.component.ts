@@ -27,12 +27,12 @@ export class PingComponent implements OnInit {
   ngOnInit() {
     if (this.appConfig.getConfig() !== undefined) {
       this.fhirService.get('/Patient/1').subscribe(data => {
-        this.router.navigate(['edms']);
+        this.router.navigate(['hie']);
       });
     } else {
       this.appConfig.getInitEventEmitter().subscribe(() => {
           this.fhirService.get('/Patient/1').subscribe(data => {
-            this.router.navigate(['edms']);
+            this.router.navigate(['hie']);
           });
         }
       );
