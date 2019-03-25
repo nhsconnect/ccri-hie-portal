@@ -22,6 +22,8 @@ export class FhirService {
   // private baseUrl: string = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
   private baseUrl = 'http://localhost:8186/ccri-fhir/STU3';
 
+  private appId = 'hie_';
+
     private GPCbaseUrl = 'http://127.0.0.1:8187/ccri/camel/fhir/gpc';
 
     private NRLSbaseUrl = 'https://data.developer.nhs.uk/nrls-ri';
@@ -47,7 +49,7 @@ export class FhirService {
                  private oauth2: Oauth2Service,
                  private appConfig: AppConfigService) {
       console.log('Constructor fhirService: Removing baseUrl');
-      localStorage.removeItem('baseUrl');
+      localStorage.removeItem(this.appId+'baseUrl');
       this.appConfig.getInitEventEmitter().subscribe( result => {
         console.log('FHIR Service config change detected');
         if (this.getBaseUrl() !== this.baseUrl) {
@@ -82,7 +84,7 @@ export class FhirService {
 
     storeBaseUrl(baseUrl: string) {
       console.log('Setting storeBaseUrl ' + baseUrl);
-        localStorage.setItem('baseUrl', baseUrl);
+        localStorage.setItem(this.appId+'baseUrl', baseUrl);
 
         if (this.baseUrl !== baseUrl) {
           this.baseUrl = baseUrl;
@@ -92,7 +94,7 @@ export class FhirService {
     }
 
     getStoredBaseUrl(): string {
-        return localStorage.getItem('baseUrl');
+        return localStorage.getItem(this.appId+'baseUrl');
     }
 
   public getBaseUrl(): string {
