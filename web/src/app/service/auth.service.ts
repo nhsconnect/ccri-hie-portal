@@ -178,7 +178,7 @@ export class AuthService {
 
   setBaseUrlOAuth2() {
     if (this.fhirService.getBaseUrl().includes('8186/ccri-fhir')) {
-      const newbaseUrl = 'https://data.developer-test.nhs.uk/ccri-smartonfhir/STU3';
+      const newbaseUrl = 'https://data.developer.nhs.uk/ccri-smartonfhir/STU3';
       console.log('swapping to smartonfhir instance: ' + newbaseUrl);
       this.fhirService.setRootUrl(newbaseUrl);
     } else {

@@ -125,8 +125,7 @@ export class FhirService {
           if (location.href.includes('data.developer-test.nhs.uk')) {
             return 'https://data.developer-test.nhs.uk/ccri-smartonfhir/STU3';
           }
-        }
-        else {
+        } else {
           if (location.href.includes('data.developer.nhs.uk')) {
             return 'https://data.developer.nhs.uk/ccri-fhir/STU3';
           }
