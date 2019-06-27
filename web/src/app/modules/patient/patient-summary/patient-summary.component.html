@@ -59,7 +59,7 @@
           </div>
 
           <span *ngIf="nrlsdocuments.length>0">
-              <app-document-reference [documents]="nrlsdocuments" (form)="onResoureSelected($event)"></app-document-reference>
+              <app-document-reference [documents]="nrlsdocuments" (documentReference)="selectDocument($event)"></app-document-reference>
 
         </span>
 

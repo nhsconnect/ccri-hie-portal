@@ -32,31 +32,41 @@ export class BinaryComponent implements OnInit {
 
     this.documentReferenceId = this.route.snapshot.paramMap.get('docid');
 
-    if (this.documentReferenceId !== undefined) {
-      this.fhirService.getResource('/DocumentReference/' + this.documentReferenceId).subscribe(resource => {
-          this.document = <fhir.DocumentReference> resource;
-          this.processDocument();
-
-          if ((this.patientEprService.patient === undefined) || (this.document.subject !== undefined
-            && ('Patient/' + this.patientEprService.patient.id) !== this.document.subject.reference)) {
-            this.fhirService.getResource(this.document.subject.reference).subscribe( patient => {
-              this.patientEprService.set(<fhir.Patient> patient);
-            });
-          }
-        },
-        () => {
-          const alertConfig: IAlertConfig = { message : 'Unable to locate document.'};
-          alertConfig.disableClose =  false; // defaults to false
-          alertConfig.viewContainerRef = this._viewContainerRef;
-          alertConfig.title = 'Alert'; // OPTIONAL, hides if not provided
-          alertConfig.closeButton = 'Close'; // OPTIONAL, defaults to 'CLOSE'
-          alertConfig.width = '400px'; // OPTIONAL, defaults to 400px
-          this._dialogService.openAlert(alertConfig);
-        });
+    if (this.patientEprService.documentReference !== undefined) {
+      this.process(this.patientEprService.documentReference);
+    } else {
+      if (this.documentReferenceId !== undefined) {
+        this.fhirService.getResource('/DocumentReference/' + this.documentReferenceId).subscribe(resource => {
+            this.process(resource);
+          },
+          () => {
+            const alertConfig: IAlertConfig = {message: 'Unable to locate document.'};
+            alertConfig.disableClose = false; // defaults to false
+            alertConfig.viewContainerRef = this._viewContainerRef;
+            alertConfig.title = 'Alert'; // OPTIONAL, hides if not provided
+            alertConfig.closeButton = 'Close'; // OPTIONAL, defaults to 'CLOSE'
+            alertConfig.width = '400px'; // OPTIONAL, defaults to 400px
+            this._dialogService.openAlert(alertConfig);
+          });
+      }
     }
 
   }
 
+  process(resource: any) {
+    this.document = <fhir.DocumentReference> resource;
+    this.processDocument();
+
+    if ((this.patientEprService.patient === undefined) ||
+      (this.document.subject !== undefined
+      && ('Patient/' + this.patientEprService.patient.id) !== this.document.subject.reference
+        && (this.document.subject.reference.indexOf('demographics.spineservices.nhs.uk')==0)
+      )) {
+      this.fhirService.getResource(this.document.subject.reference).subscribe( patient => {
+        this.patientEprService.set(<fhir.Patient> patient);
+      });
+    }
+  }
 
   processDocument() {
     // TODO KGM Need to move to actual URL
@@ -65,7 +75,8 @@ export class BinaryComponent implements OnInit {
     this.binaryId = this.document.content[0].attachment.url;
 
     if (this.binaryId !== undefined) {
-      if (this.document.content[0].attachment.contentType === 'application/fhir+xml') {
+      if (this.document.content[0].attachment.contentType === 'application/fhir+xml'
+      || this.document.content[0].attachment.contentType === 'application/fhir+json') {
         this.docType = 'fhir';
       } else if (this.document.content[0].attachment.contentType === 'application/pdf') {
         this.docType = 'pdf';

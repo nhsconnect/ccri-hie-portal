@@ -182,5 +182,8 @@ export class EprService {
   setDocumentReference(document: fhir.DocumentReference) {
     this.documentReference = document;
   }
+  getDocumentReference() {
+    return this.documentReference;
+  }
 
 }

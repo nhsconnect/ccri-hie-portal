@@ -26,16 +26,41 @@ export class PatientDocumentsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let patientid = this.route.snapshot.paramMap.get('patientid');
+      let patientid = this.route.snapshot.paramMap.get('patientid');
 
-        this.fhirSrv.get('/DocumentReference?patient='+patientid).subscribe(
-            bundle => {
-                this.resource = bundle;
-                this.getResources();
 
+      this.fhirSrv.getResource('/Patient/' + patientid).subscribe(
+        patient  => {
+
+            for (let id of patient.identifier) {
+              if (id.system.indexOf('nhs-number') > 0) {
+                this.getDocuments(id.value);
+              }
             }
-        );
+        }
+      )
     }
+
+
+    getDocuments(nhsNumber : string ) {
+
+          this.fhirSrv.getEDMS('/Patient?identifier=https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number%7C'+nhsNumber) .subscribe( patBundle => {
+              if (patBundle !== undefined) {
+                for (let entry of patBundle.entry) {
+                  this.fhirSrv.getEDMS('/DocumentReference?patient=' + entry.resource.id).subscribe(
+                    bundle => {
+                      this.resource = bundle;
+                      this.getResources();
+
+                    }
+                  )
+                }
+              }
+            }
+          );
+        }
+
+
 
     clearDown() {
         this.documents = [];

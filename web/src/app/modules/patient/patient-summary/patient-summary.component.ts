@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {MatChip} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {EprService} from '../../../service/epr.service';
+import {IAlertConfig, TdDialogService} from '@covalent/core';
 
 @Component({
   selector: 'app-patient-summary',
@@ -40,7 +41,12 @@ export class PatientSummaryComponent implements OnInit {
 
     @ViewChild('gpchip') gpchip: MatChip;
 
-  constructor(private router: Router, private fhirSrv: FhirService,  private route: ActivatedRoute, private eprService: EprService) { }
+  constructor(private router: Router,
+              private fhirSrv: FhirService,
+              private route: ActivatedRoute,
+              private eprService: EprService,
+              private _dialogService: TdDialogService,
+              private _viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
 
@@ -239,5 +245,27 @@ export class PatientSummaryComponent implements OnInit {
         this.router.navigate(['..', 'careplan', carePlan.id] , { relativeTo : this.route});
 
     }
+
+  selectDocument(document: fhir.DocumentReference) {
+    console.log(document);
+
+    if (document.content !== undefined && document.content.length> 0) {
+
+      this.eprService.setDocumentReference(document);
+
+      this.router.navigate(['..', 'document', document.id], {relativeTo: this.route });
+
+    } else {
+      let alertConfig : IAlertConfig = { message : 'Unable to locate document.'};
+      alertConfig.disableClose =  false; // defaults to false
+      alertConfig.viewContainerRef = this._viewContainerRef;
+      alertConfig.title = 'Alert'; //OPTIONAL, hides if not provided
+      alertConfig.closeButton = 'Close'; //OPTIONAL, defaults to 'CLOSE'
+      alertConfig.width = '400px'; //OPTIONAL, defaults to 400px
+      this._dialogService.openAlert(alertConfig);
+    }
+    //this.router.navigate(['..', 'careplan', carePlan.id] , { relativeTo : this.route});
+
+  }
 
 }
