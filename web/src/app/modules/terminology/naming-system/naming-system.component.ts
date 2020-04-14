@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 import {NamingSystemDataSource} from '../../../data-source/naming-system-data-source';

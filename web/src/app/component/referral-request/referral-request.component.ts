@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LinksService} from  '../../service/links.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {BundleService} from '../../service/bundle.service';
 import {FhirService} from '../../service/fhir.service';
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";

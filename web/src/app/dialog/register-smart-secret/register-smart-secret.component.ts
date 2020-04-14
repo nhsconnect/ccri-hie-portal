@@ -1,10 +1,6 @@
 import {Component, Inject, Input, OnInit, ViewContainerRef} from '@angular/core';
-import integer = fhir.integer;
-import {EprService} from "../../service/epr.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {FhirService} from '../../service/fhir.service';
-import {IAlertConfig, TdDialogService} from "@covalent/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+
 
 declare var $: any;
 
@@ -18,7 +14,7 @@ export class RegisterSmartSecretComponent implements OnInit {
 
 
   constructor(
-    public dialogRef: MatDialogRef<RegisterSmartSecretComponent>,
+    public dialogRef:  MatDialogRef<RegisterSmartSecretComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
     this.response = data.response;
 }

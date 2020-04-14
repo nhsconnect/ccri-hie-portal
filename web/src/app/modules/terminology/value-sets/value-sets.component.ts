@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 import {ValueSetDataSource} from '../../../data-source/value-set-data-source';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 
 
 const DECIMAL_FORMAT: (v: any) => any = (v: number) => v.toFixed(2);
@@ -36,7 +36,7 @@ export class ValueSetsComponent implements OnInit {
   }
 
   search(name, publisher) {
-    //console.log(event);
+
     if (name !== undefined) {
       this.searchInputName = name;
     }

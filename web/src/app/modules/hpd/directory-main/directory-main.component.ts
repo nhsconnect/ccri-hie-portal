@@ -1,12 +1,13 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {IAlertConfig, TdDialogService, TdMediaService} from '@covalent/core';
 import {FhirService} from '../../../service/fhir.service';
 import {MessageService} from '../../../service/message.service';
-import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {EprService} from '../../../service/epr.service';
 import {AuthService} from '../../../service/auth.service';
 import {Router} from '@angular/router';
+import {TdMediaService} from '@covalent/core/media';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
+import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
   selector: 'app-directory-main',

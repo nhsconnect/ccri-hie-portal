@@ -1,5 +1,5 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {OrganisationDialogComponent} from "../organisation-dialog/organisation-dialog.component";
 import {BundleService} from '../../service/bundle.service';
 import {PractitionerDialogComponent} from "../practitioner-dialog/practitioner-dialog.component";

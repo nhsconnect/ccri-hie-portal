@@ -1,8 +1,9 @@
 import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import {TdDigitsPipe} from '@covalent/core';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {FhirService} from '../../service/fhir.service';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {TdDigitsPipe} from "@covalent/core/common";
 
 @Component({
   selector: 'app-observation-chart-dialog',
@@ -56,7 +57,7 @@ from https://github.com/Teradata/covalent-echarts/issues/50
 @Input()
 observation: fhir.Observation;
 
-    @ViewChild('chart') chart: NgxChartsModule;
+    @ViewChild('chart', {static: false}) chart: NgxChartsModule;
 
 
   constructor(public dialog: MatDialog,

@@ -2,8 +2,9 @@ import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {EprService} from '../../../service/epr.service';
 import {MessageService} from '../../../service/message.service';
-import {IAlertConfig, TdDialogService} from '@covalent/core';
+
 import {AuthService} from '../../../service/auth.service';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
 
 
 

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import {FhirService} from '../../../service/fhir.service';
 import {EprService} from '../../../service/epr.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
 import {AuthService} from '../../../service/auth.service';
 import {RegisterSmartComponent} from '../../../dialog/register-smart/register-smart.component';
-import {TdMediaService} from '@covalent/core';
+import {TdMediaService} from '@covalent/core/media';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-smart-apps',

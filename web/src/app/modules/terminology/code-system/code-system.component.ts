@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ValueSetDataSource} from '../../../data-source/value-set-data-source';
 import {FhirService} from '../../../service/fhir.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 import {CodeSystemDataSource} from '../../../data-source/code-system-data-source';

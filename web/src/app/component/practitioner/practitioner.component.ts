@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 
 import {PractitionerDataSource} from "../../data-source/practitioner-data-source";

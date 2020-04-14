@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AllergyIntoleranceDataSource} from "../../data-source/allergy-data-source";
 import {RiskAssessmentDataSource} from "../../data-source/risk-assessment-data-source";
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 import {LinksService} from  '../../service/links.service';
 import {FhirService} from '../../service/fhir.service';

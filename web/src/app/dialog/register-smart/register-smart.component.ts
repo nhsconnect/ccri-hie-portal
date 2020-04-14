@@ -1,10 +1,11 @@
 import {Component, Inject, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FhirService} from '../../service/fhir.service';
 
-import {RegisterSmartSecretComponent} from "../register-smart-secret/register-smart-secret.component";
-import {AuthService} from "../../service/auth.service";
+import {RegisterSmartSecretComponent} from '../register-smart-secret/register-smart-secret.component';
+import {AuthService} from '../../service/auth.service';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 
 declare var $: any;
 
@@ -15,7 +16,7 @@ declare var $: any;
 })
 export class RegisterSmartComponent implements OnInit {
 
-    registerForm : FormGroup;
+    registerForm: FormGroup;
 
     endpoint: fhir.Endpoint;
 
@@ -50,7 +51,7 @@ export class RegisterSmartComponent implements OnInit {
 
   appSupplier: string;
 
-  edit:boolean = false;
+  edit: boolean = false;
 
   files: File | FileList;
 
@@ -171,11 +172,11 @@ export class RegisterSmartComponent implements OnInit {
 
                 }
                 , (error: any) => {
-                    console.log("Register Response Error = " + error);
+                    console.log('Register Response Error = ' + error);
                 }
                 , () => {
 
-                    console.log("Register complete()");
+                    console.log('Register complete()');
                     this.dialogRef.close();
                 }
             );
@@ -203,11 +204,10 @@ export class RegisterSmartComponent implements OnInit {
                   this.dialog.open(RegisterSmartSecretComponent, dialogConfig);*/
                 },
                 (error: any) => {
-                  console.log("Register Response Error = " + error);
                 },
                 () => {
                   this.dialogRef.close();
-                })
+                });
             } else {
               this.fhirService.put('/Endpoint/' + this.endpoint.id, this.endpoint).subscribe(resp => {
                   console.log(resp);
@@ -223,7 +223,7 @@ export class RegisterSmartComponent implements OnInit {
                   */
                 },
                 (error: any) => {
-                  console.log("Register Response Error = " + error);
+
                 },
                 () => {
                   this.dialogRef.close();

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {FhirService} from '../../service/fhir.service';
 import {BundleService} from '../../service/bundle.service';
 import {RelatedPersonDataSource} from '../../data-source/related-person-data-source';

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 import {FhirService} from '../../../service/fhir.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
 import {ConceptMapDataSource} from '../../../data-source/concept-map-data-source';

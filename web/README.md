@@ -1,4 +1,3 @@
 Build App before deploying into ccri-management spring boot app
 
-ng build --prod --deploy-url /ccri/ --base-href /ccri/
-
+ng build --prod --output-path ../docs --base-href /ccri-hie-portal/

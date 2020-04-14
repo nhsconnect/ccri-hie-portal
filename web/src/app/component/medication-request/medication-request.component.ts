@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LinksService} from '../../service/links.service';
 import {FhirService} from '../../service/fhir.service';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {MedicationRequestDataSource} from '../../data-source/medication-request-data-source';
 import {BundleService} from '../../service/bundle.service';
 import {MedicationDialogComponent} from '../../dialog/medication-dialog/medication-dialog.component';

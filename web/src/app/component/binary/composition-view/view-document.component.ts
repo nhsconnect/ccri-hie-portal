@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
-import {IAlertConfig, TdDialogService} from '@covalent/core';
 import {BundleService} from '../../../service/bundle.service';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
 
 @Component({
   selector: 'app-view-document',

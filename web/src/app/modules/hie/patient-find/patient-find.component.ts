@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {StepState} from "@covalent/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {EprService} from "../../../service/epr.service";
+
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {EprService} from '../../../service/epr.service';
+import {StepState} from '@covalent/core/steps';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {EprService} from "../../../service/epr.service";
 })
 export class PatientFindComponent implements OnInit {
 
-  constructor(private _formBuilder: FormBuilder,private router: Router, private eprService : EprService) { }
+  constructor(private _formBuilder: FormBuilder, private router: Router, private eprService: EprService) { }
 
   ngOnInit() {
     this.eprService.setTitle('Patient Find');
@@ -57,8 +58,7 @@ export class PatientFindComponent implements OnInit {
     selectPatient(patient: fhir.Patient) {
         //  console.log('Patient change - '+patient.id);
         if (patient !== undefined) {
-            //this.patientChange.set(patient);
-            this.router.navigateByUrl('hie/patient/'+patient.id  );
+            this.router.navigateByUrl('hie/patient/' + patient.id  );
 
         }
     }

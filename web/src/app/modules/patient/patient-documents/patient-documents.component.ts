@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {FhirService} from "../../../service/fhir.service";
-import {EprService} from "../../../service/epr.service";
-import {MatDialog} from '@angular/material';
-import {IAlertConfig, TdDialogService} from "@covalent/core";
+import {ActivatedRoute, Router} from '@angular/router';
+import {FhirService} from '../../../service/fhir.service';
+import {EprService} from '../../../service/epr.service';
+import {MatDialog} from '@angular/material/dialog';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
+
 
 @Component({
   selector: 'app-patient-documents',

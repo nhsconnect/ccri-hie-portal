@@ -1,7 +1,7 @@
 
 import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {PatientDataSource} from '../../data-source/patient-data-source';
 import {FhirService} from '../../service/fhir.service';
 import {PractitionerDialogComponent} from '../../dialog/practitioner-dialog/practitioner-dialog.component';

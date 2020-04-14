@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {EprService} from '../../../service/epr.service';
 import {FhirService} from '../../../service/fhir.service';
-import {IAlertConfig, TdDialogService} from '@covalent/core';
+
 import {ActivatedRoute} from '@angular/router';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
 
 @Component({
   selector: 'app-binary',

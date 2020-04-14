@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {LinksService} from "../../../service/links.service";
 import {EprService} from "../../../service/epr.service";
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {BundleService} from "../../../service/bundle.service";
 import {ResourceDialogComponent} from "../../../dialog/resource-dialog/resource-dialog.component";
 

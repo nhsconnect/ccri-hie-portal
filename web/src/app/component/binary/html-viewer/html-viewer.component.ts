@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {IAlertConfig, TdDialogService} from '@covalent/core';
+
 import {FhirService} from '../../../service/fhir.service';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
 
 @Component({
   selector: 'app-html-viewer',

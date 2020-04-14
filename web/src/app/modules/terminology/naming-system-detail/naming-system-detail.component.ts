@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
-import {MatDialog, MatDialogConfig} from '@angular/material';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-naming-system-detail',

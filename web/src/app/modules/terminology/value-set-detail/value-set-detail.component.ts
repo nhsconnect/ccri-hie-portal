@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
-import {LinksService} from '../../../service/links.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
+
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-value-set-detail',

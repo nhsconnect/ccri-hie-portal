@@ -3,7 +3,7 @@ import {PractitionerRoleDataSource} from "../../data-source/practitioner-role-da
 import {FhirService} from '../../service/fhir.service';
 import {BundleService} from '../../service/bundle.service';
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';

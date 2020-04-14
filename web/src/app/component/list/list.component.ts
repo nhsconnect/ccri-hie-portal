@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ListEntryDataSource} from '../../data-source/list-entry-data-source';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
 import {BundleService} from '../../service/bundle.service';
 import {FhirService} from '../../service/fhir.service';

@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "ccri-hie"
+  "defaultProject": "ccri-hie",
+  "cli": {
+    "analytics": "05a6ab8f-87ce-4956-845c-471976b2aa6b"
+  }
 }

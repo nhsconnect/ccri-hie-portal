@@ -1,7 +1,8 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import integer = fhir.integer;
-import {EprService} from "../../service/epr.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {EprService} from '../../service/epr.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+
 
 declare var $: any;
 
@@ -13,12 +14,10 @@ declare var $: any;
 export class ResourceDialogComponent implements OnInit {
 
 
-  //https://stackoverflow.com/questions/44987260/how-to-add-jstree-to-angular-2-application-using-typescript-with-types-jstree
-
 
   constructor(
     public dialogRef: MatDialogRef<ResourceDialogComponent>,
-    public patientEPRService : EprService,
+    public patientEPRService: EprService,
     @Inject(MAT_DIALOG_DATA) data) {
     this.resource = data.resource;
   }
@@ -45,7 +44,7 @@ export class ResourceDialogComponent implements OnInit {
         });
         */
       }
-    )
+    );
 
   }
 

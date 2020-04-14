@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
 import {AppConfigService} from '../../../service/app-config.service';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog, MatDialogConfig} from "@angular/material";
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-questionnaire',

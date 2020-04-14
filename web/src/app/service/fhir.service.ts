@@ -20,7 +20,7 @@ export class FhirService {
 
 
   // private baseUrl: string = 'https://data.developer.nhs.uk/ccri-fhir/STU3';
-  private baseUrl = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
+  private baseUrl = 'https://data.developer.nhs.uk/ccri-fhir/STU3';
 
   private edmsUrl = 'https://data.developer.nhs.uk/ccri/camel/ccri-document/STU3';
 

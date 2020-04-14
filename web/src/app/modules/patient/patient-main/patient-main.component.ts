@@ -2,9 +2,9 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {EprService} from '../../../service/epr.service';
-import {MatChip} from '@angular/material';
 import {AuthService} from '../../../service/auth.service';
 import {Oauth2Service} from '../../../service/oauth2.service';
+import {MatChip} from '@angular/material/chips';
 
 @Component({
   selector: 'app-patient-details',
@@ -35,7 +35,7 @@ export class PatientMainComponent implements OnInit {
 
     cards: any[] = [];
 
-     @ViewChild('gpchip') gpchip: MatChip;
+     @ViewChild('gpchip', {static: false}) gpchip: MatChip;
 
 
 

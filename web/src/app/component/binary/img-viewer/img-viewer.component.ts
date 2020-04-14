@@ -1,8 +1,7 @@
 import {Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
 import {ActivatedRoute} from '@angular/router';
-
-import {IAlertConfig, TdDialogService} from '@covalent/core';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
 
 @Component({
   selector: 'app-img-viewer',

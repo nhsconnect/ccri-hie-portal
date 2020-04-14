@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LocationDataSource} from '../../data-source/location-data-source';
 import {FhirService} from '../../service/fhir.service';
 import {ResourceDialogComponent} from '../../dialog/resource-dialog/resource-dialog.component';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {LinksService} from  '../../service/links.service';
 
 

@@ -3,47 +3,13 @@ import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import 'hammerjs';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  CovalentChipsModule, CovalentDataTableModule,
-  CovalentDialogsModule, CovalentExpansionPanelModule,
-  CovalentJsonFormatterModule,
-  CovalentLayoutModule, CovalentLoadingModule,
-  CovalentMediaModule, CovalentMenuModule,
-  CovalentMessageModule, CovalentNotificationsModule, CovalentSearchModule,
-  CovalentStepsModule
-} from '@covalent/core';
 import {CovalentHttpModule} from '@covalent/http';
 import {CovalentHighlightModule} from '@covalent/highlight';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentDynamicFormsModule} from '@covalent/dynamic-forms';
 import {AppRoutingModule} from './app-routing.module';
-import {
-    DateAdapter,
-    MAT_DATE_FORMATS,
-    MAT_DATE_LOCALE,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule, MatChipsModule,
-    MatDatepickerModule,
-    MatDialogModule, MatFormFieldModule, MatGridListModule,
-
-    MatIconModule,
-    MatIconRegistry,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatPaginatorModule, MatProgressBarModule, MatRadioModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatToolbarModule, MatTooltipModule,
-
-
-} from '@angular/material';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {ErrorsHandler} from './error-handler';
 import {MessageService} from './service/message.service';
 import {DocumentReferenceComponent} from './component/document-reference/document-reference.component';
@@ -127,12 +93,6 @@ import { FlagComponent } from './component/flag/flag.component';
 import { ReferralRequestComponent } from './component/referral-request/referral-request.component';
 import { PatientReferralRequestComponent } from './modules/patient/patient-referral-request/patient-referral-request.component';
 import { MedicationAdministrationComponent } from './component/medication-administration/medication-administration.component';
-//  https://github.com/Teradata/covalent-echarts/issues/50
-import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
-import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
-import { CovalentLineEchartsModule } from '@covalent/echarts/line';
-import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
-
 import { CareTeamComponent } from './component/care-team/care-team.component';
 import { QuestionnaireResponseItemComponent } from './component/questionnaire-response-item/questionnaire-response-item.component';
 import { HtmlViewerComponent } from './component/binary/html-viewer/html-viewer.component';
@@ -140,11 +100,9 @@ import {AppConfigService} from './service/app-config.service';
 import {LoadingComponent} from './security/loading/loading.component';
 import { DirectoryMainComponent } from './modules/hpd/directory-main/directory-main.component';
 import { TerminologyMainComponent } from './modules/terminology/terminology-main/terminology-main.component';
-import {TerminologyRoutingModule} from './modules/terminology-routing.module';
 import {DirectoryRoutingModule} from './modules/directory-routing.module';
 import { ValueSetsComponent } from './modules/terminology/value-sets/value-sets.component';
 import { ConceptMapsComponent } from './modules/terminology/concept-maps/concept-maps.component';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { QuestionnaireComponent } from './modules/terminology/questionnaire/questionnaire.component';
 import { QuestionnaireItemComponent } from './modules/terminology/questionnaire-item/questionnaire-item.component';
@@ -167,7 +125,41 @@ import { MessageDefinitionDetailComponent } from './modules/terminology/message-
 import { GraphDefinitionComponent } from './modules/terminology/graph-definition/graph-definition.component';
 import { GraphDefinitionDetailComponent } from './modules/terminology/graph-definition-detail/graph-definition-detail.component';
 import { GraphDefinitionLinkComponent } from './modules/terminology/graph-definition-link/graph-definition-link.component';
-import {CovalentGraphEchartsModule} from '@covalent/echarts/graph';
+import {CovalentCommonModule} from '@covalent/core/common';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {CovalentLayoutModule} from '@covalent/core/layout';
+import {CovalentMediaModule} from '@covalent/core/media';
+import {CovalentStepsModule} from '@covalent/core/steps';
+import {CovalentMessageModule} from '@covalent/core/message';
+import {CovalentJsonFormatterModule} from '@covalent/core/json-formatter';
+import {CovalentDialogsModule} from '@covalent/core/dialogs';
+import {CovalentExpansionPanelModule} from '@covalent/core/expansion-panel';
+import {CovalentChipsModule} from '@covalent/core/chips';
+import {CovalentNotificationsModule} from '@covalent/core/notifications';
+import {CovalentMenuModule} from '@covalent/core/menu';
+import {CovalentDataTableModule} from '@covalent/core/data-table';
+import {CovalentSearchModule} from '@covalent/core/search';
+import { CovalentLoadingModule } from '@covalent/core/loading';
 
 
 
@@ -311,18 +303,17 @@ const appInitializerFn = (appConfig: AppConfigService) => {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-      HttpClientModule,
+    HttpClientModule,
 
-      FormsModule,
-      FlexLayoutModule,
-      ReactiveFormsModule,
-      MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
 
-      CookieModule
-          .forRoot(),
+    CookieModule
+      .forRoot(),
 
 
- //   MatMomentDateModule,
+    //   MatMomentDateModule,
     MatDatepickerModule,
     MatSidenavModule,
     MatInputModule,
@@ -339,17 +330,20 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     MatPaginatorModule,
     MatMenuModule,
     MatSnackBarModule,
-      MatBadgeModule,
-      MatChipsModule,
-      MatProgressBarModule,
-      MatRadioModule,
+    MatBadgeModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatRadioModule,
     MatTooltipModule,
     MatGridListModule,
     MatGridListModule,
 
     DragDropModule,
 
+    CovalentCommonModule,
     CovalentLayoutModule,
+    CovalentMediaModule,
+
     CovalentStepsModule,
     // (optional) Additional Covalent Modules imports
     CovalentHttpModule.forRoot(),
@@ -357,7 +351,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentMarkdownModule,
 
     CovalentDynamicFormsModule,
-    CovalentMediaModule,
     CovalentMessageModule,
     CovalentJsonFormatterModule,
     CovalentDialogsModule,
@@ -365,25 +358,21 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentChipsModule,
     CovalentNotificationsModule,
     CovalentMenuModule,
-    CovalentBaseEchartsModule,
-    CovalentBarEchartsModule,
-    CovalentLineEchartsModule,
-    CovalentGraphEchartsModule,
-    CovalentTooltipEchartsModule,
-    CovalentLoadingModule,
+
     CovalentDataTableModule,
     CovalentSearchModule,
+    CovalentLoadingModule,
 
     NgxChartsModule,
 
-      PdfViewerModule,
-      ImageViewerModule,
-   //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDC8GmtqZiQXc16qf1v870NKy-phjv-1N0'}),
+    PdfViewerModule,
+    ImageViewerModule,
+    //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDC8GmtqZiQXc16qf1v870NKy-phjv-1N0'}),
     //  NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key='}),
     HieRoutingModule,
     DirectoryRoutingModule,
-   // TerminologyRoutingModule,
-      AppRoutingModule,
+    // TerminologyRoutingModule,
+    AppRoutingModule,
 
     OAuthModule.forRoot()
   ],

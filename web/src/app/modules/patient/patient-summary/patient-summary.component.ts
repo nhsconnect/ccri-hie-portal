@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {MatChip} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FhirService} from '../../../service/fhir.service';
 import {EprService} from '../../../service/epr.service';
-import {IAlertConfig, TdDialogService} from '@covalent/core';
+import {MatChip} from '@angular/material/chips';
+import {IAlertConfig, TdDialogService} from '@covalent/core/dialogs';
+
 
 @Component({
   selector: 'app-patient-summary',
@@ -39,7 +40,7 @@ export class PatientSummaryComponent implements OnInit {
     nrlscolor = 'info';
 
 
-    @ViewChild('gpchip') gpchip: MatChip;
+    @ViewChild('gpchip', {static: false}) gpchip: MatChip;
 
   constructor(private router: Router,
               private fhirSrv: FhirService,
@@ -249,22 +250,22 @@ export class PatientSummaryComponent implements OnInit {
   selectDocument(document: fhir.DocumentReference) {
     console.log(document);
 
-    if (document.content !== undefined && document.content.length> 0) {
+    if (document.content !== undefined && document.content.length > 0) {
 
       this.eprService.setDocumentReference(document);
 
       this.router.navigate(['..', 'document', document.id], {relativeTo: this.route });
 
     } else {
-      let alertConfig : IAlertConfig = { message : 'Unable to locate document.'};
+      let alertConfig: IAlertConfig = { message : 'Unable to locate document.'};
       alertConfig.disableClose =  false; // defaults to false
       alertConfig.viewContainerRef = this._viewContainerRef;
-      alertConfig.title = 'Alert'; //OPTIONAL, hides if not provided
-      alertConfig.closeButton = 'Close'; //OPTIONAL, defaults to 'CLOSE'
-      alertConfig.width = '400px'; //OPTIONAL, defaults to 400px
+      alertConfig.title = 'Alert';
+      alertConfig.closeButton = 'Close';
+      alertConfig.width = '400px';
       this._dialogService.openAlert(alertConfig);
     }
-    //this.router.navigate(['..', 'careplan', carePlan.id] , { relativeTo : this.route});
+
 
   }
 

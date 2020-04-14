@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FhirService} from '../../../service/fhir.service';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog, MatDialogConfig, MatDialogRef, MatTableDataSource} from '@angular/material';
+
 import {ResourceDialogComponent} from '../../../dialog/resource-dialog/resource-dialog.component';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-patient-care-plan',

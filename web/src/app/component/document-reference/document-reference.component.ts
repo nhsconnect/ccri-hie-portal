@@ -1,15 +1,16 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewContainerRef} from '@angular/core';
 import {Router} from "@angular/router";
 import {FhirService} from '../../service/fhir.service';
-import {IAlertConfig, TdDialogService} from "@covalent/core";
+
 import {DocumentReferenceDataSource} from "../../data-source/document-reference-data-source";
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 import {LinksService} from  '../../service/links.service';
 import {BundleService} from '../../service/bundle.service';
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
 import {EprService} from "../../service/epr.service";
+import {TdDialogService} from '@covalent/core/dialogs';
 
 @Component({
   selector: 'app-document-reference',
@@ -18,9 +19,9 @@ import {EprService} from "../../service/epr.service";
 })
 export class DocumentReferenceComponent implements OnInit {
 
-  @Input() documents :fhir.DocumentReference[];
+  @Input() documents: fhir.DocumentReference[];
 
-  @Input() documentsTotal :number;
+  @Input() documentsTotal: number;
 
   @Input() patientId: string;
 
@@ -30,7 +31,7 @@ export class DocumentReferenceComponent implements OnInit {
 
   organisations: fhir.Organization[];
 
-  dataSource : DocumentReferenceDataSource;
+  dataSource: DocumentReferenceDataSource;
 
   displayedColumns = ['open', 'created','type','typelink', 'author','authorLink', 'custodian', 'custodianLink', 'mime', 'status', 'resource'];
 
@@ -38,7 +39,7 @@ export class DocumentReferenceComponent implements OnInit {
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef,
               public fhirService: FhirService,
-              private patientEprService : EprService,
+              private patientEprService: EprService,
               private linksService: LinksService,
               public dialog: MatDialog,
               public bundleService: BundleService) { }
@@ -77,7 +78,7 @@ export class DocumentReferenceComponent implements OnInit {
 
     this.bundleService.getResource(document.custodian.reference).subscribe( (organisation) => {
 
-      if (organisation !== undefined && organisation.resourceType === "Organization") {
+      if (organisation !== undefined && organisation.resourceType === 'Organization') {
 
         this.organisations.push(<fhir.Organization> organisation);
 
@@ -101,7 +102,7 @@ export class DocumentReferenceComponent implements OnInit {
 
     this.practitioners = [];
 
-    for (let practitionerReference of document.author) {
+    for (const practitionerReference of document.author) {
       this.bundleService.getResource(practitionerReference.reference).subscribe((practitioner) => {
           if (practitioner !== undefined && practitioner.resourceType === "Practitioner") {
             this.practitioners.push(<fhir.Practitioner> practitioner);
